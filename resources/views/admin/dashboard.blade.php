@@ -58,7 +58,9 @@
                     <li>
                         <a href="{{ route('admin.dashboard') }}" 
                            class="flex items-center px-6 py-3 text-white sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                            <div class="w-6 h-6 bg-white rounded mr-4"></div>
+                           <div class="w-7 h-7 mr-4">
+                                <img src="{{ asset('logoDash.png') }}" alt="Cards Logo" class="w-25 h-25">
+                            </div>
                             <span class="text-lg">Dashboard</span>
                         </a>
                     </li>

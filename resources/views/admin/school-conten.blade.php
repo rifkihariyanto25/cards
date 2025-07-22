@@ -346,7 +346,7 @@
             <!-- Header -->
             <div class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
                 <div class="flex items-center justify-between">
-                    <h1 class="text-xl font-semibold text-cards-teal">@yield('page-title', 'Cards Parents - Content Management')</h1>
+                    <h1 class="text-xl font-semibold text-cards-teal">@yield('page-title', 'Cards School - Content Management')</h1>
                     <!-- Logout Button -->
                     <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf

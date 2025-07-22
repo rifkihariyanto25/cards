@@ -399,10 +399,18 @@ public function deleteHomepageProduct($id)
         // AboutSection::updateOrCreate(['id' => 1], $request->all());
         
         return redirect()->route('admin.edu.about')->with('success', 'About section updated successfully');
-    }public function eduFeatures()
+    }
+    
+    public function eduFeatures()
     {
         return view('admin.edu.features');
     }
+
+    public function updateEduFeatures()
+    {
+        return redirect()->route('admin.edu.features')->with('success', 'Features section updated successfully');
+    }
+
 
 
      /**
@@ -414,7 +422,7 @@ public function deleteHomepageProduct($id)
     }
 
     /**
-     * Update Edu Content
+     * Update Edu Download
      */
     public function updateEduDownload(Request $request)
     {
@@ -546,6 +554,41 @@ public function deleteHomepageProduct($id)
         return redirect()->route('admin.school.about')->with('success', 'About section updated successfully');
     }
 
+    public function schoolFeatures()
+    {
+        return view('admin.school.features');
+    }
+
+    public function updateSchoolFeatures()
+    {
+        return redirect()->route('admin.school.features')->with('success', 'Features section updated successfully');
+    }
+
+    public function schoolDownload()
+    {
+        return view('admin.school.download');
+    }
+
+    /**
+     * Update School Download
+     */
+    public function updateSchoolDownload(Request $request)
+    {
+       $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:500',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        
+        // Handle file upload
+        if ($request->hasFile('cover_image')) {
+            $imagePath = $request->file('cover_image')->store('school/download', 'public');
+            // Save image path to database
+        }
+        
+        
+        return redirect()->route('admin.school.download')->with('success', 'Hero section updated successfully');
+    }
  
 
         /**
@@ -646,24 +689,52 @@ public function deleteHomepageProduct($id)
     }
 
     // Features Section
-public function parentsFeatures()
-{
+    public function parentsFeatures()
+    {
 
-    return view('admin.parents.features');
-}
+        return view('admin.parents.features');
+    }
 
-public function updateParentsFeatures(Request $request)
-{
-    $request->validate([
-        'section_title' => 'required|string|max:255',
-        'section_title_font_size' => 'required|integer|min:12|max:48',
-        'section_description' => 'required|string|max:1000',
-        'section_description_font_size' => 'required|integer|min:12|max:24',
-        'bg_color' => 'required|string|max:7',
-    ]);
+    public function updateParentsFeatures(Request $request)
+    {
+        $request->validate([
+            'section_title' => 'required|string|max:255',
+            'section_title_font_size' => 'required|integer|min:12|max:48',
+            'section_description' => 'required|string|max:1000',
+            'section_description_font_size' => 'required|integer|min:12|max:24',
+            'bg_color' => 'required|string|max:7',
+        ]);
 
-    return redirect()->route('admin.parents.features')->with('success', 'Features section berhasil diperbarui!');
-}
+        return redirect()->route('admin.parents.features')->with('success', 'Features section berhasil diperbarui!');
+    }
+
+    public function parentsDownload()
+    {
+        return view('admin.parents.download');
+    }
+
+    /**
+     * Update Edu Download
+     */
+    public function updateParentsDownload(Request $request)
+    {
+       $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:500',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        
+        // Handle file upload
+        if ($request->hasFile('cover_image')) {
+            $imagePath = $request->file('cover_image')->store('parents/download', 'public');
+            // Save image path to database
+        }
+        
+        
+        return redirect()->route('admin.parents.download')->with('success', 'download section updated successfully');
+    }
+ 
+
 
     /**
      * Show flexycazh Menu Management
