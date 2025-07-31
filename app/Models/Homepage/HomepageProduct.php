@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class HomepageProduct extends Model
 {
-    protected $table = 'products';
+    protected $table = 'homepage_products';
     protected $fillable = [
         'nama',
         'gambar',
         'link',
         'deskripsi',
-        'status'
+        // 'status'
     ];
 }

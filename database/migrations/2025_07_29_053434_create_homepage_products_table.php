@@ -8,18 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('homepage_products', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('gambar')->nullable(); // boleh null jika tidak diupload
             $table->string('link')->nullable();
             $table->text('deskripsi')->nullable(); // tambahkan kolom deskripsi
-            $table->enum('status', ['active', 'inactive'])->default('active'); // Tambahan
+            // $table->enum('status', ['active', 'inactive'])->default('active'); // Tambahan
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('homepage_products');
     }
 };
