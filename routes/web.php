@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\Flexycazh\FeaturesController as FlexycazhFeatures
 use App\Http\Controllers\Admin\Flexycazh\TutorialController as FlexycazhTutorialController;
 
 
+
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -176,3 +177,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/admin', function () {
     return redirect()->route('admin.dashboard');
 });
+
+use App\Http\Controllers\User\HomepageController;
+
+Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage');
