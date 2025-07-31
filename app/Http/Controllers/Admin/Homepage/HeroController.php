@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Homepage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\HomepageHero;
+use App\Models\Homepage\HomepageHero;
 use Illuminate\Support\Facades\Storage;
 
 class HeroController extends Controller
