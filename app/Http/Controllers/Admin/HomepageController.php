@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class HomepageController extends Controller
 {
-
     public function homepageHero()
     {
         $heroData = HomepageHero::first();

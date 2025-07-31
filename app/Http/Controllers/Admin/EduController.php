@@ -12,6 +12,7 @@ class EduController extends Controller
     {
         return view('admin.edu.hero');
     }
+
     /**
      * Update Edu hero
      */

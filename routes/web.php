@@ -3,7 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\HomepageController;
+
+// homepage
+use App\Http\Controllers\Admin\Homepage\HeroController;
+use App\Http\Controllers\Admin\Homepage\AboutController;
+use App\Http\Controllers\Admin\Homepage\MitraController;
+use App\Http\Controllers\Admin\Homepage\ProductController;
+
 use App\Http\Controllers\Admin\EduController;
 use App\Http\Controllers\Admin\CanteenController;
 use App\Http\Controllers\Admin\SchoolController;
@@ -29,26 +35,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Logout
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
-        // Homepage Management
         Route::prefix('homepage')->name('homepage.')->group(function () {
-            Route::get('/hero', [HomepageController::class, 'homepageHero'])->name('hero');
-            Route::post('/hero', [HomepageController::class, 'updateHomepageHero'])->name('hero.update');
-            Route::get('/about', [HomepageController::class, 'homepageAbout'])->name('about');
-            Route::post('/about', [HomepageController::class, 'updateHomepageAbout'])->name('about.update');
+            // Hero Section
+            Route::get('/hero', [HeroController::class, 'index'])->name('hero');
+            Route::post('/hero', [HeroController::class, 'update'])->name('hero.update');
 
-            Route::get('/mitra', [HomepageController::class, 'homepageMitra'])->name('mitra');
-            Route::get('/mitra/create', [HomepageController::class, 'createHomepageMitra'])->name('mitra.create');
-            Route::post('/mitra', [HomepageController::class, 'storeHomepageMitra'])->name('mitra.store');
-            Route::get('/mitra/{id}/edit', [HomepageController::class, 'editHomepageMitra'])->name('mitra.edit');
-            Route::post('/mitra/{id}', [HomepageController::class, 'updateHomepageMitra'])->name('mitra.update');
-            Route::delete('/mitra/{id}', [HomepageController::class, 'deleteHomepageMitra'])->name('mitra.delete');
+            // About Section
+            Route::get('/about', [AboutController::class, 'index'])->name('about');
+            Route::post('/about', [AboutController::class, 'update'])->name('about.update');
 
-            Route::get('/product', [HomepageController::class, 'homepageProduct'])->name('product');
-            Route::get('/product/create', [HomepageController::class, 'createHomepageProduct'])->name('product.create');
-            Route::post('/product', [HomepageController::class, 'storeHomepageProduct'])->name('product.store');
-            Route::get('/product/{id}/edit', [HomepageController::class, 'editHomepageProduct'])->name('product.edit');
-            Route::put('/product/{id}', [HomepageController::class, 'updateHomepageProduct'])->name('product.update');
-            Route::delete('/product/{id}', [HomepageController::class, 'deleteHomepageProduct'])->name('product.delete');
+            // Mitra Section
+            Route::get('/mitra', [MitraController::class, 'index'])->name('mitra');
+            Route::get('/mitra/create', [MitraController::class, 'create'])->name('mitra.create');
+            Route::post('/mitra', [MitraController::class, 'store'])->name('mitra.store');
+            Route::get('/mitra/{id}/edit', [MitraController::class, 'edit'])->name('mitra.edit'); // optional
+            Route::post('/mitra/{id}', [MitraController::class, 'update'])->name('mitra.update'); // optional
+            Route::delete('/mitra/{id}', [MitraController::class, 'delete'])->name('mitra.delete');
+
+            // Product Section
+            Route::get('/product', [ProductController::class, 'index'])->name('product');
+            Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+            Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+            Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+            Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
+            Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
         });
 
         Route::prefix('edu')->name('edu.')->group(function () {
