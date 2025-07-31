@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AdminController;
 
+
 // homepage
 use App\Http\Controllers\Admin\Homepage\HeroController as HomepageHeroController;
 use App\Http\Controllers\Admin\Homepage\AboutController as HomepageAboutController;
@@ -39,8 +40,7 @@ use App\Http\Controllers\Admin\Parents\DownloadController as ParentsDownloadCont
 use App\Http\Controllers\Admin\Flexycazh\HeroController as FlexycazhHeroController;
 use App\Http\Controllers\Admin\Flexycazh\FeaturesController as FlexycazhFeaturesController;
 use App\Http\Controllers\Admin\Flexycazh\TutorialController as FlexycazhTutorialController;
-
-
+use App\Models\HomepageProduct;
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -70,20 +70,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/about', [HomepageAboutController::class, 'update'])->name('about.update');
 
             // Mitra Section
-            Route::get('/mitra', [MitraController::class, 'index'])->name('mitra');
-            Route::get('/mitra/create', [MitraController::class, 'create'])->name('mitra.create');
-            Route::post('/mitra', [MitraController::class, 'store'])->name('mitra.store');
-            Route::get('/mitra/{id}/edit', [MitraController::class, 'edit'])->name('mitra.edit'); // optional
-            Route::post('/mitra/{id}', [MitraController::class, 'update'])->name('mitra.update'); // optional
-            Route::delete('/mitra/{id}', [MitraController::class, 'delete'])->name('mitra.delete');
-
+            Route::get('/mitra', [MitraController::class, 'homepageMitra'])->name('mitra');
+            Route::get('/mitra/create', [MitraController::class, 'createHomepageMitra'])->name('mitra.create');
+            Route::post('/mitra', [MitraController::class, 'storeHomepageMitra'])->name('mitra.store');
+            Route::get('/mitra/{mitra}/edit', [MitraController::class, 'editHomepageMitra'])->name('mitra.edit');
+            Route::put('/mitra/{mitra}', [MitraController::class, 'updateHomepageMitra'])->name('mitra.update');
+            Route::delete('/mitra/{mitra}', [MitraController::class, 'deleteHomepageMitra'])->name('mitra.delete');
             // Product Section
-            Route::get('/product', [ProductController::class, 'index'])->name('product');
-            Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
-            Route::post('/product', [ProductController::class, 'store'])->name('product.store');
-            Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
-            Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
-            Route::delete('/product/{id}', [ProductController::class, 'delete'])->name('product.delete');
+           Route::get('/product', [ProductController::class, 'homepageProduct'])->name('product');
+            Route::get('/product/create', [ProductController::class, 'createHomepageProduct'])->name('product.create');
+            Route::post('/product', [ProductController::class, 'storeHomepageProduct'])->name('product.store');
+            Route::get('/product/{product}/edit', [ProductController::class, 'editHomepageProduct'])->name('product.edit');
+            Route::put('/product/{product}', [ProductController::class, 'updateHomepageProduct'])->name('product.update');
+            Route::delete('/product/{product}', [ProductController::class, 'deleteHomepageProduct'])->name('product.delete');
         });
 
         // Edu Section

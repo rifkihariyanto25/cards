@@ -6,27 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('homepage_products', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('gambar')->nullable();
+            $table->string('gambar')->nullable(); // boleh null jika tidak diupload
             $table->string('link')->nullable();
-            $table->text('deskripsi')->nullable();
-            $table->boolean('status')->default(true);
-            $table->timestamps();
+            $table->text('deskripsi')->nullable(); // tambahkan kolom deskripsi
+            $table->enum('status', ['active', 'inactive'])->default('active'); // Tambahan
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('homepage_products');
+        Schema::dropIfExists('products');
     }
 };

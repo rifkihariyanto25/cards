@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('homepage_mitras', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nama');
             $table->string('logo')->nullable();
             $table->timestamps();
         });

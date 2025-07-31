@@ -1,7 +1,6 @@
 @extends('admin.home-conten')
 
 @section('title', 'Tambah Mitra - Homepage Content Management')
-
 @section('page-title', 'Home Page - Content Management')
 
 @section('content')
@@ -16,16 +15,16 @@
         </a>
     </div>
 
-    <form action="{{ route('admin.homepage.mitra') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.homepage.mitra.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <!-- Nama Mitra -->
         <div class="mb-6">
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nama Mitra</label>
-            <input type="text" id="name" name="name" class="input-field" 
-                   value="{{ old('name') }}" 
+            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Mitra</label>
+            <input type="text" id="nama" name="nama" class="input-field" 
+                   value="{{ old('nama') }}" 
                    placeholder="Masukkan nama mitra" required>
-            @error('name')
+            @error('nama')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
@@ -33,7 +32,7 @@
         <!-- Logo Mitra -->
         <div class="mb-6">
             <label for="logo" class="block text-sm font-medium text-gray-700 mb-2">Logo Mitra</label>
-            <div class="image-upload-area" onclick="document.getElementById('logo').click()">
+            <div class="image-upload-area cursor-pointer" onclick="document.getElementById('logo').click()">
                 <div class="text-center" id="logo-preview">
                     <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>

@@ -31,25 +31,47 @@
         </div>
 
         <!-- Gambar Produk -->
-        <div>
-            <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">Gambar Produk</label>
-            <div class="image-upload-area" onclick="document.getElementById('gambar').click()">
-                <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+        <!-- Upload Area -->
+        <div class="mb-4">
+        <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">Gambar Produk</label>
+        <div id="upload-area" 
+            class="cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-cards-teal transition"
+            onclick="document.getElementById('gambar').click()">
+
+            <!-- Preview (kosong dulu) -->
+            <img id="preview-img" src="" 
+                class="hidden max-h-48 rounded-lg mx-auto mb-2" 
+                alt="Preview">
+
+            <!-- Default placeholder -->
+            <div id="upload-placeholder">
+                <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                 </svg>
-                <p class="text-gray-600 font-medium mb-2">Drop Your File Here or Browse</p>
-                <p class="text-gray-500 text-sm">Supports: JPG, PNG, GIF (Max: 2MB)</p>
-                <input type="file" 
-                       id="gambar" 
-                       name="gambar" 
-                       accept="image/*" 
-                       class="hidden"
-                       onchange="previewImage(this)">
+                <p class="text-gray-600 font-medium">Drop Your File Here or Browse</p>
             </div>
-            @error('gambar')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
         </div>
+
+        <!-- Hidden file input -->
+        <input type="file" id="gambar" name="gambar" accept="image/*" class="hidden">
+        </div>
+
+        <script>
+        document.getElementById('gambar').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('upload-placeholder').style.display = 'none';
+                const img = document.getElementById('preview-img');
+                img.src = e.target.result;
+                img.classList.remove('hidden');
+            }
+            reader.readAsDataURL(file);
+        });
+        </script>
 
         <!-- Link Produk -->
         <div>
@@ -83,8 +105,9 @@
             <select id="status" 
                     name="status" 
                     class="input-field @error('status') border-red-500 @enderror">
-                <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Active</option>
-                <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactive</option>
+                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+
             </select>
             @error('status')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
