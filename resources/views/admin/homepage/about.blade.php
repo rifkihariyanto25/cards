@@ -30,134 +30,260 @@
                    placeholder="Masukkan judul section">
         </div>
 
-        <!-- Konten-1 -->
+        <!-- ======================= KONTEN 1 ======================= -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">Konten-1</h3>
-            
+
             <!-- Judul Konten 1 -->
             <div class="mb-4">
                 <div class="flex justify-between items-center mb-2">
-                    <label for="content1_title" class="block text-sm font-medium text-gray-700">Judul</label>
+                    <label for="content_1_title" class="block text-sm font-medium text-gray-700">Judul</label>
                     <div class="flex items-center space-x-2">
                         <span class="text-sm text-gray-600">Ukuran Font</span>
-                        <select name="content1_title_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
-                            <option value="36" {{ (old('content1_title_font_size') ?? $aboutData->content1_title_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
-                            <option value="32" {{ (old('content1_title_font_size') ?? $aboutData->content1_title_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
-                            <option value="28" {{ (old('content1_title_font_size') ?? $aboutData->content1_title_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
-                            <option value="24" {{ (old('content1_title_font_size') ?? $aboutData->content1_title_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        <select name="content_1_title_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_1_title_font_size') ?? $aboutData->content_1_title_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_1_title_font_size') ?? $aboutData->content_1_title_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_1_title_font_size') ?? $aboutData->content_1_title_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_1_title_font_size') ?? $aboutData->content_1_title_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
                         </select>
                     </div>
                 </div>
-                <input type="text" id="content1_title" name="content1_title" class="input-field" 
-                       value="{{ old('content1_title') ?? $aboutData->content1_title ?? '' }}" 
-                       placeholder="Masukkan judul konten 1">
+                <input type="text" id="content_1_title" name="content_1_title" class="input-field" 
+                    value="{{ old('content_1_title') ?? $aboutData->content_1_title ?? '' }}" 
+                    placeholder="Masukkan judul konten 1">
             </div>
 
             <!-- Sub Judul Konten 1 -->
             <div class="mb-4">
                 <div class="flex justify-between items-center mb-2">
-                    <label for="content1_subtitle" class="block text-sm font-medium text-gray-700">Sub Judul</label>
+                    <label for="content_1_subtitle" class="block text-sm font-medium text-gray-700">Sub Judul</label>
                     <div class="flex items-center space-x-2">
                         <span class="text-sm text-gray-600">Ukuran Font</span>
-                        <select name="content1_subtitle_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
-                            <option value="36" {{ (old('content1_subtitle_font_size') ?? $aboutData->content1_subtitle_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
-                            <option value="32" {{ (old('content1_subtitle_font_size') ?? $aboutData->content1_subtitle_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
-                            <option value="28" {{ (old('content1_subtitle_font_size') ?? $aboutData->content1_subtitle_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
-                            <option value="24" {{ (old('content1_subtitle_font_size') ?? $aboutData->content1_subtitle_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        <select name="content_1_subtitle_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_1_subtitle_font_size') ?? $aboutData->content_1_subtitle_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_1_subtitle_font_size') ?? $aboutData->content_1_subtitle_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_1_subtitle_font_size') ?? $aboutData->content_1_subtitle_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_1_subtitle_font_size') ?? $aboutData->content_1_subtitle_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
                         </select>
                     </div>
                 </div>
-                <input type="text" id="content1_subtitle" name="content1_subtitle" class="input-field" 
-                       value="{{ old('content1_subtitle') ?? $aboutData->content1_subtitle ?? '' }}" 
-                       placeholder="Masukkan sub judul konten 1">
+                <input type="text" id="content_1_subtitle" name="content_1_subtitle" class="input-field" 
+                    value="{{ old('content_1_subtitle') ?? $aboutData->content_1_subtitle ?? '' }}" 
+                    placeholder="Masukkan sub judul konten 1">
             </div>
 
-            <!-- Link Icon Konten 1 -->
+            <!-- Icon Konten 1 -->
             <div class="mb-4">
-                <label for="content1_icon" class="block text-sm font-medium text-gray-700 mb-2">Link Icon</label>
-                <div class="image-upload-area" onclick="document.getElementById('content1_icon').click()">
-                    @if(isset($aboutData->content1_icon) && $aboutData->content1_icon)
-                        <img src="{{ asset('storage/' . $aboutData->content1_icon) }}" alt="Icon" class="max-w-full max-h-32 rounded-lg mb-2">
-                    @endif
-                    <div class="text-center">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 1</label>
+                <div id="preview_content1_icon" 
+                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
+                     onclick="document.getElementById('content1_icon').click()">
+                    @if(isset($aboutData->content_1_icon))
+                        <img src="{{ asset('storage/' . $aboutData->content_1_icon) }}" class="mx-auto max-h-32 rounded-lg">
+                    @else
                         <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                         </svg>
-                        <p class="text-gray-500">Pastikan File berbentuk SVG atau PNG</p>
-                    </div>
+                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
+                    @endif
                 </div>
-                <input type="file" id="content1_icon" name="content1_icon" class="hidden" accept=".svg,.png">
-                <button type="button" class="btn-primary mt-2" onclick="document.getElementById('content1_icon').click()">
-                    Upload
-                </button>
+                <input type="file" id="content1_icon" name="content1_icon" class="hidden" accept=".svg,.png"
+                    onchange="previewImage(event, 'preview_content1_icon')">
             </div>
         </div>
 
-        <!-- Konten-2 -->
+        <!-- ======================= KONTEN 2 ======================= -->
         <div class="mb-6">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">Konten-2</h3>
-            
+
             <!-- Judul Konten 2 -->
             <div class="mb-4">
                 <div class="flex justify-between items-center mb-2">
-                    <label for="content2_title" class="block text-sm font-medium text-gray-700">Judul</label>
+                    <label for="content_2_title" class="block text-sm font-medium text-gray-700">Judul</label>
                     <div class="flex items-center space-x-2">
                         <span class="text-sm text-gray-600">Ukuran Font</span>
-                        <select name="content2_title_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
-                            <option value="36" {{ (old('content2_title_font_size') ?? $aboutData->content2_title_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
-                            <option value="32" {{ (old('content2_title_font_size') ?? $aboutData->content2_title_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
-                            <option value="28" {{ (old('content2_title_font_size') ?? $aboutData->content2_title_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
-                            <option value="24" {{ (old('content2_title_font_size') ?? $aboutData->content2_title_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        <select name="content_2_title_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_2_title_font_size') ?? $aboutData->content_2_title_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_2_title_font_size') ?? $aboutData->content_2_title_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_2_title_font_size') ?? $aboutData->content_2_title_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_2_title_font_size') ?? $aboutData->content_2_title_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
                         </select>
                     </div>
                 </div>
-                <input type="text" id="content2_title" name="content2_title" class="input-field" 
-                       value="{{ old('content2_title') ?? $aboutData->content2_title ?? '' }}" 
-                       placeholder="Masukkan judul konten 2">
+                <input type="text" id="content_2_title" name="content_2_title" class="input-field" 
+                    value="{{ old('content_2_title') ?? $aboutData->content_2_title ?? '' }}" 
+                    placeholder="Masukkan judul konten 2">
             </div>
 
             <!-- Sub Judul Konten 2 -->
             <div class="mb-4">
                 <div class="flex justify-between items-center mb-2">
-                    <label for="content2_subtitle" class="block text-sm font-medium text-gray-700">Sub Judul</label>
+                    <label for="content_2_subtitle" class="block text-sm font-medium text-gray-700">Sub Judul</label>
                     <div class="flex items-center space-x-2">
                         <span class="text-sm text-gray-600">Ukuran Font</span>
-                        <select name="content2_subtitle_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
-                            <option value="36" {{ (old('content2_subtitle_font_size') ?? $aboutData->content2_subtitle_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
-                            <option value="32" {{ (old('content2_subtitle_font_size') ?? $aboutData->content2_subtitle_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
-                            <option value="28" {{ (old('content2_subtitle_font_size') ?? $aboutData->content2_subtitle_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
-                            <option value="24" {{ (old('content2_subtitle_font_size') ?? $aboutData->content2_subtitle_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        <select name="content_2_subtitle_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_2_subtitle_font_size') ?? $aboutData->content_2_subtitle_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_2_subtitle_font_size') ?? $aboutData->content_2_subtitle_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_2_subtitle_font_size') ?? $aboutData->content_2_subtitle_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_2_subtitle_font_size') ?? $aboutData->content_2_subtitle_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
                         </select>
                     </div>
                 </div>
-                <input type="text" id="content2_subtitle" name="content2_subtitle" class="input-field" 
-                       value="{{ old('content2_subtitle') ?? $aboutData->content2_subtitle ?? '' }}" 
-                       placeholder="Masukkan sub judul konten 2">
+                <input type="text" id="content_2_subtitle" name="content_2_subtitle" class="input-field" 
+                    value="{{ old('content_2_subtitle') ?? $aboutData->content_2_subtitle ?? '' }}" 
+                    placeholder="Masukkan sub judul konten 2">
             </div>
 
-            <!-- Link Icon Konten 2 -->
+            <!-- Icon Konten 2 -->
             <div class="mb-4">
-                <label for="content2_icon" class="block text-sm font-medium text-gray-700 mb-2">Link Icon</label>
-                <div class="image-upload-area" onclick="document.getElementById('content2_icon').click()">
-                    @if(isset($aboutData->content2_icon) && $aboutData->content2_icon)
-                        <img src="{{ asset('storage/' . $aboutData->content2_icon) }}" alt="Icon" class="max-w-full max-h-32 rounded-lg mb-2">
-                    @endif
-                    <div class="text-center">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 2</label>
+                <div id="preview_content2_icon" 
+                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
+                     onclick="document.getElementById('content2_icon').click()">
+                    @if(isset($aboutData->content_2_icon))
+                        <img src="{{ asset('storage/' . $aboutData->content_2_icon) }}" class="mx-auto max-h-32 rounded-lg">
+                    @else
                         <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                         </svg>
-                        <p class="text-gray-500">Pastikan File berbentuk SVG atau PNG</p>
+                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
+                    @endif
+                </div>
+                <input type="file" id="content2_icon" name="content2_icon" class="hidden" accept=".svg,.png"
+                    onchange="previewImage(event, 'preview_content2_icon')">
+            </div>
+        </div>
+
+        <!-- ======================= KONTEN 3 ======================= -->
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Konten-3</h3>
+
+            <!-- Judul Konten 3 -->
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <label for="content_3_title" class="block text-sm font-medium text-gray-700">Judul</label>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">Ukuran Font</span>
+                        <select name="content_3_title_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_3_title_font_size') ?? $aboutData->content_3_title_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_3_title_font_size') ?? $aboutData->content_3_title_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_3_title_font_size') ?? $aboutData->content_3_title_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_3_title_font_size') ?? $aboutData->content_3_title_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        </select>
                     </div>
                 </div>
-                <input type="file" id="content2_icon" name="content2_icon" class="hidden" accept=".svg,.png">
-                <button type="button" class="btn-primary mt-2" onclick="document.getElementById('content2_icon').click()">
-                    Upload
-                </button>
+                <input type="text" id="content_3_title" name="content_3_title" class="input-field" 
+                    value="{{ old('content_3_title') ?? $aboutData->content_3_title ?? '' }}" 
+                    placeholder="Masukkan judul konten 3">
+            </div>
+
+            <!-- Sub Judul Konten 3 -->
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <label for="content_3_subtitle" class="block text-sm font-medium text-gray-700">Sub Judul</label>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">Ukuran Font</span>
+                        <select name="content_3_subtitle_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_3_subtitle_font_size') ?? $aboutData->content_3_subtitle_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_3_subtitle_font_size') ?? $aboutData->content_3_subtitle_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_3_subtitle_font_size') ?? $aboutData->content_3_subtitle_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_3_subtitle_font_size') ?? $aboutData->content_3_subtitle_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" id="content_3_subtitle" name="content_3_subtitle" class="input-field" 
+                    value="{{ old('content_3_subtitle') ?? $aboutData->content_3_subtitle ?? '' }}" 
+                    placeholder="Masukkan sub judul konten 3">
+            </div>
+
+            <!-- Icon Konten 3 -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 3</label>
+                <div id="preview_content3_icon" 
+                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
+                     onclick="document.getElementById('content3_icon').click()">
+                    @if(isset($aboutData->content_3_icon))
+                        <img src="{{ asset('storage/' . $aboutData->content_3_icon) }}" class="mx-auto max-h-32 rounded-lg">
+                    @else
+                        <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
+                    @endif
+                </div>
+                <input type="file" id="content3_icon" name="content3_icon" class="hidden" accept=".svg,.png"
+                    onchange="previewImage(event, 'preview_content3_icon')">
+            </div>
+        </div>
+
+        <!-- ======================= KONTEN 4 ======================= -->
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Konten-4</h3>
+
+            <!-- Judul Konten 4 -->
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <label for="content_4_title" class="block text-sm font-medium text-gray-700">Judul</label>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">Ukuran Font</span>
+                        <select name="content_4_title_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_4_title_font_size') ?? $aboutData->content_4_title_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_4_title_font_size') ?? $aboutData->content_4_title_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_4_title_font_size') ?? $aboutData->content_4_title_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_4_title_font_size') ?? $aboutData->content_4_title_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" id="content_4_title" name="content_4_title" class="input-field" 
+                    value="{{ old('content_4_title') ?? $aboutData->content_4_title ?? '' }}" 
+                    placeholder="Masukkan judul konten 4">
+            </div>
+
+            <!-- Sub Judul Konten 4 -->
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <label for="content_4_subtitle" class="block text-sm font-medium text-gray-700">Sub Judul</label>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">Ukuran Font</span>
+                        <select name="content_4_subtitle_font_size" class="border border-gray-300 rounded-md px-3 py-1 text-sm">
+                            <option value="36" {{ (old('content_4_subtitle_font_size') ?? $aboutData->content_4_subtitle_font_size ?? '36') == '36' ? 'selected' : '' }}>36</option>
+                            <option value="32" {{ (old('content_4_subtitle_font_size') ?? $aboutData->content_4_subtitle_font_size ?? '36') == '32' ? 'selected' : '' }}>32</option>
+                            <option value="28" {{ (old('content_4_subtitle_font_size') ?? $aboutData->content_4_subtitle_font_size ?? '36') == '28' ? 'selected' : '' }}>28</option>
+                            <option value="24" {{ (old('content_4_subtitle_font_size') ?? $aboutData->content_4_subtitle_font_size ?? '36') == '24' ? 'selected' : '' }}>24</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="text" id="content_4_subtitle" name="content_4_subtitle" class="input-field" 
+                    value="{{ old('content_4_subtitle') ?? $aboutData->content_4_subtitle ?? '' }}" 
+                    placeholder="Masukkan sub judul konten 4">
+            </div>
+
+            <!-- Icon Konten 4 -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 4</label>
+                <div id="preview_content4_icon" 
+                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
+                     onclick="document.getElementById('content4_icon').click()">
+                    @if(isset($aboutData->content_4_icon))
+                        <img src="{{ asset('storage/' . $aboutData->content_4_icon) }}" class="mx-auto max-h-32 rounded-lg">
+                    @else
+                        <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
+                    @endif
+                </div>
+                <input type="file" id="content4_icon" name="content4_icon" class="hidden" accept=".svg,.png"
+                    onchange="previewImage(event, 'preview_content4_icon')">
             </div>
         </div>
 
         <!-- Save Button -->
-        <div class="flex justify-start">
+        <div class="flex justify-start mt-6">
             <button type="submit" class="btn-primary">
                 Save
             </button>
@@ -165,3 +291,14 @@
     </form>
 </div>
 @endsection
+
+<script>
+function previewImage(event, previewId) {
+    let reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById(previewId).innerHTML =
+            `<img src="${e.target.result}" class="mx-auto max-h-32 rounded-lg" alt="Preview">`;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+</script>
