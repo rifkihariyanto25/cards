@@ -33,11 +33,12 @@
         .dropdown-arrow.rotate {
             transform: rotate(180deg);
         }
+        
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
    <div class="flex">
-        <!-- Sidebar -->
+       <!-- Sidebar -->
         <div class="w-80 bg-cards-teal min-h-screen">
             <!-- Logo -->
             <div class="p-6 border-b border-teal-600">
@@ -58,7 +59,7 @@
                     <li>
                         <a href="{{ route('admin.dashboard') }}" 
                            class="flex items-center px-6 py-3 text-white sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                           <div class="w-7 h-7 mr-4">
+                            <div class="w-7 h-7 mr-4">
                                 <img src="{{ asset('logoDash.png') }}" alt="Cards Logo" class="w-25 h-25">
                             </div>
                             <span class="text-lg">Dashboard</span>
@@ -82,22 +83,23 @@
                             <li><a href="{{ route('admin.homepage.about') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.homepage.about') ? 'bg-cyan-800' : '' }}">About Section</a></li>
                             <li><a href="{{ route('admin.homepage.mitra') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.homepage.mitra') ? 'bg-cyan-800' : '' }}">Mitra Section</a></li>
                             <li><a href="{{ route('admin.homepage.product') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.homepage.product') ? 'bg-cyan-800' : '' }}">Product Section</a></li>
+                             <li><a href="{{ route('admin.homepage.testimoni') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.homepage.testimoni') ? 'bg-cyan-800' : '' }}">Testimoni Section</a></li>
                         </ul>
                     </li>
 
                     <!-- Edu -->
                     <li>
                         <div class="flex items-center px-6 py-3 text-white sidebar-item cursor-pointer" 
-                             onclick="toggleDropdown('edu-dropdown')">
+                            onclick="toggleDropdown('edu-dropdown')">
                             <div class="w-7 h-7 mr-4">
                                 <img src="{{ asset('logoEdu.png') }}" alt="Cards Logo" class="w-25 h-25">
                             </div>
                             <span class="text-lg flex-1">Edu</span>
-                            <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 dropdown-arrow {{ request()->routeIs('admin.edu.*') ? 'rotate' : '' }}" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                             </svg>
                         </div>
-                        <ul id="edu-dropdown" class="hidden ml-12 mt-2 space-y-1">
+                        <ul id="edu-dropdown" class="{{ request()->routeIs('admin.edu.*') ? '' : 'hidden' }} ml-12 mt-2 space-y-1">
                             <li><a href="{{ route('admin.edu.hero') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.edu.hero') ? 'bg-cyan-800' : '' }}">Hero Section</a></li>
                             <li><a href="{{ route('admin.edu.about') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.edu.about') ? 'bg-cyan-800' : '' }}">About Section</a></li>
                             <li><a href="{{ route('admin.edu.features') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.edu.features') ? 'bg-cyan-800' : '' }}">Features Section</a></li>
@@ -108,77 +110,76 @@
                     <!-- Canteen -->
                     <li>
                         <div class="flex items-center px-6 py-3 text-white sidebar-item cursor-pointer" 
-                             onclick="toggleDropdown('canteen-dropdown')">
-                             <div class="w-7 h-7 mr-4">
+                            onclick="toggleDropdown('canteen-dropdown')">
+                            <div class="w-7 h-7 mr-4">
                                 <img src="{{ asset('logoCanteen.png') }}" alt="Cards Logo" class="w-25 h-25">
                             </div>
                             <span class="text-lg flex-1">Canteen</span>
-                            <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 dropdown-arrow {{ request()->routeIs('admin.canteen.*') ? 'rotate' : '' }}" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                             </svg>
                         </div>
-                        <ul id="canteen-dropdown" class="hidden ml-12 mt-2 space-y-1">
+                        <ul id="canteen-dropdown" class="{{ request()->routeIs('admin.canteen.*') ? '' : 'hidden' }} ml-12 mt-2 space-y-1">
                             <li><a href="{{ route('admin.canteen.hero') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.canteen.hero') ? 'bg-cyan-800' : '' }}">Hero Section</a></li>
                             <li><a href="{{ route('admin.canteen.about') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.canteen.about') ? 'bg-cyan-800' : '' }}">About Section</a></li>
                             <li><a href="{{ route('admin.canteen.features') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.canteen.features') ? 'bg-cyan-800' : '' }}">Features Section</a></li>
-                           
                         </ul>
                     </li>
 
                     <!-- School -->
                     <li>
                         <div class="flex items-center px-6 py-3 text-white sidebar-item cursor-pointer" 
-                             onclick="toggleDropdown('school-dropdown')">
+                            onclick="toggleDropdown('school-dropdown')">
                             <div class="w-7 h-7 mr-4">
                                 <img src="{{ asset('logoSchool.png') }}" alt="Cards Logo" class="w-25 h-25">
                             </div>
                             <span class="text-lg flex-1">School</span>
-                            <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 dropdown-arrow {{ request()->routeIs('admin.school.*') ? 'rotate' : '' }}" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                             </svg>
                         </div>
-                        <ul id="school-dropdown" class="hidden ml-12 mt-2 space-y-1">
-                             <li><a href="{{ route('admin.school.hero') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.school.hero') ? 'bg-cyan-800' : '' }}">Hero Section</a></li>
+                        <ul id="school-dropdown" class="{{ request()->routeIs('admin.school.*') ? '' : 'hidden' }} ml-12 mt-2 space-y-1">
+                            <li><a href="{{ route('admin.school.hero') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.school.hero') ? 'bg-cyan-800' : '' }}">Hero Section</a></li>
                             <li><a href="{{ route('admin.school.about') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.school.about') ? 'bg-cyan-800' : '' }}">About Section</a></li>
                             <li><a href="{{ route('admin.school.features') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.school.features') ? 'bg-cyan-800' : '' }}">Features Section</a></li>
-                             <li><a href="{{ route('admin.school.download') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.school.download') ? 'bg-cyan-800' : '' }}">Download Section</a></li>
+                            <li><a href="{{ route('admin.school.download') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.school.download') ? 'bg-cyan-800' : '' }}">Download Section</a></li>
                         </ul>
                     </li>
 
                     <!-- Parents -->
                     <li>
                         <div class="flex items-center px-6 py-3 text-white sidebar-item cursor-pointer" 
-                             onclick="toggleDropdown('parents-dropdown')">
+                            onclick="toggleDropdown('parents-dropdown')">
                             <div class="w-7 h-7 mr-4">
                                 <img src="{{ asset('logoParent.png') }}" alt="Cards Logo" class="w-25 h-25">
                             </div>
                             <span class="text-lg flex-1">Parents</span>
-                            <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 dropdown-arrow {{ request()->routeIs('admin.parents.*') ? 'rotate' : '' }}" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                             </svg>
                         </div>
-                        <ul id="parents-dropdown" class="hidden ml-12 mt-2 space-y-1">
+                        <ul id="parents-dropdown" class="{{ request()->routeIs('admin.parents.*') ? '' : 'hidden' }} ml-12 mt-2 space-y-1">
                             <li><a href="{{ route('admin.parents.hero') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.parents.hero') ? 'bg-cyan-800' : '' }}">Hero Section</a></li>
                             <li><a href="{{ route('admin.parents.about') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.parents.about') ? 'bg-cyan-800' : '' }}">About Section</a></li>
                             <li><a href="{{ route('admin.parents.features') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.parents.features') ? 'bg-cyan-800' : '' }}">Features Section</a></li>
-                             <li><a href="{{ route('admin.parents.download') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.parents.download') ? 'bg-cyan-800' : '' }}">Download Section</a></li>
+                            <li><a href="{{ route('admin.parents.download') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.parents.download') ? 'bg-cyan-800' : '' }}">Download Section</a></li>
                         </ul>
                     </li>
 
                     <!-- FlexyCazh -->
                     <li>
                         <div class="flex items-center px-6 py-3 text-white sidebar-item cursor-pointer" 
-                             onclick="toggleDropdown('flexycazh-dropdown')">
-                             <div class="w-7 h-7 mr-4">
+                            onclick="toggleDropdown('flexycazh-dropdown')">
+                            <div class="w-7 h-7 mr-4">
                                 <img src="{{ asset('logoFlexy.png') }}" alt="Cards Logo" class="w-25 h-25">
                             </div>
                             <span class="text-lg flex-1">FlexyCazh</span>
-                            <svg class="w-4 h-4 dropdown-arrow" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-4 h-4 dropdown-arrow {{ request()->routeIs('admin.flexycazh.*') ? 'rotate' : '' }}" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                             </svg>
                         </div>
-                        <ul id="flexycazh-dropdown" class="hidden ml-12 mt-2 space-y-1">
-                           <li><a href="{{ route('admin.flexycazh.hero') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.flexycazh.hero') ? 'bg-cyan-800' : '' }}">Hero Section</a></li>
+                        <ul id="flexycazh-dropdown" class="{{ request()->routeIs('admin.flexycazh.*') ? '' : 'hidden' }} ml-12 mt-2 space-y-1">
+                            <li><a href="{{ route('admin.flexycazh.hero') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.flexycazh.hero') ? 'bg-cyan-800' : '' }}">Hero Section</a></li>
                             <li><a href="{{ route('admin.flexycazh.features') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.flexycazh.features') ? 'bg-cyan-800' : '' }}">Features Section</a></li>
                             <li><a href="{{ route('admin.flexycazh.tutorial') }}" class="block px-4 py-2 text-white text-sm hover:bg-cyan-800 rounded {{ request()->routeIs('admin.flexycazh.tutorial') ? 'bg-cyan-800' : '' }}">Tutorial Section</a></li>
                         </ul>
@@ -188,12 +189,11 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1">
             <!-- Header -->
-            <header class="bg-white shadow-sm border-b border-gray-200">
-                <div class="flex items-center justify-between px-8 py-4">
-                    <h1 class="text-2xl font-semibold text-cards-teal">Dashboard</h1>
-                    
+            <div class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-xl font-semibold text-cards-teal">@yield('page-title', 'Home Page - Content Management')</h1>
                     <!-- Logout Button -->
                     <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf
@@ -203,33 +203,108 @@
                         </button>
                     </form>
                 </div>
-            </header>
+            </div>
 
-            <!-- Main Content Area -->
-            <main class="flex-1 p-8">
-                <div class="bg-white rounded-lg shadow-sm">
-                    <!-- Table Header -->
-                    <div class="px-6 py-4 border-b border-gray-200">
-                        <div class="flex justify-between items-center">
-                            <div class="flex space-x-8">
-                                <div class="text-sm font-medium text-gray-700">No.</div>
-                                <div class="text-sm font-medium text-gray-700">Text</div>
-                                <div class="text-sm font-medium text-gray-700 ml-auto">Text</div>
+           <!-- Main Content Area -->
+        <main class="flex-1 p-8">
+            <div class="bg-white rounded-lg shadow-sm">
+                <!-- Hero Section Header -->
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-semibold text-cyan-600">Hero Section</h2>
+                </div>
+
+                <!-- List Pengajuan FlexyCazh Section -->
+                <div class="px-6 py-4">
+                    <!-- Section Header with Green Background -->
+                    <div class="bg-teal-700 text-white px-4 py-3 rounded-t-lg flex items-center">
+                        <span class="mr-2">📋</span>
+                        <span class="font-medium">List Pengajuan FlexyCazh</span>
+                    </div>
+
+                    <!-- Table Container -->
+                    <div class="border border-gray-200 rounded-b-lg overflow-hidden">
+                        <!-- Table Header -->
+                        <div class="bg-blue-50 border-b border-gray-200">
+                            <div class="grid grid-cols-7 gap-4 px-4 py-3 text-sm font-medium text-gray-700">
+                                <div class="text-center">No.</div>
+                                <div>Nama Partner</div>
+                                <div class="text-center">Jenis Partner</div>
+                                <div>Nama PIC</div>
+                                <div class="text-center">No. HP PIC</div>
+                                <div>Kebutuhan</div>
+                                <div>Kebutuhan Pendanaan</div>
+                                <div class="text-center">Tenor</div>
+                            </div>
+                        </div>
+
+                        <!-- Table Body -->
+                        <div class="divide-y divide-gray-200">
+                            <!-- Row 1 -->
+                            <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
+                                <div class="text-center font-medium">1.</div>
+                                <div class="text-gray-900">Toyota Xpander</div>
+                                <div class="text-center">1</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-900">085291888881</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                            </div>
+
+                            <!-- Row 2 -->
+                            <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
+                                <div class="text-center font-medium">2.</div>
+                                <div class="text-gray-900">Toyota Alphard</div>
+                                <div class="text-center">1</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                            </div>
+
+                            <!-- Row 3 -->
+                            <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
+                                <div class="text-center font-medium">3.</div>
+                                <div class="text-gray-900">Daihatsu Ayla</div>
+                                <div class="text-center">4</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                            </div>
+
+                            <!-- Row 4 -->
+                            <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
+                                <div class="text-center font-medium">4.</div>
+                                <div class="text-gray-900">Daihatsu Xenia</div>
+                                <div class="text-center">3</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                            </div>
+
+                            <!-- Row 5 -->
+                            <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
+                                <div class="text-center font-medium">5.</div>
+                                <div class="text-gray-900">Hyundai Palisade</div>
+                                <div class="text-center">1</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-gray-500">-</div>
+                                <div class="text-center text-gray-500">-</div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Table Content -->
-                    <div class="p-6">
-                        <div class="text-center py-12">
-                            <div class="text-gray-500 text-lg">Selamat datang di Dashboard Admin Cards</div>
-                            <div class="text-gray-400 text-sm mt-2">Pilih menu di sidebar untuk mengelola konten</div>
-                        </div>
-                    </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
+
 
     <script>
         function toggleDropdown(dropdownId) {

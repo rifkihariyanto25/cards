@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Homepage\HeroController as HomepageHeroController
 use App\Http\Controllers\Admin\Homepage\AboutController as HomepageAboutController;
 use App\Http\Controllers\Admin\Homepage\MitraController;
 use App\Http\Controllers\Admin\Homepage\ProductController;
+use App\Http\Controllers\Admin\Homepage\TestimoniController;
 
 // Edu
 use App\Http\Controllers\Admin\Edu\HeroController as EduHeroController;
@@ -83,6 +84,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/product/{product}/edit', [ProductController::class, 'editHomepageProduct'])->name('product.edit');
             Route::put('/product/{product}', [ProductController::class, 'updateHomepageProduct'])->name('product.update');
             Route::delete('/product/{product}', [ProductController::class, 'deleteHomepageProduct'])->name('product.delete');
+
+            Route::get('/testimoni', [AdminController::class, 'homepageTestimoni'])->name('testimoni');
+            Route::get('/testimoni/create', [AdminController::class, 'createHomepageTestimoni'])->name('testimoni.create'); // Add this line
+            Route::post('/testimoni', [AdminController::class, 'storeHomepageTestimoni'])->name('testimoni.store'); // Add this line
+            Route::get('/testimoni/{id}/edit', [AdminController::class, 'editHomepageTestimoni'])->name('testimoni.edit'); // Optional: for editing
+            Route::post('/testimoni/{id}', [AdminController::class, 'updateHomepageTestimoni'])->name('testimoni.update');
+            Route::delete('/testimoni/{id}', [AdminController::class, 'deleteHomepageTestimoni'])->name('testimoni.delete');
         });
 
         // Edu Section
