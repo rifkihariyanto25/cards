@@ -247,33 +247,13 @@
         <div class="flex flex-wrap justify-center gap-6 lg:gap-8 min-w-full lg:min-w-0">
             
             <!-- Logo Items -->
-
-             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 1"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 2"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 3"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 4"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 5"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 6"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 7"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 8"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo 9"
-            class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
+            @forelse($mitras as $mitra)
+                <img src="{{ $mitra->logo ? asset('storage/' . $mitra->logo) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s' }}" 
+                alt="{{ $mitra->nama }}" class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
+            @empty
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo Default"
+                class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
+            @endforelse
         </div>
         </div> 
     </div>
@@ -290,6 +270,21 @@
     <div id="produkCarousel" class="flex space-x-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4" onscroll="handleScroll()">
       
       <!-- Slides -->
+      @forelse($products as $index => $product)
+      <div class="flex-shrink-0 w-[300px] md:w-[360px] snap-start" data-index="{{ $index }}">
+        <div class="relative bg-[#007F9E] rounded-2xl shadow-xl text-white overflow-hidden group hover:-translate-y-2 transition duration-300">
+          <div class="flex items-center justify-center w-full h-60">
+            <img src="{{ $product->gambar ? asset('storage/' . $product->gambar) : '../img/p-1.png' }}" alt="{{ $product->nama }}" class="object-contain max-h-full" />
+          </div>
+          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition duration-500 flex items-center justify-center">
+            <div class="text-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+              <h3 class="text-lg font-semibold mb-3">{{ $product->nama }}</h3>
+              <a href="{{ $product->link ?? '#' }}" class="bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 px-4 rounded-full transition">Selengkapnya ›</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      @empty
       <div class="flex-shrink-0 w-[300px] md:w-[360px] snap-start" data-index="0">
         <div class="relative bg-[#007F9E] rounded-2xl shadow-xl text-white overflow-hidden group hover:-translate-y-2 transition duration-300">
           <div class="flex items-center justify-center w-full h-60">
@@ -303,48 +298,7 @@
           </div>
         </div>
       </div>
-
-      <div class="flex-shrink-0 w-[300px] md:w-[360px] snap-start" data-index="1">
-        <div class="relative bg-[#008EA7] rounded-2xl shadow-xl text-white overflow-hidden group hover:-translate-y-2 transition duration-300">
-          <div class="flex items-center justify-center w-full h-60">
-            <img src="../img/p-1.png" alt="Cards Teacher" class="object-contain max-h-full" />
-          </div>
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition duration-500 flex items-center justify-center">
-            <div class="text-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-              <h3 class="text-lg font-semibold mb-3">Cards Teacher</h3>
-              <a href="#" class="bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 px-4 rounded-full transition">Selengkapnya ›</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex-shrink-0 w-[300px] md:w-[360px] snap-start" data-index="2">
-        <div class="relative bg-[#008EA7] rounded-2xl shadow-xl text-white overflow-hidden group hover:-translate-y-2 transition duration-300">
-          <div class="flex items-center justify-center w-full h-60">
-            <img src="../img/p-1.png" alt="Cards Teacher" class="object-contain max-h-full" />
-          </div>
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition duration-500 flex items-center justify-center">
-            <div class="text-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-              <h3 class="text-lg font-semibold mb-3">Cards Teacher</h3>
-              <a href="#" class="bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 px-4 rounded-full transition">Selengkapnya ›</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex-shrink-0 w-[300px] md:w-[360px] snap-start" data-index="2">
-        <div class="relative bg-[#008EA7] rounded-2xl shadow-xl text-white overflow-hidden group hover:-translate-y-2 transition duration-300">
-          <div class="flex items-center justify-center w-full h-60">
-            <img src="../img/p-1.png" alt="Cards Teacher" class="object-contain max-h-full" />
-          </div>
-          <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition duration-500 flex items-center justify-center">
-            <div class="text-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-              <h3 class="text-lg font-semibold mb-3">Cards Teacher</h3>
-              <a href="#" class="bg-orange-500 hover:bg-orange-600 text-white text-sm py-2 px-4 rounded-full transition">Selengkapnya ›</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      @endforelse
 
     </div>
 
@@ -372,7 +326,30 @@
         <div class="swiper mySwiperTesti relative">
         <div class="swiper-wrapper">
 
-            <!-- Slide 1 -->
+            @forelse($testimonies as $testimoni)
+            <!-- Slide -->
+            <div class="swiper-slide bg-white text-gray-800 rounded-xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 shadow-lg">
+            <!-- Foto -->
+            <div class="flex-shrink-0">
+                <img src="{{ $testimoni->foto ? asset('storage/' . $testimoni->foto) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBXixafqdNLVEfd3rh13dHkGlLEFAufANTxQ&s' }}" alt="{{ $testimoni->nama }}" class="w-32 h-40 rounded-lg object-cover mx-auto" />
+            </div>
+            
+            <!-- Konten -->
+            <div class="text-left">
+                <div class="flex justify-center md:justify-end mb-2">
+                <span class="bg-cyan-100 text-cyan-800 text-xs px-3 py-1 rounded-full">Pengguna Cards Edu</span>
+                </div>
+                <p class="text-sm md:text-base mb-4 leading-relaxed relative">
+                <span class="text-3xl text-cyan-600 font-serif absolute -top-3 left-0">"</span>
+                {{ $testimoni->komentar }}
+                <span class="text-3xl text-cyan-600 font-serif align-text-top">"</span>
+                </p>
+                <p class="text-cyan-700 font-semibold">{{ $testimoni->nama }}</p>
+                <p class="text-sm text-gray-500">{{ $testimoni->profesi }}</p>
+            </div>
+            </div>
+            @empty
+            <!-- Default Slide -->
             <div class="swiper-slide bg-white text-gray-800 rounded-xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 shadow-lg">
             <!-- Foto -->
             <div class="flex-shrink-0">
@@ -385,36 +362,15 @@
                 <span class="bg-cyan-100 text-cyan-800 text-xs px-3 py-1 rounded-full">Pengguna Cards Edu</span>
                 </div>
                 <p class="text-sm md:text-base mb-4 leading-relaxed relative">
-                <span class="text-3xl text-cyan-600 font-serif absolute -top-3 left-0">“</span>
+                <span class="text-3xl text-cyan-600 font-serif absolute -top-3 left-0">"</span>
                 Aplikasi ini sangat terpercaya dan kompeten! Kami telah bekerja sama dengan berbagai pihak yang puas dengan layanan yang diberikan. Benar-benar solusi yang bisa diandalkan!
-                <span class="text-3xl text-cyan-600 font-serif align-text-top">”</span>
+                <span class="text-3xl text-cyan-600 font-serif align-text-top">"</span>
                 </p>
                 <p class="text-cyan-700 font-semibold">Ibu Mega</p>
                 <p class="text-sm text-gray-500">Guru SMP 1 Bojong</p>
             </div>
             </div>
-
-             <!-- Slide 2 -->
-            <div class="swiper-slide bg-white text-gray-800 rounded-xl p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 shadow-lg">
-            <!-- Foto -->
-            <div class="flex-shrink-0">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBXixafqdNLVEfd3rh13dHkGlLEFAufANTxQ&s" alt="Ibu Mega" class="w-32 h-40 rounded-lg object-cover mx-auto" />
-            </div>
-            
-            <!-- Konten -->
-            <div class="text-left">
-                <div class="flex justify-center md:justify-end mb-2">
-                <span class="bg-cyan-100 text-cyan-800 text-xs px-3 py-1 rounded-full">Pengguna Cards Edu</span>
-                </div>
-                <p class="text-sm md:text-base mb-4 leading-relaxed relative">
-                <span class="text-3xl text-cyan-600 font-serif absolute -top-3 left-0">“</span>
-                Aplikasi ini sangat terpercaya dan kompeten! Kami telah bekerja sama dengan berbagai pihak yang puas dengan layanan yang diberikan. Benar-benar solusi yang bisa diandalkan!
-                <span class="text-3xl text-cyan-600 font-serif align-text-top">”</span>
-                </p>
-                <p class="text-cyan-700 font-semibold">Ibu Mega</p>
-                <p class="text-sm text-gray-500">Guru SMP 1 Bojong</p>
-            </div>
-            </div>
+            @endforelse
 
         </div>
 
@@ -547,7 +503,7 @@
 
 
 <script>
-  //klik geser
+  // Testimonial Swiper
    const swiperTesti = new Swiper('.mySwiperTesti', {
     loop: true,
     slidesPerView: 1,

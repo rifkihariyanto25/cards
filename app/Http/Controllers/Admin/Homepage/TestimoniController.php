@@ -11,11 +11,10 @@ class TestimoniController extends Controller
 {
 public function homepageTestimoni()
 {
-    // Jika Anda sudah memiliki model Testimoni, gunakan:
-    // $testimonies = Testimoni::orderBy('created_at', 'desc')->get();
+    // Menggunakan model HomepageTestimoni
+    $testimonies = HomepageTestimoni::orderBy('created_at', 'desc')->get();
     
-    // Untuk sementara, return view dengan data dummy
-    return view('admin.homepage.testimoni');
+    return view('admin.homepage.testimoni', compact('testimonies'));
 }
 
 /**
@@ -48,8 +47,8 @@ public function storeHomepageTestimoni(Request $request)
             $validatedData['foto'] = $path;
         }
 
-        // Jika Anda sudah memiliki model Testimoni:
-        // Testimoni::create($validatedData);
+        // Menggunakan model HomepageTestimoni
+        HomepageTestimoni::create($validatedData);
 
         // Flash message sukses
         return redirect()->route('admin.homepage.testimoni')
@@ -67,17 +66,8 @@ public function storeHomepageTestimoni(Request $request)
  */
 public function editHomepageTestimoni($id)
 {
-    // Jika Anda sudah memiliki model Testimoni:
-    // $testimoni = Testimoni::findOrFail($id);
-    
-    // Untuk sementara, return view dengan data dummy
-    $testimoni = (object) [
-        'id' => $id,
-        'nama' => 'Ibu Mega',
-        'profesi' => 'Kepala Sekolah',
-        'foto' => 'testimonies/sample.jpg',
-        'komentar' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-    ];
+    // Menggunakan model HomepageTestimoni
+    $testimoni = HomepageTestimoni::findOrFail($id);
     
     return view('admin.homepage.testimoni.testimoni-edit', compact('testimoni'));
 }
@@ -96,8 +86,8 @@ public function updateHomepageTestimoni(Request $request, $id)
     ]);
 
     try {
-        // Jika Anda sudah memiliki model Testimoni:
-        // $testimoni = Testimoni::findOrFail($id);
+        // Menggunakan model HomepageTestimoni
+        $testimoni = HomepageTestimoni::findOrFail($id);
 
         // Handle file upload
         if ($request->hasFile('foto')) {
@@ -106,15 +96,15 @@ public function updateHomepageTestimoni(Request $request, $id)
             $path = $foto->storeAs('testimonies', $filename, 'public');
             
             // Hapus foto lama jika ada
-            // if ($testimoni->foto && Storage::disk('public')->exists($testimoni->foto)) {
-            //     Storage::disk('public')->delete($testimoni->foto);
-            // }
+            if ($testimoni->foto && Storage::disk('public')->exists($testimoni->foto)) {
+                Storage::disk('public')->delete($testimoni->foto);
+            }
             
             $validatedData['foto'] = $path;
         }
 
         // Update data
-        // $testimoni->update($validatedData);
+        $testimoni->update($validatedData);
 
         return redirect()->route('admin.homepage.testimoni')
                          ->with('success', 'Testimoni berhasil diperbarui!');
@@ -132,15 +122,15 @@ public function updateHomepageTestimoni(Request $request, $id)
 public function deleteHomepageTestimoni($id)
 {
     try {
-        // Jika Anda sudah memiliki model Testimoni:
-        // $testimoni = Testimoni::findOrFail($id);
+        // Menggunakan model HomepageTestimoni
+        $testimoni = HomepageTestimoni::findOrFail($id);
         
         // Hapus foto jika ada
-        // if ($testimoni->foto && Storage::disk('public')->exists($testimoni->foto)) {
-        //     Storage::disk('public')->delete($testimoni->foto);
-        // }
+        if ($testimoni->foto && Storage::disk('public')->exists($testimoni->foto)) {
+            Storage::disk('public')->delete($testimoni->foto);
+        }
         
-        // $testimoni->delete();
+        $testimoni->delete();
 
         return redirect()->route('admin.homepage.testimoni')
                          ->with('success', 'Testimoni berhasil dihapus!');
