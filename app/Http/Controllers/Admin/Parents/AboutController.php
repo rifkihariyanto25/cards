@@ -4,33 +4,42 @@ namespace App\Http\Controllers\Admin\Parents;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Parents\ParentsAbout;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        return view('admin.parents.about');
+        $aboutData = ParentsAbout::first();
+        return view('admin.parents.about', compact('aboutData'));
     }
 
     public function update(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'section_title' => 'required|string|max:255',
-            'section_title_font_size' => 'required|in:24,28,32,36',
-            'section_description' => 'required|string|max:1000',
-            'section_description_font_size' => 'required|in:14,16,18,20',
-            'about_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'layout_position' => 'required|in:image_left,image_right',
-            'bg_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'is_active' => 'nullable|boolean',
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'subtitle' => 'required|string|max:500',
+            'title_font_size' => 'nullable|string|max:5',
+            'subtitle_font_size' => 'nullable|string|max:5',
+            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        $aboutData = ParentsAbout::firstOrNew(['id' => 1]);
+        $aboutData->title = $request->title;
+        $aboutData->subtitle = $request->subtitle;
+        $aboutData->title_font_size = $request->title_font_size;
+        $aboutData->subtitle_font_size = $request->subtitle_font_size;
 
-        // Save logic here
+
+        if ($request->hasFile('cover_image')) {
+            if ($aboutData->cover_image && Storage::disk('public')->exists($aboutData->cover_image)) {
+                Storage::disk('public')->delete($aboutData->cover_image);
+            }
+            $aboutData->cover_image = $request->file('cover_image')->store('parents/about', 'public');
+        }
+        
+        $aboutData->save();
 
         return redirect()->route('admin.parents.about')->with('success', 'About section updated!');
     }

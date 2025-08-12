@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Admin\School;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\School\SchoolAbout;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        return view('admin.school.about');
+        $aboutData = SchoolAbout::first();
+        return view('admin.school.about', compact('aboutData'));
     }
 
     public function update(Request $request)
@@ -17,13 +20,25 @@ class AboutController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'subtitle' => 'required|string|max:500',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'title_font_size' => 'nullable|string|max:5',
+            'subtitle_font_size' => 'nullable|string|max:5',
+            'cover_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
 
+        $aboutData = SchoolAbout::firstOrNew(['id' => 1]);
+        $aboutData->title = $request->title;
+        $aboutData->subtitle = $request->subtitle;
+        $aboutData->title_font_size = $request->title_font_size;
+        $aboutData->subtitle_font_size = $request->subtitle_font_size;
+
         if ($request->hasFile('cover_image')) {
-            $imagePath = $request->file('cover_image')->store('school/about', 'public');
-            // Simpan ke database
+            if ($aboutData->cover_image && Storage::disk('public')->exists($aboutData->cover_image)) {
+                Storage::disk('public')->delete($aboutData->cover_image);
+            }
+            $aboutData->cover_image = $request->file('cover_image')->store('school/about', 'public');
         }
+        
+        $aboutData->save();
 
         return redirect()->route('admin.school.about')->with('success', 'About section updated successfully');
     }
