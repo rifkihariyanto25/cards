@@ -29,8 +29,9 @@
                 <tr>
                     <th class="w-16">No</th>
                     <th>Nama</th>
-                    <th class="w-32">Ikon</th>
+                    <th class="w-32">Gambar</th>
                     <th>Deskripsi</th>
+                    <th>Status</th>
                     <th class="w-32">Action</th>
                 </tr>
             </thead>
@@ -40,9 +41,9 @@
                     <td class="text-center">{{ $index + 1 }}</td>
                     <td>{{ $feature->nama ?? 'Cards Feature' }}</td>
                     <td class="text-center">
-                        @if(isset($feature->ikon) && $feature->ikon)
-                            <img src="{{ asset('storage/' . $feature->ikon) }}" 
-                                 alt="Feature Icon" 
+                        @if(isset($feature->gambar) && $feature->gambar)
+                            <img src="{{ asset('storage/' . $feature->gambar) }}" 
+                                 alt="Feature Image" 
                                  class="w-16 h-16 object-cover rounded mx-auto">
                         @else
                             <div class="w-16 h-16 bg-gray-200 rounded mx-auto flex items-center justify-center">
@@ -53,6 +54,11 @@
                         @endif
                     </td>
                     <td>{{ $feature->deskripsi ?? '-' }}</td>
+                    <td>
+                        <span class="px-2 py-1 rounded text-xs font-medium {{ $feature->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                            {{ ucfirst($feature->status ?? 'active') }}
+                        </span>
+                    </td>
                     <td>
                         <a href="{{ route('admin.edu.features.edit', $feature->id ?? 1) }}" 
                            class="action-btn action-btn-edit">
@@ -76,7 +82,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center py-8 text-gray-500">No features found</td>
+                    <td colspan="6" class="text-center py-8 text-gray-500">No features found</td>
                 </tr>
                 @endforelse
             </tbody>

@@ -106,9 +106,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/features', [EduFeaturesController::class, 'eduFeatures'])->name('features');
             Route::get('/features/create', [EduFeaturesController::class, 'createEduFeatures'])->name('features.create');
             Route::post('/features', [EduFeaturesController::class, 'storeEduFeature'])->name('features.store');
-            Route::get('/features/{features}/edit', [EduFeaturesController::class, 'editEduFeature'])->name('features.edit');
-            Route::put('/features/{features}', [EduFeaturesController::class, 'updateEduFeature'])->name('features.update');
-            Route::delete('/features/{features}', [EduFeaturesController::class, 'deleteEduFeature'])->name('features.delete');
+            Route::get('/features/{id}/edit', [EduFeaturesController::class, 'editEduFeature'])->name('features.edit');
+            Route::put('/features/{id}', [EduFeaturesController::class, 'updateEduFeature'])->name('features.update');
+            Route::delete('/features/{id}', [EduFeaturesController::class, 'deleteEduFeature'])->name('features.delete');
             
             
             Route::get('/download', [DownloadController::class, 'index'])->name('download');
@@ -193,5 +193,7 @@ Route::get('/admin', function () {
 });
 
 use App\Http\Controllers\User\HomepageController;
+use App\Http\Controllers\User\EduController;
 
 Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage');
+Route::get('/edu', [EduController::class, 'index'])->name('edu');

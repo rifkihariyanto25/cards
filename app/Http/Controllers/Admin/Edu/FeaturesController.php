@@ -51,7 +51,7 @@ class FeaturesController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('features')
+        return redirect()->route('admin.edu.features')
                          ->with('success', 'Feature created successfully!');
     }
 
@@ -67,7 +67,7 @@ class FeaturesController extends Controller
     /**
      * Update a feature
      */
-    public function updateEduFeature(Request $request, EduFeature $features)
+    public function updateEduFeature(Request $request, $id)
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
@@ -76,34 +76,38 @@ class FeaturesController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
+        $feature = EduFeature::findOrFail($id);
+
         if ($request->hasFile('gambar')) {
-            if ($features->gambar && Storage::disk('public')->exists($features->gambar)) {
-                Storage::disk('public')->delete($features->gambar);
+            if ($feature->gambar && Storage::disk('public')->exists($feature->gambar)) {
+                Storage::disk('public')->delete($feature->gambar);
             }
 
             $validated['gambar'] = $request->file('gambar')->store('edu/features', 'public');
         } else {
-            $validated['gambar'] = $features->gambar;
+            $validated['gambar'] = $feature->gambar;
         }
 
-        $features->update($validated);
+        $feature->update($validated);
 
-        return redirect()->route('features')
+        return redirect()->route('admin.edu.features')
                          ->with('success', 'Feature updated successfully!');
     }
 
     /**
      * Delete a feature
      */
-    public function deleteEduFeature(EduFeature $features)
+    public function deleteEduFeature($id)
     {
-        if ($features->gambar && Storage::disk('public')->exists($features->gambar)) {
-            Storage::disk('public')->delete($features->gambar);
+        $feature = EduFeature::findOrFail($id);
+        
+        if ($feature->gambar && Storage::disk('public')->exists($feature->gambar)) {
+            Storage::disk('public')->delete($feature->gambar);
         }
 
-        $features->delete();
+        $feature->delete();
 
-        return redirect()->route('features')
+        return redirect()->route('admin.edu.features')
                          ->with('success', 'Feature deleted successfully!');
     }
 }

@@ -98,7 +98,7 @@
         
         <!-- Mobile Title (shown only on mobile) -->
         <div class="w-full lg:hidden text-white text-center mb-6">
-            <h1 class="text-4xl font-bold">Cards Edu</h1>
+            <h1 class="text-4xl font-bold">{{ $heroData->title ?? 'Cards Edu' }}</h1>
         </div>
 
         <!-- Gambar Siswa -->
@@ -113,10 +113,9 @@
         <!-- Teks -->
         <div class="w-full lg:w-2/5 text-white text-center lg:text-left space-y-6 order-3 lg:order-none">
             <!-- Desktop Title (hidden on mobile) -->
-            <h1 class="hidden lg:block text-4xl lg:text-5xl font-bold">Cards Edu</h1>
+            <h1 class="hidden lg:block text-4xl lg:text-5xl font-bold">{{ $heroData->title ?? 'Cards Edu' }}</h1>
             <p class="text-lg leading-relaxed">
-                Transformasi sekolah jadi digital? Bisa!<br />
-                Dengan Cards Edu, absensi, tugas, dan rapor jadi lebih cepat, rapi, dan terpantau!
+                {!! $heroData->subtitle ?? 'Transformasi sekolah jadi digital? Bisa!<br />Dengan Cards Edu, absensi, tugas, dan rapor jadi lebih cepat, rapi, dan terpantau!' !!}
             </p>
             <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
                 <a href="#" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium text-sm transition">
@@ -152,8 +151,7 @@
       <!-- KETERANGAN -->
       <div class="text-base text-gray-800 leading-relaxed text-justify px-2">
         <p>
-          Cards Edu adalah produk dari <strong>PT CAZH Teknologi Inovasi</strong> yang dirancang untuk mendigitalisasi sistem pembelajaran dan administrasi sekolah. 
-          Aplikasi ini mengelola jadwal, kehadiran, tugas, nilai, dan rapor akademik siswa secara terintegrasi.
+          {!! $aboutData->subtitle ?? 'Cards Edu adalah produk dari <strong>PT CAZH Teknologi Inovasi</strong> yang dirancang untuk mendigitalisasi sistem pembelajaran dan administrasi sekolah. Aplikasi ini mengelola jadwal, kehadiran, tugas, nilai, dan rapor akademik siswa secara terintegrasi.' !!}
         </p>
         <p class="mt-4">
           Cards Edu juga terhubung dengan layanan lain seperti <em>Cards School</em>, <em>Cards Canteen</em>, dan <em>Cards Parent</em> untuk menciptakan 
@@ -170,10 +168,10 @@
       <div class="flex justify-end">
         <div class="max-w-lg space-y-6 text-left">
           <h2 class="text-4xl font-bold text-cyan-800">
-            Apa itu Cards Edu?
+            {{ $aboutData->title ?? 'Apa itu Cards Edu?' }}
           </h2>
           <p class="text-lg text-gray-800 leading-relaxed">
-            Cards Edu adalah produk dari PT CAZH Teknologi Inovasi yang dirancang untuk mendigitalisasi sistem pembelajaran dan administrasi sekolah. Aplikasi ini mengelola jadwal, kehadiran, tugas, nilai, dan rapor akademik siswa secara terintegrasi. Terhubung juga dengan Cards School, Cards Canteen, dan Cards Parent, untuk ekosistem digital pendidikan yang lengkap.
+            {!! $aboutData->subtitle ?? 'Cards Edu adalah produk dari PT CAZH Teknologi Inovasi yang dirancang untuk mendigitalisasi sistem pembelajaran dan administrasi sekolah. Aplikasi ini mengelola jadwal, kehadiran, tugas, nilai, dan rapor akademik siswa secara terintegrasi. Terhubung juga dengan Cards School, Cards Canteen, dan Cards Parent, untuk ekosistem digital pendidikan yang lengkap.' !!}
           </p>
         </div>
       </div>
@@ -203,26 +201,38 @@
 
     <!-- Grid Fitur -->
     <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8 justify-items-center mb-20">
-        <!-- Card 1 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-        <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
-        <h3 class="font-semibold text-lg">Jadwal Otomatis</h3>
-        <p class="text-sm">Siswa dan guru dapat melihat jadwal harian langsung dari aplikasi.</p>
-    </article>
-
-    <!-- Card 2 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-        <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
-        <h3 class="font-semibold text-lg">Jadwal Otomatis</h3>
-        <p class="text-sm">Siswa dan guru dapat melihat jadwal harian langsung dari aplikasi.</p>
-    </article>
-
-    <!-- Card 3 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-        <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
-        <h3 class="font-semibold text-lg">Jadwal Otomatis</h3>
-        <p class="text-sm">Siswa dan guru dapat melihat jadwal harian langsung dari aplikasi.</p>
-    </article>
+        @forelse($features as $feature)
+        <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
+            @if($feature->gambar)
+            <img src="{{ asset('storage/' . $feature->gambar) }}" alt="{{ $feature->nama }}" class="mx-auto w-14 h-14">
+            @else
+            <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="{{ $feature->nama }}" class="mx-auto w-14 h-14">
+            @endif
+            <h3 class="font-semibold text-lg">{{ $feature->nama }}</h3>
+            <p class="text-sm">{{ $feature->deskripsi }}</p>
+        </article>
+        @empty
+        <!-- Card Default -->
+        <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
+            <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
+            <h3 class="font-semibold text-lg">Jadwal Otomatis</h3>
+            <p class="text-sm">Siswa dan guru dapat melihat jadwal harian langsung dari aplikasi.</p>
+        </article>
+        
+        <!-- Card Default 2 -->
+        <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
+            <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
+            <h3 class="font-semibold text-lg">Absensi Digital</h3>
+            <p class="text-sm">Absensi siswa dan guru tercatat secara digital dan dapat dipantau secara real-time.</p>
+        </article>
+        
+        <!-- Card Default 3 -->
+        <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
+            <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
+            <h3 class="font-semibold text-lg">Rapor Digital</h3>
+            <p class="text-sm">Rapor siswa dapat diakses secara digital oleh guru, siswa, dan orang tua.</p>
+        </article>
+        @endforelse
 
     
     <!-- SVG Wave -->

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('gambar')->nullable(); // boleh null jika tidak diupload
             $table->text('deskripsi')->nullable(); // tambahkan kolom deskripsi
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
         });
     }
 

@@ -86,14 +86,13 @@
         </div>
 
         <!-- Status -->
-        <!-- <div>
+        <div>
             <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
             <select id="status" 
                     name="status" 
                     class="input-field @error('status') border-red-500 @enderror">
                 <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
                 <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-
             </select>
             @error('status')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
