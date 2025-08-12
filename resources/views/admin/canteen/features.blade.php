@@ -36,7 +36,7 @@
         </div>
 
         <!-- Feature 1 -->
-        <div class="bg-gray-50 rounded-lg p-6 mb-8">
+        <div class="rounded-lg p-2 mb-6">
             <h3 class="text-lg font-semibold text-gray-800 mb-6">Fitur-1</h3>
             
             <!-- Feature 1 Title -->

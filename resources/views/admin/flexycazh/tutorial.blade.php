@@ -1,42 +1,42 @@
-@extends('admin.school-conten')
+@extends('admin.flexycazh-conten')
 
-@section('title', 'School Features - Cards Admin')
-@section('page-title', 'School Page - Content Management')
+@section('title', 'Flexycazh Testimoni - Cards Admin')
+@section('page-title', 'Flexycazh Page - Content Management')
 
 @section('content')
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">Features Section - School</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">Tutorial Section - Flexycazh</h2>
     </div>
     
-    <form action="{{ route('admin.school.features.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.flexycazh.tutorial') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <!-- Main Title -->
-        <div class="mb-8">
+        <div class="mb-2">
             <label for="title" class="block text-sm font-medium text-gray-700 mb-3">Judul</label>
             <input type="text" 
                    id="title" 
                    name="title" 
                    class="input-field" 
-                   value="{{ old('title', $features->title ?? '') }}"
+                   value="{{ old('title', $testimoni->title ?? '') }}"
                    placeholder="Masukkan judul utama features">
             <div class="flex items-center justify-end mt-3">
                 <span class="text-sm text-gray-500 mr-3">Ukuran Font</span>
                 <select name="title_font_size" class="w-20 px-3 py-2 border border-gray-300 rounded-md  text-sm">
-                    <option value="24" {{ (old('title_font_size', $features->title_font_size ?? '36') == '24') ? 'selected' : '' }}>24</option>
-                    <option value="28" {{ (old('title_font_size', $features->title_font_size ?? '36') == '28') ? 'selected' : '' }}>28</option>
-                    <option value="32" {{ (old('title_font_size', $features->title_font_size ?? '36') == '32') ? 'selected' : '' }}>32</option>
-                    <option value="36" {{ (old('title_font_size', $features->title_font_size ?? '36') == '36') ? 'selected' : '' }}>36</option>
-                    <option value="40" {{ (old('title_font_size', $features->title_font_size ?? '36') == '40') ? 'selected' : '' }}>40</option>
-                    <option value="44" {{ (old('title_font_size', $features->title_font_size ?? '36') == '44') ? 'selected' : '' }}>44</option>
-                    <option value="48" {{ (old('title_font_size', $features->title_font_size ?? '36') == '48') ? 'selected' : '' }}>48</option>
+                    <option value="24" {{ (old('title_font_size', $testimoni->title_font_size ?? '36') == '24') ? 'selected' : '' }}>24</option>
+                    <option value="28" {{ (old('title_font_size', $testimoni->title_font_size ?? '36') == '28') ? 'selected' : '' }}>28</option>
+                    <option value="32" {{ (old('title_font_size', $testimoni->title_font_size ?? '36') == '32') ? 'selected' : '' }}>32</option>
+                    <option value="36" {{ (old('title_font_size', $testimoni->title_font_size ?? '36') == '36') ? 'selected' : '' }}>36</option>
+                    <option value="40" {{ (old('title_font_size', $testimoni->title_font_size ?? '36') == '40') ? 'selected' : '' }}>40</option>
+                    <option value="44" {{ (old('title_font_size', $testimoni->title_font_size ?? '36') == '44') ? 'selected' : '' }}>44</option>
+                    <option value="48" {{ (old('title_font_size', $testimoni->title_font_size ?? '36') == '48') ? 'selected' : '' }}>48</option>
                 </select>
             </div>
         </div>
 
         <!-- Feature 1 -->
-        <div class="rounded-lg p-2 mb-6">
+        <div class=" rounded-lg p-2 mb-8">
             <h3 class="text-lg font-semibold text-gray-800 mb-6">Fitur-1</h3>
             
             <!-- Feature 1 Title -->
@@ -46,18 +46,18 @@
                        id="feature1_title" 
                        name="feature1_title" 
                        class="input-field" 
-                       value="{{ old('feature1_title', $features->feature1_title ?? '') }}"
+                       value="{{ old('feature1_title', $testimoni->feature1_title ?? '') }}"
                        placeholder="Masukkan judul fitur 1">
                 <div class="flex items-center justify-end mt-3">
                     <span class="text-sm text-gray-500 mr-3">Ukuran Font</span>
                     <select name="feature1_title_font_size" class="w-20 px-3 py-2 border border-gray-300 rounded-md  text-sm">
-                        <option value="16" {{ (old('feature1_title_font_size', $features->feature1_title_font_size ?? '36') == '16') ? 'selected' : '' }}>16</option>
-                        <option value="18" {{ (old('feature1_title_font_size', $features->feature1_title_font_size ?? '36') == '18') ? 'selected' : '' }}>18</option>
-                        <option value="20" {{ (old('feature1_title_font_size', $features->feature1_title_font_size ?? '36') == '20') ? 'selected' : '' }}>20</option>
-                        <option value="24" {{ (old('feature1_title_font_size', $features->feature1_title_font_size ?? '36') == '24') ? 'selected' : '' }}>24</option>
-                        <option value="28" {{ (old('feature1_title_font_size', $features->feature1_title_font_size ?? '36') == '28') ? 'selected' : '' }}>28</option>
-                        <option value="32" {{ (old('feature1_title_font_size', $features->feature1_title_font_size ?? '36') == '32') ? 'selected' : '' }}>32</option>
-                        <option value="36" {{ (old('feature1_title_font_size', $features->feature1_title_font_size ?? '36') == '36') ? 'selected' : '' }}>36</option>
+                        <option value="16" {{ (old('feature1_title_font_size', $testimoni->feature1_title_font_size ?? '36') == '16') ? 'selected' : '' }}>16</option>
+                        <option value="18" {{ (old('feature1_title_font_size', $testimoni->feature1_title_font_size ?? '36') == '18') ? 'selected' : '' }}>18</option>
+                        <option value="20" {{ (old('feature1_title_font_size', $testimoni->feature1_title_font_size ?? '36') == '20') ? 'selected' : '' }}>20</option>
+                        <option value="24" {{ (old('feature1_title_font_size', $testimoni->feature1_title_font_size ?? '36') == '24') ? 'selected' : '' }}>24</option>
+                        <option value="28" {{ (old('feature1_title_font_size', $testimoni->feature1_title_font_size ?? '36') == '28') ? 'selected' : '' }}>28</option>
+                        <option value="32" {{ (old('feature1_title_font_size', $testimoni->feature1_title_font_size ?? '36') == '32') ? 'selected' : '' }}>32</option>
+                        <option value="36" {{ (old('feature1_title_font_size', $testimoni->feature1_title_font_size ?? '36') == '36') ? 'selected' : '' }}>36</option>
                     </select>
                 </div>
             </div>
@@ -69,51 +69,22 @@
                           name="feature1_subtitle" 
                           class="textarea-field" 
                           rows="3"
-                          placeholder="Masukkan sub judul atau deskripsi fitur 1">{{ old('feature1_subtitle', $features->feature1_subtitle ?? '') }}</textarea>
+                          placeholder="Masukkan sub judul atau deskripsi fitur 1">{{ old('feature1_subtitle', $testimoni->feature1_subtitle ?? '') }}</textarea>
                 <div class="flex items-center justify-end mt-3">
                     <span class="text-sm text-gray-500 mr-3">Ukuran Font</span>
                     <select name="feature1_subtitle_font_size" class="w-20 px-3 py-2 border border-gray-300 rounded-md  text-sm">
-                        <option value="12" {{ (old('feature1_subtitle_font_size', $features->feature1_subtitle_font_size ?? '36') == '12') ? 'selected' : '' }}>12</option>
-                        <option value="14" {{ (old('feature1_subtitle_font_size', $features->feature1_subtitle_font_size ?? '36') == '14') ? 'selected' : '' }}>14</option>
-                        <option value="16" {{ (old('feature1_subtitle_font_size', $features->feature1_subtitle_font_size ?? '36') == '16') ? 'selected' : '' }}>16</option>
-                        <option value="18" {{ (old('feature1_subtitle_font_size', $features->feature1_subtitle_font_size ?? '36') == '18') ? 'selected' : '' }}>18</option>
-                        <option value="20" {{ (old('feature1_subtitle_font_size', $features->feature1_subtitle_font_size ?? '36') == '20') ? 'selected' : '' }}>20</option>
-                        <option value="24" {{ (old('feature1_subtitle_font_size', $features->feature1_subtitle_font_size ?? '36') == '24') ? 'selected' : '' }}>24</option>
-                        <option value="36" {{ (old('feature1_subtitle_font_size', $features->feature1_subtitle_font_size ?? '36') == '36') ? 'selected' : '' }}>36</option>
+                        <option value="12" {{ (old('feature1_subtitle_font_size', $testimoni->feature1_subtitle_font_size ?? '36') == '12') ? 'selected' : '' }}>12</option>
+                        <option value="14" {{ (old('feature1_subtitle_font_size', $testimoni->feature1_subtitle_font_size ?? '36') == '14') ? 'selected' : '' }}>14</option>
+                        <option value="16" {{ (old('feature1_subtitle_font_size', $testimoni->feature1_subtitle_font_size ?? '36') == '16') ? 'selected' : '' }}>16</option>
+                        <option value="18" {{ (old('feature1_subtitle_font_size', $testimoni->feature1_subtitle_font_size ?? '36') == '18') ? 'selected' : '' }}>18</option>
+                        <option value="20" {{ (old('feature1_subtitle_font_size', $testimoni->feature1_subtitle_font_size ?? '36') == '20') ? 'selected' : '' }}>20</option>
+                        <option value="24" {{ (old('feature1_subtitle_font_size', $testimoni->feature1_subtitle_font_size ?? '36') == '24') ? 'selected' : '' }}>24</option>
+                        <option value="36" {{ (old('feature1_subtitle_font_size', $testimoni->feature1_subtitle_font_size ?? '36') == '36') ? 'selected' : '' }}>36</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Feature 1 Icon -->
-            <div class="mb-6">
-                <label for="feature1_icon" class="block text-sm font-medium text-gray-700 mb-3">Icon</label>
-                <div class="image-upload-area" onclick="document.getElementById('feature1_icon').click()">
-                    @if(isset($features->feature1_icon) && $features->feature1_icon)
-                        <img src="{{ asset('storage/' . $features->feature1_icon) }}" alt="Feature 1 Icon" class="max-w-full max-h-32 rounded-lg mx-auto mb-4">
-                    @endif
-                    <div class="flex flex-col items-center">
-                        <svg class="w-12 h-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                        </svg>
-                        <p class="text-gray-600">Drop Your File Here or Browse</p>
-                    </div>
-                </div>
-                <input type="file" 
-                       id="feature1_icon" 
-                       name="feature1_icon" 
-                       class="hidden" 
-                       accept="image/*">
-                
-                <!-- Upload Button -->
-                <div class="mt-4">
-                    <button type="button" 
-                            class="btn-primary"
-                            onclick="document.getElementById('feature1_icon').click()">
-                        Upload
-                    </button>
-                </div>
-            </div>
-        </div>
+           
 
         <!-- Additional Features (Feature 2, 3, etc.) can be added here with similar structure -->
         

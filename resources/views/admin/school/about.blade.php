@@ -5,7 +5,7 @@
 @section('content')
 <div class="bg-white rounded-lg shadow-sm p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-cards-teal">About Section - School</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">About Section - School</h2>
     </div>
 
     <form action="{{ route('admin.school.about.update') }}" method="POST" enctype="multipart/form-data">
@@ -20,8 +20,8 @@
                 <input type="text" 
                        name="section_title" 
                        id="section_title" 
-                       value="{{ old('section_title', $content['section_title'] ?? 'Apa Itu Cards Parents ?') }}"
-                       class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                       value="{{ old('section_title', $content['section_title'] ?? '') }}"
+                       class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-transparent">
                 <select name="section_title_font_size" class="px-3 py-2 border border-gray-300 rounded-md bg-white">
                     <option value="24" {{ ($content['section_title_font_size'] ?? '28') == '24' ? 'selected' : '' }}>24</option>
                     <option value="28" {{ ($content['section_title_font_size'] ?? '28') == '28' ? 'selected' : '' }}>28</option>
@@ -41,7 +41,7 @@
                 <textarea name="section_description" 
                           id="section_description" 
                           rows="4"
-                          class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">{{ old('section_description', $content['section_description'] ?? 'Sistem ini menyajikan solusi modern yang menyederhanakan peran orang tua. Dengan menggabungkan berbagai fungsi seperti manajemen keuangan, pemantauan pendidikan, dan juga yang lainnya dalam satu ekosistem yang mudah diakses.') }}</textarea>
+                          class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2  focus:border-transparent">{{ old('section_description', $content['section_description'] ?? '') }}</textarea>
                 <select name="section_description_font_size" class="px-3 py-2 border border-gray-300 rounded-md bg-white">
                     <option value="14" {{ ($content['section_description_font_size'] ?? '16') == '14' ? 'selected' : '' }}>14</option>
                     <option value="16" {{ ($content['section_description_font_size'] ?? '16') == '16' ? 'selected' : '' }}>16</option>
@@ -53,30 +53,25 @@
         </div>
 
         <!-- About Image -->
-        <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-                Gambar About
-            </label>
-            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                @if(isset($content['about_image']) && $content['about_image'])
-                    <div class="mb-4">
-                        <img src="{{ asset('storage/' . $content['about_image']) }}" 
-                             alt="Current About Image" 
-                             class="max-w-full h-auto max-h-48 mx-auto rounded-lg shadow-sm">
+       <div class="mt-6 mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+            <div class="image-upload-area" onclick="document.getElementById('hero-image').click()">
+                @if(isset($hero->image) && $hero->image)
+                    <img src="{{ asset('storage/' . $hero->image) }}" alt="Current Image" class="max-w-full max-h-32 rounded-lg mx-auto">
+                @else
+                    <div class="text-center">
+                        <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        <p class="text-gray-500">Drop Your File Here or Browse</p>
+                        <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
                     </div>
                 @endif
-                <div class="upload-area">
-                    <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <div class="text-sm text-gray-600">
-                        <label for="about_image" class="cursor-pointer">
-                            <span class="text-blue-600 hover:text-blue-500">Drop Your File Here or Browse</span>
-                            <input type="file" id="about_image" name="about_image" class="sr-only" accept="image/*">
-                        </label>
-                    </div>
-                </div>
             </div>
+            <input type="file" id="hero-image" name="image" accept="image/*" class="hidden">
+            @error('image')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
         <!-- Layout Position -->
@@ -100,39 +95,13 @@
             </div>
         </div>
 
-        <!-- Background Color -->
-        <div class="mb-6">
-            <label for="bg_color" class="block text-sm font-medium text-gray-700 mb-2">
-                Warna Background
-            </label>
-            <div class="flex items-center space-x-4">
-                <input type="color" 
-                       name="bg_color" 
-                       id="bg_color" 
-                       value="{{ old('bg_color', $content['bg_color'] ?? '#f8fafc') }}"
-                       class="h-10 w-16 rounded border border-gray-300">
-                <input type="text" 
-                       name="bg_color_hex" 
-                       placeholder="#f8fafc"
-                       value="{{ old('bg_color', $content['bg_color'] ?? '#f8fafc') }}"
-                       class="px-4 py-2 border border-gray-300 rounded-md">
-            </div>
-        </div>
 
-        <!-- Show/Hide Section -->
-        <div class="mb-6">
-            <label class="flex items-center">
-                <input type="checkbox" name="is_active" value="1" 
-                       {{ ($content['is_active'] ?? true) ? 'checked' : '' }}
-                       class="mr-2">
-                <span class="text-sm font-medium text-gray-700">Tampilkan Section</span>
-            </label>
-        </div>
+       
 
         <!-- Submit Button -->
         <div class="flex justify-end">
             <button type="submit" 
-                    class="px-6 py-2 bg-cyan-800 text-white rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
+                    class="px-6 py-2 bg-cyan-800 text-white rounded-md hover:bg-cyan-700 focus:ring-2  focus:ring-offset-2 transition-colors">
                 Simpan Perubahan
             </button>
         </div>

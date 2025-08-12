@@ -1,19 +1,19 @@
-@extends('admin.school-conten')
+@extends('admin.flexycazh-conten')
 
-@section('title', 'School Features - Cards Admin')
-@section('page-title', 'School Page - Content Management')
+@section('title', 'Flexycazh Features - Cards Admin')
+@section('page-title', 'Flexycazh Page - Content Management')
 
 @section('content')
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">Features Section - School</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">Features Section - Flexycazh</h2>
     </div>
     
-    <form action="{{ route('admin.school.features.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.flexycazh.features') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <!-- Main Title -->
-        <div class="mb-8">
+        <div class="mb-2">
             <label for="title" class="block text-sm font-medium text-gray-700 mb-3">Judul</label>
             <input type="text" 
                    id="title" 
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Feature 1 -->
-        <div class="rounded-lg p-2 mb-6">
+        <div class=" rounded-lg p-2 mb-8">
             <h3 class="text-lg font-semibold text-gray-800 mb-6">Fitur-1</h3>
             
             <!-- Feature 1 Title -->

@@ -24,7 +24,7 @@
                    id="nama" 
                    name="nama" 
                    value="{{ old('nama', $testimoni->nama ?? 'Ibu Mega') }}"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  focus:border-blue-500 outline-none transition-colors"
                    placeholder="Masukkan nama testimoni"
                    required>
             @error('nama')
@@ -39,7 +39,7 @@
                    id="profesi" 
                    name="profesi" 
                    value="{{ old('profesi', $testimoni->profesi ?? 'Kepala Sekolah') }}"
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  focus:border-blue-500 outline-none transition-colors"
                    placeholder="Masukkan profesi"
                    required>
             @error('profesi')
@@ -95,7 +95,7 @@
             <textarea id="komentar" 
                       name="komentar" 
                       rows="4"
-                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors resize-vertical"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  focus:border-blue-500 outline-none transition-colors resize-vertical"
                       placeholder="Masukkan komentar testimoni"
                       required>{{ old('komentar', $testimoni->komentar ?? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.') }}</textarea>
             @error('komentar')
@@ -110,7 +110,7 @@
                 Batal
             </a>
             <button type="submit" 
-                    class="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-2 rounded-lg transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    class="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-2 rounded-lg transition-colors focus:ring-2  focus:ring-offset-2">
                 Update
             </button>
         </div>
