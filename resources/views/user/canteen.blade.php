@@ -100,14 +100,11 @@
   <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-10 mt-[180px]">
     <!-- Konten Kiri -->
     <div class="text-white">
-      <h2 class="text-2xl sm:text-3xl font-bold leading-snug">
-        Uang Saku Digital: Solusi Cashless <br class="hidden sm:block" />
-        yang Aman & Terkontrol untuk <br class="hidden sm:block" />
-        Transaksi Kantin.
+      <h2 class="text-2xl sm:text-3xl font-bold leading-snug" style="font-size: {{ $hero->title_font_size ?? '24px' }}">
+        {{ $hero->title ?? 'Uang Saku Digital: Solusi Cashless yang Aman & Terkontrol untuk Transaksi Kantin.' }}
       </h2>
-      <p class="text-base sm:text-lg text-white/90 mt-4 leading-relaxed">
-        Terhubung dengan akun orang tua, semua transaksi terpantau <br class="hidden md:block" />
-        real-time & bebas dari risiko kehilangan uang tunai.
+      <p class="text-base sm:text-lg text-white/90 mt-4 leading-relaxed" style="font-size: {{ $hero->subtitle_font_size ?? '16px' }}">
+        {{ $hero->subtitle ?? 'Terhubung dengan akun orang tua, semua transaksi terpantau real-time & bebas dari risiko kehilangan uang tunai.' }}
       </p>
       <a
         href="#demo"
@@ -121,7 +118,7 @@
     <div class="relative">
       <div class="rounded-xl overflow-hidden border-4 border-[#f7931e] shadow-lg w-full max-w-md mx-auto">
         <img
-          src="../img/hero_canteen.png" 
+          src="{{ isset($hero->cover_image) && $hero->cover_image ? asset('storage/' . $hero->cover_image) : '../img/hero_canteen.png' }}" 
           alt="Foto siswa di kantin"
           class="w-full h-auto object-cover"
         />
@@ -145,19 +142,19 @@
 <section class="px-6 sm:px-10 lg:px-20 py-16 bg-white">
   <div class="max-w-7xl mx-auto">
     <!-- Judul Mobile (hanya muncul di mobile) -->
-    <h2 class="md:hidden text-2xl sm:text-3xl font-semibold text-[#007696] mb-6 text-center">
-      Apa itu Cards E-Canteen?
+    <h2 class="md:hidden text-2xl sm:text-3xl font-semibold text-[#007696] mb-6 text-center" style="font-size: {{ $about->title_font_size ?? '24px' }}">
+      {{ $about->title ?? 'Apa itu Cards E-Canteen?' }}
     </h2>
 
     <div class="flex flex-col md:grid md:grid-cols-2 gap-10 items-center">
       <!-- Konten Kiri (Desktop) -->
       <div class="order-2 md:order-1">
         <!-- Judul Desktop (hidden di mobile) -->
-        <h2 class="hidden md:block text-2xl sm:text-3xl font-semibold text-[#007696] mb-4">
-          Apa itu Cards E-Canteen?
+        <h2 class="hidden md:block text-2xl sm:text-3xl font-semibold text-[#007696] mb-4" style="font-size: {{ $about->title_font_size ?? '24px' }}">
+          {{ $about->title ?? 'Apa itu Cards E-Canteen?' }}
         </h2>
-        <p class="text-base sm:text-lg text-gray-700 leading-relaxed">
-          E-Canteen adalah solusi kantin digital dari CARDS yang dirancang untuk mempermudah transaksi di lingkungan sekolah, kampus, atau institusi. Dengan sistem ini, proses jual beli di kantin menjadi lebih cepat, aman, dan tanpa uang tunai, sehingga membantu membentuk budaya cashless sekaligus mendukung efisiensi operasional.
+        <p class="text-base sm:text-lg text-gray-700 leading-relaxed" style="font-size: {{ $about->subtitle_font_size ?? '16px' }}">
+          {{ $about->subtitle ?? 'E-Canteen adalah solusi kantin digital dari CARDS yang dirancang untuk mempermudah transaksi di lingkungan sekolah, kampus, atau institusi. Dengan sistem ini, proses jual beli di kantin menjadi lebih cepat, aman, dan tanpa uang tunai, sehingga membantu membentuk budaya cashless sekaligus mendukung efisiensi operasional.' }}
         </p>
       </div>
 
@@ -170,7 +167,7 @@
                       bg-[#f7931e] rounded-full shadow-xl z-0 overflow-hidden">
             <!-- Gambar HP -->
             <img 
-  src="../img/apait_canteen.png" 
+  src="{{ isset($about->cover_image) && $about->cover_image ? asset('storage/' . $about->cover_image) : '../img/apait_canteen.png' }}" 
   alt="Mockup E-Canteen" 
   class="absolute left-1/2 top-1/2 translate-x-[-70px] -translate-y-[140px]
          w-[250px] h-auto object-contain z-10

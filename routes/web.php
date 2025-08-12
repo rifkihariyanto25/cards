@@ -78,7 +78,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/mitra/{mitra}', [MitraController::class, 'updateHomepageMitra'])->name('mitra.update');
             Route::delete('/mitra/{mitra}', [MitraController::class, 'deleteHomepageMitra'])->name('mitra.delete');
             // Product Section
-           Route::get('/product', [ProductController::class, 'homepageProduct'])->name('product');
+            Route::get('/product', [ProductController::class, 'homepageProduct'])->name('product');
             Route::get('/product/create', [ProductController::class, 'createHomepageProduct'])->name('product.create');
             Route::post('/product', [ProductController::class, 'storeHomepageProduct'])->name('product.store');
             Route::get('/product/{product}/edit', [ProductController::class, 'editHomepageProduct'])->name('product.edit');
@@ -109,8 +109,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/features/{id}/edit', [EduFeaturesController::class, 'editEduFeature'])->name('features.edit');
             Route::put('/features/{id}', [EduFeaturesController::class, 'updateEduFeature'])->name('features.update');
             Route::delete('/features/{id}', [EduFeaturesController::class, 'deleteEduFeature'])->name('features.delete');
-            
-            
+
+
             Route::get('/download', [DownloadController::class, 'index'])->name('download');
             Route::post('/download/update', [DownloadController::class, 'update'])->name('download.update');
         });
@@ -155,15 +155,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             // Features Section (Orang Tua Gak Risau)
             Route::get('/features', [ParentsFeaturesController::class, 'index'])->name('features');
-            Route::post('/features', [ParentsFeaturesController::class, 'update'])->name('features.update');
+            Route::post('/features/section', [ParentsFeaturesController::class, 'updateSection'])->name('features.section.update');
 
             // Features Items Management
-            Route::get('/features/items', [ParentsFeaturesController::class, 'items'])->name('features.items');
-            Route::get('/features/items/create', [ParentsFeaturesController::class, 'create'])->name('features.items.create');
-            Route::post('/features/items', [ParentsFeaturesController::class, 'store'])->name('features.items.store');
-            Route::get('/features/items/{id}/edit', [ParentsFeaturesController::class, 'edit'])->name('features.items.edit');
-            Route::put('/features/items/{id}', [ParentsFeaturesController::class, 'updateItem'])->name('features.items.update');
-            Route::delete('/features/items/{id}', [ParentsFeaturesController::class, 'destroy'])->name('features.items.delete');
+            Route::get('/features/create', [ParentsFeaturesController::class, 'create'])->name('features.create');
+            Route::post('/features/store', [ParentsFeaturesController::class, 'store'])->name('features.store');
+            Route::get('/features/{id}/edit', [ParentsFeaturesController::class, 'edit'])->name('features.edit');
+            Route::put('/features/{id}', [ParentsFeaturesController::class, 'update'])->name('features.update');
+            Route::delete('/features/{id}', [ParentsFeaturesController::class, 'destroy'])->name('features.destroy');
+
 
             // App Download Section
             Route::get('/download', [ParentsDownloadController::class, 'index'])->name('download');
@@ -194,6 +194,10 @@ Route::get('/admin', function () {
 
 use App\Http\Controllers\User\HomepageController;
 use App\Http\Controllers\User\EduController;
+use App\Http\Controllers\User\ParentController;
+use App\Http\Controllers\User\CanteenController;
 
 Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/edu', [EduController::class, 'index'])->name('edu');
+// Route::get('/parents', [ParentController::class, 'index'])->name('parents');
+Route::get('/canteen', [CanteenController::class, 'index'])->name('canteen');

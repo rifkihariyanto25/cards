@@ -7,9 +7,75 @@
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
         <h2 class="text-xl font-semibold text-cards-teal">Features Section - Parents</h2>
+        <a href="{{ route('admin.parents.features.create') }}" class="btn-primary">Add New Feature</a>
     </div>
     
-    <form action="{{ route('admin.parents.features.update') }}" method="POST" enctype="multipart/form-data">
+    <!-- Features List Table -->
+    <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Daftar Fitur</h3>
+        
+        @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Gambar</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Deskripsi</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    @forelse($features as $feature)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <div class="text-sm leading-5 font-medium text-gray-900">{{ $feature->nama }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                @if($feature->gambar)
+                                    <img src="{{ asset('storage/' . $feature->gambar) }}" alt="{{ $feature->nama }}" class="h-10 w-10 object-cover rounded">
+                                @else
+                                    <span class="text-gray-400">No Image</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 border-b border-gray-200">
+                                <div class="text-sm leading-5 text-gray-900">{{ Str::limit($feature->deskripsi, 50) }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $feature->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    {{ ucfirst($feature->status) }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium">
+                                <a href="{{ route('admin.parents.features.edit', $feature->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</a>
+                                <form action="{{ route('admin.parents.features.destroy', $feature->id) }}" method="POST" class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure you want to delete this feature?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-center text-gray-500">
+                                No features found. <a href="{{ route('admin.parents.features.create') }}" class="text-indigo-600 hover:text-indigo-900">Create one</a>.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <h3 class="text-lg font-semibold text-gray-800 mb-4">Section Settings</h3>
+    
+    <form action="{{ route('admin.parents.features.section.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <!-- Main Title -->
