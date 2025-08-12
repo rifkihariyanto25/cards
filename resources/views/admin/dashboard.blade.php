@@ -320,16 +320,31 @@
             }
         }
 
-        // Close dropdowns when clicking outside
+          // Close dropdowns when clicking outside
         document.addEventListener('click', function(event) {
             const dropdowns = document.querySelectorAll('[id$="-dropdown"]');
-            dropdowns.forEach(dropdown => {
-                if (!dropdown.contains(event.target) && !dropdown.previousElementSibling.contains(event.target)) {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+
+            const isClickInsideSidebar = sidebar && sidebar.contains(event.target);
+            const isClickInsideMainContent = mainContent && mainContent.contains(event.target);
+        
+    
+        dropdowns.forEach(dropdown => {
+            const toggleButton = dropdown.previousElementSibling;
+            const isClickOnToggle = toggleButton && toggleButton.contains(event.target);
+            const isClickOnDropdownItem = dropdown.contains(event.target);
+            
+        
+            if (!isClickOnToggle && !isClickOnDropdownItem && !isClickInsideMainContent) {
+                if (!isClickInsideSidebar || (!toggleButton.contains(event.target) && !dropdown.contains(event.target))) {
                     dropdown.classList.add('hidden');
                     dropdown.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotate');
                 }
-            });
+            }
         });
+    });
     </script>
 </body>
 </html>
