@@ -79,7 +79,7 @@ public function storeHomepageProduct(Request $request)
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'link' => 'nullable|url',
             'deskripsi' => 'nullable|string',
-            'status' => 'required|in:active,inactive',
+
         ]);
 
         if ($request->hasFile('gambar')) {

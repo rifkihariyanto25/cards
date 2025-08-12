@@ -96,14 +96,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Edu Section
         Route::prefix('edu')->name('edu.')->group(function () {
             Route::get('/hero', [EduHeroController::class, 'index'])->name('hero');
-            Route::post('/hero/update', [EduHeroController::class, 'update'])->name('hero.update');
+            Route::post('/hero', [EduHeroController::class, 'update'])->name('hero.update');
 
             Route::get('/about', [EduAboutController::class, 'index'])->name('about');
-            Route::post('/about/update', [EduAboutController::class, 'update'])->name('about.update');
+            Route::post('/about', [EduAboutController::class, 'update'])->name('about.update');
 
-            Route::get('/features', [EduFeaturesController::class, 'index'])->name('features');
-            Route::post('/features/update', [EduFeaturesController::class, 'update'])->name('features.update');
-
+            // Route::get('/features', [EduFeaturesController::class, 'index'])->name('features');
+            // Route::post('/features/update', [EduFeaturesController::class, 'update'])->name('features.update');
+            Route::get('/features', [EduFeaturesController::class, 'eduFeatures'])->name('features');
+            Route::get('/features/create', [EduFeaturesController::class, 'createEduFeatures'])->name('features.create');
+            Route::post('/features', [EduFeaturesController::class, 'storeEduFeature'])->name('features.store');
+            Route::get('/features/{features}/edit', [EduFeaturesController::class, 'editEduFeature'])->name('features.edit');
+            Route::put('/features/{features}', [EduFeaturesController::class, 'updateEduFeature'])->name('features.update');
+            Route::delete('/features/{features}', [EduFeaturesController::class, 'deleteEduFeature'])->name('features.delete');
+            
+            
             Route::get('/download', [DownloadController::class, 'index'])->name('download');
             Route::post('/download/update', [DownloadController::class, 'update'])->name('download.update');
         });

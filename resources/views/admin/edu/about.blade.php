@@ -1,12 +1,12 @@
 @extends('admin.edu-content')
 
-@section('title', 'About Section - Cards Admin')
-@section('page-title', 'Cards Edu - Content Management')
+@section('title', 'About Section - Edu Admin')
+@section('page-title', 'Edu Page - Content Management')
 
 @section('content')
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">About Section - Edu</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">Edu About Section</h2>
     </div>
 
     <form action="{{ route('admin.edu.about.update') }}" method="POST" enctype="multipart/form-data">
@@ -18,16 +18,16 @@
                 <!-- Title -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Judul</label>
-                    <input type="text" name="title" value="{{ old('title', $about->title ?? '') }}" class="input-field" placeholder="Enter about title">
+                    <input type="text" name="title" value="{{ old('title', $aboutData->title ?? '') }}" class="input-field" placeholder="Enter about title">
                     @error('title')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Subtitle -->
+                <!-- Description -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Sub Judul</label>
-                    <textarea name="subtitle" class="textarea-field" rows="3" placeholder="Enter about subtitle">{{ old('subtitle', $about->subtitle ?? '') }}</textarea>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Sub judul</label>
+                    <textarea name="subtitle" class="textarea-field" rows="5" placeholder="Enter subtitle">{{ old('subtitle', $aboutData->subtitle ?? '') }}</textarea>
                     @error('subtitle')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -40,12 +40,9 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Ukuran Font</label>
                     <select name="title_font_size" class="input-field">
-                        <option value="24" {{ old('title_font_size', $hero->title_font_size ?? '') == '24' ? 'selected' : '' }}>24</option>
-                        <option value="28" {{ old('title_font_size', $hero->title_font_size ?? '') == '28' ? 'selected' : '' }}>28</option>
-                        <option value="32" {{ old('title_font_size', $hero->title_font_size ?? '') == '32' ? 'selected' : '' }}>32</option>
-                        <option value="36" {{ old('title_font_size', $hero->title_font_size ?? '') == '36' ? 'selected' : '' }}>36</option>
-                        <option value="40" {{ old('title_font_size', $hero->title_font_size ?? '') == '40' ? 'selected' : '' }}>40</option>
-                        <option value="48" {{ old('title_font_size', $hero->title_font_size ?? '') == '48' ? 'selected' : '' }}>48</option>
+                        @foreach([24,28,32,36,40,48] as $size)
+                            <option value="{{ $size }}" {{ old('title_font_size', $aboutData->title_font_size ?? '') == $size ? 'selected' : '' }}>{{ $size }}</option>
+                        @endforeach
                     </select>
                     @error('title_font_size')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -56,11 +53,9 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Ukuran Font Sub Judul</label>
                     <select name="subtitle_font_size" class="input-field">
-                        <option value="14" {{ old('subtitle_font_size', $hero->subtitle_font_size ?? '') == '14' ? 'selected' : '' }}>14</option>
-                        <option value="16" {{ old('subtitle_font_size', $hero->subtitle_font_size ?? '') == '16' ? 'selected' : '' }}>16</option>
-                        <option value="18" {{ old('subtitle_font_size', $hero->subtitle_font_size ?? '') == '18' ? 'selected' : '' }}>18</option>
-                        <option value="20" {{ old('subtitle_font_size', $hero->subtitle_font_size ?? '') == '20' ? 'selected' : '' }}>20</option>
-                        <option value="24" {{ old('subtitle_font_size', $hero->subtitle_font_size ?? '') == '24' ? 'selected' : '' }}>24</option>
+                        @foreach([14,16,18,20,24] as $size)
+                            <option value="{{ $size }}" {{ old('subtitle_font_size', $aboutData->subtitle_font_size ?? '') == $size ? 'selected' : '' }}>{{ $size }}</option>
+                        @endforeach
                     </select>
                     @error('subtitle_font_size')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -68,49 +63,39 @@
                 </div>
             </div>
         </div>
-
-        <!-- Cover Image -->
-        <div class="mt-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
-            <div class="image-upload-area" onclick="document.getElementById('about-image').click()">
-                @if(isset($hero->image) && $hero->image)
-                    <img src="{{ asset('storage/' . $hero->image) }}" alt="Current Image" class="max-w-full max-h-32 rounded-lg mx-auto">
-                @else
-                    <div class="text-center">
-                        <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                        </svg>
-                        <p class="text-gray-500">Drop Your File Here or Browse</p>
-                        <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
-                    </div>
-                @endif
-            </div>
-            <input type="file" id="about-image" name="image" accept="image/*" class="hidden">
-            @error('image')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+<!-- Cover Image -->
+<div class="mt-6">
+    <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+    <div class="image-upload-area border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer hover:border-blue-500 transition-colors"
+         onclick="document.getElementById('about-image').click()">
+        
+        <div id="upload-placeholder" class="text-center {{ isset($aboutData) && $aboutData->cover_image ? 'hidden' : '' }}">
+            <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+            <p class="text-gray-500">
+                Drop Your File Here or Browse
+            </p>
+            <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
         </div>
 
-        <!-- Layout Position -->
-        <div class="mt-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-                Posisi Layout
-            </label>
-            <div class="flex space-x-4">
-                <label class="flex items-center">
-                    <input type="radio" name="layout_position" value="image_left" 
-                           {{ ($content['layout_position'] ?? 'image_left') == 'image_left' ? 'checked' : '' }}
-                           class="mr-2">
-                    <span>Gambar di Kiri</span>
-                </label>
-                <label class="flex items-center">
-                    <input type="radio" name="layout_position" value="image_right" 
-                           {{ ($content['layout_position'] ?? 'image_left') == 'image_right' ? 'checked' : '' }}
-                           class="mr-2">
-                    <span>Gambar di Kanan</span>
-                </label>
-            </div>
-        </div>
+        @if(isset($aboutData) && $aboutData->cover_image)
+            <img 
+                id="image-preview" 
+                class="max-w-full max-h-32 rounded-lg mx-auto mt-4" 
+                src="{{ asset('storage/' . $aboutData->cover_image) }}" 
+                alt="Image Preview"
+            />
+        @else
+            <img id="image-preview" class="max-w-full max-h-32 rounded-lg mx-auto mt-4 hidden" src="" alt="Image Preview"/>
+        @endif
+    </div>
+    
+    <input type="file" id="about-image" name="cover_image" accept="image/*" class="hidden" onchange="previewImage(this)">
+    @error('cover_image')
+        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
+</div>
 
         <!-- Submit Button -->
         <div class="mt-6 flex justify-end">
@@ -135,19 +120,19 @@
 @section('extra-js')
 <script>
     function previewImage(input) {
-    const preview = document.getElementById('image-preview');
-    const previewImg = document.getElementById('preview-img');
-    
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
+        const preview = document.getElementById('image-preview');
+        const placeholder = document.getElementById('upload-placeholder');
+        const file = input.files[0];
         
-        reader.onload = function(e) {
-            previewImg.src = e.target.result;
-            preview.classList.remove('hidden');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                if (placeholder) placeholder.classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
         }
-        
-        reader.readAsDataURL(input.files[0]);
     }
-}
 </script>
 @endsection
