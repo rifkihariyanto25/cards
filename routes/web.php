@@ -137,8 +137,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/about', [SchoolAboutController::class, 'index'])->name('about');
             Route::post('/about', [SchoolAboutController::class, 'update'])->name('about.update');
 
+            // Features CRUD
             Route::get('/features', [SchoolFeaturesController::class, 'index'])->name('features');
-            Route::post('/features', [SchoolFeaturesController::class, 'update'])->name('features.update');
+            Route::get('/features/create', [SchoolFeaturesController::class, 'create'])->name('features.create');
+            Route::post('/features', [SchoolFeaturesController::class, 'store'])->name('features.store');
+            Route::get('/features/{id}/edit', [SchoolFeaturesController::class, 'edit'])->name('features.edit');
+            Route::post('/features/{id}', [SchoolFeaturesController::class, 'update'])->name('features.update');
+            Route::delete('/features/{id}', [SchoolFeaturesController::class, 'delete'])->name('features.delete');
 
             Route::get('/download', [SchoolDownloadController::class, 'index'])->name('download');
             Route::post('/download', [SchoolDownloadController::class, 'update'])->name('download.update');
