@@ -183,43 +183,41 @@
   <!-- Grid Fitur Responsive -->
   <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8 justify-items-center">
     
-    <!-- Mulai dari sini bisa tambah card sebanyak apapun -->
-
-    <!-- Card 1 -->
+    @forelse($features ?? [] as $feature)
+    <!-- Feature Card -->
+    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
+      @if(isset($feature->gambar) && $feature->gambar)
+        <img src="{{ asset('storage/' . $feature->gambar) }}" alt="{{ $feature->nama }}" class="mx-auto w-14 h-14 object-cover">
+      @else
+        <div class="w-14 h-14 bg-gray-200 rounded-full mx-auto flex items-center justify-center">
+          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+      @endif
+      <h3 class="font-semibold text-lg">{{ $feature->nama }}</h3>
+      <p class="text-sm">{{ $feature->deskripsi }}</p>
+    </article>
+    @empty
+    <!-- Fallback Cards if no features in database -->
     <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
       <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
       <h3 class="font-semibold text-lg">Jadwal Otomatis</h3>
       <p class="text-sm">Siswa dan guru dapat melihat jadwal harian langsung dari aplikasi.</p>
     </article>
     
-
-    <!-- Card 3 -->
     <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
       <img src="https://img.icons8.com/emoji/96/money-bag-emoji.png" alt="Ikon Pembayaran" class="mx-auto w-14 h-14">
       <h3 class="font-semibold text-lg">Pembayaran Digital</h3>
       <p class="text-sm">Kelola pembayaran sekolah dan uang saku anak dengan mudah.</p>
     </article>
 
-    <!-- Card 4 -->
     <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
       <img src="https://img.icons8.com/emoji/96/notebook-with-decorative-cover.png" alt="Ikon Rapor" class="mx-auto w-14 h-14">
       <h3 class="font-semibold text-lg">Rapor Online</h3>
       <p class="text-sm">Pantau perkembangan akademik anak melalui rapor digital.</p>
     </article>
-
-    <!-- Card 5 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/bell-emoji.png" alt="Ikon Notifikasi" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Notifikasi Real-time</h3>
-      <p class="text-sm">Dapatkan pemberitahuan penting dari sekolah secara instan.</p>
-    </article>
-
-    <!-- Card 6 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/bar-chart-emoji.png" alt="Ikon Analitik" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Analisis Pembelajaran</h3>
-      <p class="text-sm">Pantau perkembangan belajar anak dengan data statistik.</p>
-    </article>
+    @endforelse
 
   </div>
 </section>

@@ -17,7 +17,7 @@ class FeaturesController extends Controller
 
     public function create()
     {
-        return view('admin.parents.features.create');
+        return view('admin.parents.feature.feature-create');
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class FeaturesController extends Controller
     public function edit($id)
     {
         $feature = ParentsFeature::findOrFail($id);
-        return view('admin.parents.features.edit', compact('feature'));
+        return view('admin.parents.feature.feature-edit', compact('feature'));
     }
 
     public function update(Request $request, $id)
@@ -93,16 +93,5 @@ class FeaturesController extends Controller
         return redirect()->route('admin.parents.features')->with('success', 'Feature deleted successfully!');
     }
     
-    public function updateSection(Request $request)
-    {
-        $request->validate([
-            'section_title' => 'required|string|max:255',
-            'section_title_font_size' => 'required|integer|min:12|max:48',
-            'section_description' => 'required|string|max:1000',
-            'section_description_font_size' => 'required|integer|min:12|max:24',
-            'bg_color' => 'required|string|max:7',
-        ]);
 
-        return redirect()->route('admin.parents.features')->with('success', 'Features section updated!');
-    }
 }

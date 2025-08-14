@@ -165,7 +165,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             // Features Section (Orang Tua Gak Risau)
             Route::get('/features', [ParentsFeaturesController::class, 'index'])->name('features');
-            Route::post('/features/section', [ParentsFeaturesController::class, 'updateSection'])->name('features.section.update');
 
             // Features Items Management
             Route::get('/features/create', [ParentsFeaturesController::class, 'create'])->name('features.create');
@@ -204,10 +203,10 @@ Route::get('/admin', function () {
 
 use App\Http\Controllers\User\HomepageController;
 use App\Http\Controllers\User\EduController;
-use App\Http\Controllers\User\ParentController;
+use App\Http\Controllers\User\ParentsController;
 use App\Http\Controllers\User\CanteenController;
 
 Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/edu', [EduController::class, 'index'])->name('edu');
-// Route::get('/parents', [ParentController::class, 'index'])->name('parents');
+Route::get('/parents', [ParentsController::class, 'index'])->name('parents');
 Route::get('/canteen', [CanteenController::class, 'index'])->name('canteen');

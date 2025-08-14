@@ -1,13 +1,13 @@
-@extends('admin.canteen-conten')
+@extends('admin.parent-conten')
 
-@section('title', 'Cards Admin - Edit Canteen Feature')
-@section('page-title', 'Canteen Page - Edit Feature')
+@section('title', 'Cards Admin - Edit Parents Feature')
+@section('page-title', 'Parents Page - Edit Feature')
 
 @section('content')
 <div class="bg-white rounded-lg shadow-sm p-6">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-xl font-semibold text-cards-teal">Edit Feature</h2>
-        <a href="{{ route('admin.canteen.features') }}" 
+        <a href="{{ route('admin.parents.features') }}" 
            class="bg-cyan-700 hover:bg-cyan-800 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -16,9 +16,9 @@
         </a>
     </div>
 
-    <form action="{{ route('admin.canteen.features.update', $feature->id ?? 1) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.parents.features.update', $feature->id ?? 1) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
-        @method('POST')
+        @method('PUT')
         
         <!-- Nama Field -->
         <div>
