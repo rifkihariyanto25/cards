@@ -125,8 +125,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/about', [CanteenAboutController::class, 'index'])->name('about');
             Route::post('/about', [CanteenAboutController::class, 'update'])->name('about.update');
 
+            // Features CRUD
             Route::get('/features', [CanteenFeaturesController::class, 'index'])->name('features');
-            Route::post('/features', [CanteenFeaturesController::class, 'update'])->name('features.update');
+            Route::get('/features/create', [CanteenFeaturesController::class, 'create'])->name('features.create');
+            Route::post('/features', [CanteenFeaturesController::class, 'store'])->name('features.store');
+            Route::get('/features/{id}/edit', [CanteenFeaturesController::class, 'edit'])->name('features.edit');
+            Route::post('/features/{id}', [CanteenFeaturesController::class, 'update'])->name('features.update');
+            Route::delete('/features/{id}', [CanteenFeaturesController::class, 'delete'])->name('features.delete');
         });
 
         // School Management
