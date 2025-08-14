@@ -85,12 +85,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/product/{product}', [ProductController::class, 'updateHomepageProduct'])->name('product.update');
             Route::delete('/product/{product}', [ProductController::class, 'deleteHomepageProduct'])->name('product.delete');
 
-            Route::get('/testimoni', [AdminController::class, 'homepageTestimoni'])->name('testimoni');
-            Route::get('/testimoni/create', [AdminController::class, 'createHomepageTestimoni'])->name('testimoni.create'); // Add this line
-            Route::post('/testimoni', [AdminController::class, 'storeHomepageTestimoni'])->name('testimoni.store'); // Add this line
-            Route::get('/testimoni/{id}/edit', [AdminController::class, 'editHomepageTestimoni'])->name('testimoni.edit'); // Optional: for editing
-            Route::post('/testimoni/{id}', [AdminController::class, 'updateHomepageTestimoni'])->name('testimoni.update');
-            Route::delete('/testimoni/{id}', [AdminController::class, 'deleteHomepageTestimoni'])->name('testimoni.delete');
+            Route::get('/testimoni', [TestimoniController::class, 'homepageTestimoni'])->name('testimoni');
+            Route::get('/testimoni/create', [TestimoniController::class, 'createHomepageTestimoni'])->name('testimoni.create');
+            Route::post('/testimoni', [TestimoniController::class, 'storeHomepageTestimoni'])->name('testimoni.store');
+            Route::get('/testimoni/{id}/edit', [TestimoniController::class, 'editHomepageTestimoni'])->name('testimoni.edit');
+            Route::post('/testimoni/{id}', [TestimoniController::class, 'updateHomepageTestimoni'])->name('testimoni.update');
+            Route::delete('/testimoni/{id}', [TestimoniController::class, 'deleteHomepageTestimoni'])->name('testimoni.delete');
         });
 
         // Edu Section
