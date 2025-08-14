@@ -13,7 +13,7 @@
         </a>
     </div>
 
-    <form action="{{ route('admin.homepage.testimoni.create') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.homepage.testimoni.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         
         <!-- Nama Field -->
