@@ -11,80 +11,86 @@ class FeaturesController extends Controller
 {
     public function index()
     {
-        $features = FlexycazhFeature::latest()->get();
+        $features = FlexycazhFeature::all();
         return view('admin.flexycazh.features', compact('features'));
     }
 
     public function create()
     {
-        return view('admin.flexycazh.feature.feature-create');
+        return view('admin.flexycazh.features.create');
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'nama' => 'required|string|max:255',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'nullable|string',
             'status' => 'required|in:active,inactive',
         ]);
 
-        // Simpan gambar
-        if ($request->hasFile('gambar')) {
-            $gambarName = time() . '_' . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->storeAs('public/flexycazh/features', $gambarName);
-            $validated['gambar'] = 'flexycazh/features/' . $gambarName;
-        }
+        $imagePath = $request->hasFile('gambar') 
+            ? $request->file('gambar')->store('flexycazh/features', 'public') 
+            : null;
 
-        FlexycazhFeature::create($validated);
+        FlexycazhFeature::create([
+            'nama' => $request->nama,
+            'gambar' => $imagePath,
+            'deskripsi' => $request->deskripsi,
+            'status' => $request->status,
+        ]);
 
-        return redirect()->route('admin.flexycazh.features.index')->with('success', 'Feature created successfully!');
+        return redirect()->route('admin.flexycazh.features')
+                         ->with('success', 'Feature created successfully!');
     }
 
     public function edit($id)
     {
         $feature = FlexycazhFeature::findOrFail($id);
-        return view('admin.flexycazh.feature.feature-edit', compact('feature'));
+        return view('admin.flexycazh.features.edit', compact('feature'));
     }
 
     public function update(Request $request, $id)
     {
-        $feature = FlexycazhFeature::findOrFail($id);
-
-        $validated = $request->validate([
+        $request->validate([
             'nama' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'deskripsi' => 'nullable|string',
             'status' => 'required|in:active,inactive',
         ]);
 
-        // Jika ada gambar baru, hapus yang lama lalu simpan baru
+        $feature = FlexycazhFeature::findOrFail($id);
+
         if ($request->hasFile('gambar')) {
             if ($feature->gambar && Storage::disk('public')->exists($feature->gambar)) {
                 Storage::disk('public')->delete($feature->gambar);
             }
-
-            $gambarName = time() . '_' . $request->file('gambar')->getClientOriginalName();
-            $request->file('gambar')->storeAs('public/flexycazh/features', $gambarName);
-            $validated['gambar'] = 'flexycazh/features/' . $gambarName;
+            $feature->gambar = $request->file('gambar')->store('flexycazh/features', 'public');
         }
 
-        $feature->update($validated);
+        $feature->update([
+            'nama' => $request->nama,
+            'gambar' => $feature->gambar,
+            'deskripsi' => $request->deskripsi,
+            'status' => $request->status,
+        ]);
 
-        return redirect()->route('admin.flexycazh.features.index')->with('success', 'Feature updated successfully!');
+        return redirect()->route('admin.flexycazh.features')
+                         ->with('success', 'Feature updated successfully!');
     }
 
     public function destroy($id)
     {
         $feature = FlexycazhFeature::findOrFail($id);
 
-        // Hapus gambar jika ada
         if ($feature->gambar && Storage::disk('public')->exists($feature->gambar)) {
             Storage::disk('public')->delete($feature->gambar);
         }
 
         $feature->delete();
 
-        return redirect()->route('admin.flexycazh.features.index')->with('success', 'Feature deleted successfully!');
+        return redirect()->route('admin.flexycazh.features')
+                         ->with('success', 'Feature deleted successfully!');
     }
 }
+

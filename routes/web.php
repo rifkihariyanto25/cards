@@ -186,7 +186,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             // Features Section
             Route::get('/features', [FlexycazhFeaturesController::class, 'index'])->name('features');
-
+            
             // Features Items Management
             Route::get('/features/create', [FlexycazhFeaturesController::class, 'create'])->name('features.create');
             Route::post('/features/store', [FlexycazhFeaturesController::class, 'store'])->name('features.store');
