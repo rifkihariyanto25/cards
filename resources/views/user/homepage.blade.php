@@ -34,7 +34,7 @@
     <div class="flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center space-x-2">
-        <img src="../img/logo cards.png" alt="Logo" class="h-5 w-8">
+        <img src="{{ asset('logoCards.png') }}" alt="Logo" class="h-5 w-8">
         <span class="text-xl font-semibold text-cyan-700"></span>
         </div>
 
@@ -49,8 +49,8 @@
 
         <!-- Desktop Menu -->
         <div class="hidden md:flex space-x-8 items-center font-medium">
-        <a href="index.html" class="hover:text-cyan-700 transition-colors">Home</a>
-         <a href="flexy.html" class="hover:text-cyan-700 transition-colors">Flexy</a>
+        <a href="{{ route('homepage') }}" class="hover:text-cyan-700 transition-colors">Home</a>
+         <a href="{{ route('flexy') }}" class="hover:text-cyan-700 transition-colors">Flexy</a>
        
         <!-- Wrapper Produk -->
         <div class="relative" id="product-dropdown-wrapper">
@@ -65,14 +65,14 @@
 
         <!-- Dropdown Menu -->
         <div id="product-dropdown" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 w-44 z-[110]">
-            <a href="Edu.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Edu</a>
-            <a href="parents.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Parents</a>
-            <a href="school.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">School</a>
-            <a href="canteen.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Canteen</a>
+            <a href="{{ route('edu') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Edu</a>
+            <a href="{{ route('parents') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Parents</a>
+            <a href="{{ route('school') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">School</a>
+            <a href="{{ route('canteen') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Canteen</a>
         </div>
         </div>
-        <a href="about.html" class="hover:text-cyan-700 transition-colors">About</a>
-        <a href="contact.html" class="hover:text-cyan-700 transition-colors">Contact</a>
+        <a href="{{ route('homepage') }}#about" class="hover:text-cyan-700 transition-colors">About</a>
+        <a href="{{ route('homepage') }}#contact" class="hover:text-cyan-700 transition-colors">Contact</a>
         </div>
     </div>
     </nav>
@@ -80,8 +80,8 @@
  <!-- MOBILE MENU  -->
     <div id="mobile-menu" class="md:hidden hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg mx-4 rounded-lg z-[90] py-3">
       <div class="flex flex-col space-y-4 px-6 font-medium">
-        <a href="index.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">Home</a>
-         <a href="flexy.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">Flexy</a>
+        <a href="{{ route('homepage') }}" class="text-cyan-700 hover:text-cyan-900 transition-colors">Home</a>
+         <a href="{{ route('flexy') }}" class="text-cyan-700 hover:text-cyan-900 transition-colors">Flexy</a>
 
         <!-- Products dropdown -->
         <div class="relative">
@@ -94,14 +94,14 @@
 
             <!-- DROPDOWN yang menutupi elemen lain -->
             <div id="mobile-product-dropdown" class="hidden mt-2 bg-white shadow rounded w-full text-left z-[100]">
-            <a href="Edu.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Edu</a>
-            <a href="parents.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Parents</a>
-            <a href="school.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">School</a>
-            <a href="canteen.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Canteen</a>
+            <a href="{{ route('edu') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Edu</a>
+            <a href="{{ route('parents') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Parents</a>
+            <a href="{{ route('school') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">School</a>
+            <a href="{{ route('canteen') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Canteen</a>
             </div>
         </div>
-        <a href="about.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">About</a>
-        <a href="contact.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">Contact</a>
+        <a href="{{ route('homepage') }}#about" class="text-cyan-700 hover:text-cyan-900 transition-colors">About</a>
+        <a href="{{ route('homepage') }}#contact" class="text-cyan-700 hover:text-cyan-900 transition-colors">Contact</a>
       </div>
     </div>
 
