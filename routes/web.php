@@ -186,7 +186,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             // Features Section
             Route::get('/features', [FlexycazhFeaturesController::class, 'index'])->name('features');
-            Route::post('/features', [FlexycazhFeaturesController::class, 'update'])->name('features.update');
+
+            // Features Items Management
+            Route::get('/features/create', [FlexycazhFeaturesController::class, 'create'])->name('features.create');
+            Route::post('/features/store', [FlexycazhFeaturesController::class, 'store'])->name('features.store');
+            Route::get('/features/{id}/edit', [FlexycazhFeaturesController::class, 'edit'])->name('features.edit');
+            Route::put('/features/{id}', [FlexycazhFeaturesController::class, 'update'])->name('features.update');
+            Route::delete('/features/{id}', [FlexycazhFeaturesController::class, 'destroy'])->name('features.destroy');
 
             // // Tutorial Section
             Route::get('/tutorial', [FlexycazhTutorialController::class, 'index'])->name('tutorial');
