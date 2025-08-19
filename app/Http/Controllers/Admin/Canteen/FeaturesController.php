@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Canteen;
 
 use App\Http\Controllers\Controller;
 
+
 class FeaturesController extends Controller
 {
     public function index()
@@ -17,3 +18,4 @@ class FeaturesController extends Controller
         return redirect()->route('admin.canteen.features')->with('success', 'Features section updated successfully');
     }
 }
+
