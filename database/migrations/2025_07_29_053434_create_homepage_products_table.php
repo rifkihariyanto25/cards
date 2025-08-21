@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('link')->nullable();
             $table->text('deskripsi')->nullable(); // tambahkan kolom deskripsi
             // $table->enum('status', ['active', 'inactive'])->default('active'); // Tambahan
+            $table->timestamps(); // Menambahkan created_at dan updated_at
         });
     }
 

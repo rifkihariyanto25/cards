@@ -14,4 +14,7 @@ class HomepageProduct extends Model
         'deskripsi',
         // 'status'
     ];
+    
+    // Pastikan timestamps diaktifkan
+    public $timestamps = true;
 }

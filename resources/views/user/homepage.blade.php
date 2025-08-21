@@ -242,20 +242,49 @@
         <span class="text-orange-400 font-bold">130,000+</span> Siswa
         </h2>
 
-        <!-- Scroll Container -->
-        <div class="overflow-x-auto">
-        <div class="flex flex-wrap justify-center gap-6 lg:gap-8 min-w-full lg:min-w-0">
-            
-            <!-- Logo Items -->
-            @forelse($mitras as $mitra)
-                <img src="{{ $mitra->logo ? asset('storage/' . $mitra->logo) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s' }}" 
-                alt="{{ $mitra->nama }}" class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            @empty
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo Default"
-                class="bg-white rounded-xl p-2 w-20 h-20 object-contain shadow-md" />
-            @endforelse
+        <!-- Marquee Container -->
+        <div class="marquee-container overflow-hidden">
+            <div class="marquee-content">
+                <!-- Logo Items First Set -->
+                @forelse($mitras as $mitra)
+                    <div class="bg-white rounded-xl p-3 w-24 h-24 flex items-center justify-center shadow-md mx-4 hover:scale-110 transition-transform duration-300">
+                        <img src="{{ $mitra->logo ? asset('storage/' . $mitra->logo) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s' }}" 
+                        alt="{{ $mitra->nama }}" class="max-w-full max-h-full object-contain" />
+                    </div>
+                @empty
+                    <div class="bg-white rounded-xl p-3 w-24 h-24 flex items-center justify-center shadow-md mx-4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo Default"
+                        class="max-w-full max-h-full object-contain" />
+                    </div>
+                @endforelse
+                
+                <!-- Logo Items Duplicate for Continuous Effect (2x) -->
+                @forelse($mitras as $mitra)
+                    <div class="bg-white rounded-xl p-3 w-24 h-24 flex items-center justify-center shadow-md mx-4 hover:scale-110 transition-transform duration-300">
+                        <img src="{{ $mitra->logo ? asset('storage/' . $mitra->logo) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s' }}" 
+                        alt="{{ $mitra->nama }}" class="max-w-full max-h-full object-contain" />
+                    </div>
+                @empty
+                    <div class="bg-white rounded-xl p-3 w-24 h-24 flex items-center justify-center shadow-md mx-4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo Default"
+                        class="max-w-full max-h-full object-contain" />
+                    </div>
+                @endforelse
+                
+                <!-- Logo Items Duplicate for Continuous Effect (3x) -->
+                @forelse($mitras as $mitra)
+                    <div class="bg-white rounded-xl p-3 w-24 h-24 flex items-center justify-center shadow-md mx-4 hover:scale-110 transition-transform duration-300">
+                        <img src="{{ $mitra->logo ? asset('storage/' . $mitra->logo) : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s' }}" 
+                        alt="{{ $mitra->nama }}" class="max-w-full max-h-full object-contain" />
+                    </div>
+                @empty
+                    <div class="bg-white rounded-xl p-3 w-24 h-24 flex items-center justify-center shadow-md mx-4">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoh2BJppxcWR0_uR_A40oHqbgK9bUxd1iI7Q&s" alt="Logo Default"
+                        class="max-w-full max-h-full object-contain" />
+                    </div>
+                @endforelse
+            </div>
         </div>
-        </div> 
     </div>
     </section>
 
@@ -593,8 +622,81 @@
 
   // Initial check on page load
   window.addEventListener('load', handleScroll);
-    // Geser Testimoni
-     
+
+  // Inisialisasi Swiper untuk Testimoni
+  const testimoniSwiper = new Swiper(".mySwiperTesti", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+
+  // Animasi Marquee untuk Mitra
+  document.addEventListener('DOMContentLoaded', function() {
+    const marqueeContent = document.querySelector('.marquee-content');
+    if (marqueeContent) {
+      // Tambahkan CSS untuk animasi marquee
+      const style = document.createElement('style');
+      style.textContent = `
+        .marquee-container {
+          width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+          position: relative;
+        }
+        .marquee-content {
+          display: flex;
+          animation: marquee 60s linear infinite;
+          width: fit-content;
+          will-change: transform;
+        }
+        .marquee-content > div {
+          flex-shrink: 0;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.33%); }
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Mengatur agar 5 logo terlihat sekaligus dan animasi berjalan lancar
+      const updateMarqueeDisplay = () => {
+        const containerWidth = document.querySelector('.marquee-container').offsetWidth;
+        const logoItems = document.querySelectorAll('.marquee-content > div');
+        const logoWidth = logoItems[0].offsetWidth;
+        const visibleLogos = 5;
+        
+        // Hitung jarak antar logo untuk menampilkan 5 logo sekaligus
+        const totalWidth = containerWidth;
+        const itemWidth = totalWidth / visibleLogos;
+        const margin = (itemWidth - logoWidth) / 2;
+        
+        // Terapkan margin dan ukuran yang sesuai
+        logoItems.forEach(logo => {
+          logo.style.marginLeft = `${margin}px`;
+          logo.style.marginRight = `${margin}px`;
+        });
+        
+        // Sesuaikan kecepatan animasi berdasarkan jumlah logo
+        // Semakin banyak logo, semakin lambat animasinya agar tidak terlihat terputus
+        const totalLogos = logoItems.length;
+        const animationDuration = totalLogos * 2; // 2 detik per logo
+        document.querySelector('.marquee-content').style.animation = `marquee ${animationDuration}s linear infinite`;
+      };
+      
+      // Jalankan saat halaman dimuat dan saat ukuran window berubah
+      updateMarqueeDisplay();
+      window.addEventListener('resize', updateMarqueeDisplay);
+    }
+  });
 </script>
 
 </body>

@@ -18,7 +18,7 @@
 
     <form action="{{ route('admin.canteen.features.update', $feature->id ?? 1) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
-        @method('POST')
+        @method('PUT')
         
         <!-- Nama Field -->
         <div>
