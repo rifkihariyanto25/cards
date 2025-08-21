@@ -97,14 +97,14 @@
     
     <!-- Judul untuk mobile (muncul hanya di mobile) -->
     <div class="w-full lg:hidden text-center text-white order-1">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-4">Cards Parents</h2>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">{{ $heroData->title ?? 'Cards Parents' }}</h2>
     </div>
 
     <!-- Gambar -->
     <div class="w-full lg:w-1/2 order-3 lg:order-none">
       <div class="bg-[#00627a] p-4 rounded-2xl w-full max-w-md mx-auto lg:mx-0">
           <img 
-          src="../img/parents_hero.png" 
+          src="{{ asset('storage/' . ($heroData->cover_image ?? 'parents/hero/parents_hero.png')) }}" 
           alt="Cards Parents Mockup"
           class="rounded-lg w-full h-auto 
                   shadow-[15px_-15px_80px_(0,0,0,0.4)] 
@@ -117,9 +117,9 @@
     <!-- Konten Teks + Tombol -->
     <div class="w-full lg:w-1/2 text-center lg:text-left text-white order-4 lg:order-none">
       <!-- Judul untuk desktop (tersembunyi di mobile) -->
-      <h2 class="hidden lg:block text-3xl sm:text-4xl font-bold mt-8 lg:mt-0 mb-4">Cards Parents</h2>
+      <h2 class="hidden lg:block text-3xl sm:text-4xl font-bold mt-8 lg:mt-0 mb-4">{{ $heroData->title ?? 'Cards Parents' }}</h2>
       <p class="text-base sm:text-lg mb-8">
-        Transformasi sekolah jadi digital? Bisa! Dengan Cards Parents, kelola uang saku anak, tagihan sekolah, dan rapor jadi lebih cepat, rapi, dan terpantau!
+        {!! $heroData->subtitle ?? 'Transformasi sekolah jadi digital? Bisa! Dengan Cards Parents, kelola uang saku anak, tagihan sekolah, dan rapor jadi lebih cepat, rapi, dan terpantau!' !!}
       </p>
 
       <!-- Tombol CTA -->
@@ -146,7 +146,7 @@
         <div class="w-full lg:w-1/2 order-1 lg:order-none">
     <div class="bg-[#00627a] p-4 rounded-2xl w-full max-w-md mx-auto lg:mx-0">
         <img 
-        src="../img/apaitu_parents.png" 
+        src="{{ asset('storage/' . ($aboutData->cover_image ?? 'parents/about/apaitu_parents.png')) }}" 
         alt="Cards Parents Mockup"
         class="rounded-lg w-full h-auto 
                 shadow-[15px_-15px_80px_(0,0,0,0.4)] 
@@ -159,9 +159,9 @@
 
     <!-- Teks Kanan -->
     <div class="w-full lg:w-1/2 text-center lg:text-left">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Apa Itu Cards Parents ?</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">{{ $aboutData->title ?? 'Apa Itu Cards Parents ?' }}</h2>
       <p class="text-gray-700 text-base sm:text-lg leading-relaxed">
-        Sistem ini menyajikan solusi modern yang menyederhanakan peran orang tua. Dengan menggabungkan berbagai fungsi seperti manajemen keuangan, pemantauan pendidikan, dan juga yang lainnya dalam satu dasbor yang mudah diakses.
+        {!! $aboutData->subtitle ?? 'Sistem ini menyajikan solusi modern yang menyederhanakan peran orang tua. Dengan menggabungkan berbagai fungsi seperti manajemen keuangan, pemantauan pendidikan, dan juga yang lainnya dalam satu dasbor yang mudah diakses.' !!}
       </p>
     </div>
 
@@ -236,7 +236,7 @@
         <!-- Judul untuk mobile (muncul hanya di mobile) -->
         <div class="w-full md:hidden text-center text-cyan-800 mb-6">
             <h2 class="text-2xl sm:text-3xl font-bold">
-                Download Aplikasi <br>Cards Parents
+                Download Aplikasi Cards Parents
             </h2>
         </div>
 
@@ -253,7 +253,7 @@
         <div class="md:w-1/2 w-full text-center md:text-left order-3 md:order-none">
             <!-- Judul untuk desktop (tersembunyi di mobile) -->
             <h2 class="hidden md:block text-2xl sm:text-3xl font-bold text-cyan-800 mb-4">
-                Download Aplikasi <br class="md:hidden">Cards Parents
+                Download Aplikasi Cards Parents
             </h2>
             <p class="text-gray-700 text-base sm:text-lg mb-6">
                 Mulai perjalanan belajar digital Anda sekarang! Download aplikasi Cards Parents dan rasakan pengalaman belajar yang tak terlupakan. Tersedia untuk berbagai platform dengan fitur lengkap dan interface yang user-friendly.
