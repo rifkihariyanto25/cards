@@ -93,14 +93,11 @@
   <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-10 mt-[180px]">
     <!-- Konten Kiri -->
     <div class="text-white">
-      <h2 class="text-2xl sm:text-3xl font-bold leading-snug">
-        Uang Saku Digital: Solusi Cashless <br class="hidden sm:block" />
-        yang Aman & Terkontrol untuk <br class="hidden sm:block" />
-        Transaksi Kantin.
+      <h2 class="text-2xl sm:text-3xl font-bold leading-snug" style="font-size: {{ $heroData->title_font_size ?? '24px' }}">
+        {{ $heroData->title ?? 'Uang Saku Digital: Solusi Cashless yang Aman & Terkontrol untuk Transaksi Kantin.' }}
       </h2>
-      <p class="text-base sm:text-lg text-white/90 mt-4 leading-relaxed">
-        Terhubung dengan akun orang tua, semua transaksi terpantau <br class="hidden md:block" />
-        real-time & bebas dari risiko kehilangan uang tunai.
+      <p class="text-base sm:text-lg text-white/90 mt-4 leading-relaxed" style="font-size: {{ $heroData->subtitle_font_size ?? '16px' }}">
+        {{ $heroData->subtitle ?? 'Terhubung dengan akun orang tua, semua transaksi terpantau real-time & bebas dari risiko kehilangan uang tunai.' }}
       </p>
       <a
         href="#demo"
@@ -121,8 +118,8 @@
                 transform rotate-[-15deg]">
         </div>
        <img 
-          src="../img/hero_school.png" 
-          alt="Mockup E-Canteen" 
+          src="{{ asset('storage/' . ($heroData->cover_image ?? '../img/hero_school.png')) }}" 
+          alt="Mockup School" 
           class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[140px]
                 w-[250px] h-auto object-contain z-10
                 scale-105 
@@ -154,18 +151,18 @@
 
       <!-- JUDUL -->
       <div>
-        <h2 class="text-3xl font-bold text-cyan-800 mb-4">
-          Apa itu Cards School?
+        <h2 class="text-3xl font-bold text-cyan-800 mb-4" style="font-size: {{ $aboutData->title_font_size ?? '24px' }}">
+          {{ $aboutData->title ?? 'Apa itu Cards School?' }}
         </h2>
         <p class="text-base text-gray-700">
-          Cards  adalah solusi digital inovatif untuk dunia pendidikan.
+          Cards adalah solusi digital inovatif untuk dunia pendidikan.
         </p>
       </div>
 
       <!-- KETERANGAN -->
       <div class="text-base text-gray-800 leading-relaxed text-justify px-2">
-        <p>
-          Cards School adalah platform digital yang dirancang untuk mempermudah pengelolaan kegiatan sekolah secara menyeluruh. Mulai dari absensi, manajemen nilai, komunikasi orang tua-guru, hingga pelaporan rapor—semua bisa dilakukan secara cepat, praktis, dan efisien dalam satu aplikasi.
+        <p style="font-size: {{ $aboutData->subtitle_font_size ?? '16px' }}">
+          {{ $aboutData->subtitle ?? 'Cards School adalah platform digital yang dirancang untuk mempermudah pengelolaan kegiatan sekolah secara menyeluruh. Mulai dari absensi, manajemen nilai, komunikasi orang tua-guru, hingga pelaporan rapor—semua bisa dilakukan secara cepat, praktis, dan efisien dalam satu aplikasi.' }}
         </p>
       </div>
 
@@ -195,7 +192,7 @@
                       bg-[#f7931e] rounded-full shadow-xl z-0 overflow-hidden">
             <!-- Gambar HP -->
             <img 
-                src="../img/apaitu_school.png" 
+                src="{{ asset('storage/' . ($aboutData->cover_image ?? '../img/apaitu_school.png')) }}" 
                 alt="Mockup E-Canteen" 
                 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[140px]
                       w-[250px] h-auto object-contain z-10
@@ -230,26 +227,16 @@
     
     <!-- Mulai dari sini bisa tambah card sebanyak apapun -->
 
-    <!-- Card 1 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Presensi Qr Code</h3>
-      <p class="text-sm">cukup dengan scan data langsung masuk ke sistem.</p>
-    </article>
-
-    <!-- Card 2 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/graduation-cap.png" alt="Ikon Nilai Digital" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Tagihan Digital</h3>
-      <p class="text-sm">SPP dan tagihan sekolah terkelola otomatis</p>
-    </article>
-
-    <!-- Card 3 -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/money-bag-emoji.png" alt="Ikon Pembayaran" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Pembayaran Digital</h3>
-      <p class="text-sm">Kelola pembayaran sekolah dan uang saku anak dengan mudah.</p>
-    </article>
+    @foreach($features as $feature)
+     @if($feature->status == 'active')
+     <!-- Card Feature -->
+     <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
+       <img src="{{ asset('storage/' . ($feature->gambar ?? 'img/icons8-feature.png')) }}" alt="Ikon {{ $feature->nama }}" class="mx-auto w-14 h-14">
+       <h3 class="font-semibold text-lg">{{ $feature->nama }}</h3>
+       <p class="text-sm">{{ $feature->deskripsi }}</p>
+     </article>
+     @endif
+     @endforeach
   </div>
 </section>
 
