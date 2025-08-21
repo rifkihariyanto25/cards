@@ -20,7 +20,7 @@
     <div class="flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center space-x-2">
-        <img src="../img/logo cards.png" alt="Logo" class="h-5 w-8">
+        <img src="{{ asset('storage/edu/logo-cards.png') }}" alt="Logo" class="h-5 w-8">
         <span class="text-xl font-semibold text-cyan-700"></span>
         </div>
 
@@ -104,7 +104,7 @@
         <!-- Gambar Siswa -->
         <div class="w-full lg:w-3/5 flex lg:pl-10 justify-center order-2 lg:order-none">
             <div class="bg-[#0f7c96] p-5 rounded-[3rem] w-full max-w-md">
-                <img src="../img/IMG EDU.png" 
+                <img src="{{ asset('storage/' . ($heroData->cover_image ?? 'edu/hero/IMG EDU.png')) }}" 
                     alt="Gambar Siswa" 
                     class="w-full aspect-[4/3] rounded-full object-cover" />
             </div>
@@ -179,7 +179,7 @@
       <!-- GAMBAR KANAN -->
       <div class="flex justify-start">
         <div class="bg-orange-500 p-2 rounded-[3rem] w-full max-w-md">
-          <img src="../img/Img About edu.png"
+          <img src="{{ asset('storage/' . ($aboutData->cover_image ?? 'edu/about/Img About edu.png')) }}"
                alt="Siswa menggunakan laptop"
                class="rounded-[2.5rem] object-cover w-full h-auto" />
         </div>
@@ -257,7 +257,7 @@
         <!-- Gambar Aplikasi -->
         <div class="w-full lg:w-3/5 flex lg:pl-10 justify-center order-2 md:order-none">
             <div class="bg-orange-500 p-5 rounded-[3rem] w-full max-w-md">
-                <img src="../img/download.png" 
+                <img src="{{ asset('storage/edu/download.png') }}" 
                     alt="Gambar Siswa" 
                     class="w-full aspect-[4/3] rounded-full object-cover" />
             </div>
@@ -276,7 +276,7 @@
             <!-- Tombol App Store -->
             <div class="flex flex-wrap justify-center md:justify-start gap-4">
                 <a href="#" target="_blank">
-                    <img src="../img/App Store.png" alt="Download di App Store" class="h-12 w-auto">
+                    <img src="{{ asset('storage/edu/app-store.png') }}" alt="Download di App Store" class="h-12 w-auto">
                 </a>
                 <a href="#" target="_blank">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Download di Google Play" class="h-12 w-auto">
@@ -297,8 +297,7 @@
         
         <!-- Logo -->
         <div class="md:w-1/4 flex justify-center md:justify-start">
-            <img src="../img/footer logo.png" alt="Cards Edu Logo" class="h-12 w-auto">
-            <!-- Ganti src dengan logo asli -->
+            <img src="{{ asset('storage/edu/footer-logo.png') }}" alt="Cards Edu Logo" class="h-12 w-auto">
         </div>
 
         <!-- Navigation Links -->
