@@ -104,7 +104,6 @@
 
         <!-- Submit Button -->
         <div class="flex justify-end space-x-4">
-            <a href="{{ route('admin.homepage.product') }}" class="btn-secondary">Cancel</a>
             <button type="submit" class="btn-primary">Update Product</button>
         </div>
     </form>

@@ -72,24 +72,36 @@
                     placeholder="Masukkan sub judul konten 1">
             </div>
 
-            <!-- Icon Konten 1 -->
+             <!-- Link Icon Konten 1 -->
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 1</label>
-                <div id="preview_content1_icon" 
-                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
-                     onclick="document.getElementById('content1_icon').click()">
-                    @if(isset($aboutData->content_1_icon))
-                        <img src="{{ asset('storage/' . $aboutData->content_1_icon) }}" class="mx-auto max-h-32 rounded-lg">
-                    @else
+                <label for="content1_icon" class="block text-sm font-medium text-gray-700 mb-2">Link Icon</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors cursor-pointer" onclick="document.getElementById('content1_icon').click()">
+                    
+                    <!-- Upload Area Content 1 (Default) -->
+                    <div id="upload-area-content1" @if(isset($aboutData->content1_icon) && $aboutData->content1_icon) style="display: none;" @endif>
                         <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                         </svg>
-                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
-                    @endif
+                        <p class="text-gray-500 mb-1">Drop Your File Here or Browse</p>
+                        <p class="text-xs text-gray-400">SVG, PNG up to 2MB</p>
+                    </div>
+                    
+                    <!-- Preview Area Content 1 -->
+                    <div id="preview-area-content1" @if(!isset($aboutData->content1_icon) || !$aboutData->content1_icon) class="hidden" @endif>
+                        <img id="preview-image-content1" 
+                             src="{{ isset($aboutData->content1_icon) && $aboutData->content1_icon ? asset('storage/' . $aboutData->content1_icon) : '' }}" 
+                             alt="Icon Preview" 
+                             class="max-w-full max-h-32 rounded-lg mx-auto object-contain mb-2">
+                        <p class="text-sm text-gray-600 mb-2">Click to change icon</p>
+                        <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event, 'content1')">Remove Icon</button>
+                    </div>
+                    
+                    <!-- Hidden File Input -->
+                    <input type="file" id="content1_icon" name="content1_icon" class="hidden" accept=".svg,.png" onchange="previewImage(this, 'content1')">
                 </div>
-                <input type="file" id="content1_icon" name="content1_icon" class="hidden" accept=".svg,.png"
-                    onchange="previewImage(event, 'preview_content1_icon')">
+                @error('content1_icon')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
@@ -135,24 +147,36 @@
                     placeholder="Masukkan sub judul konten 2">
             </div>
 
-            <!-- Icon Konten 2 -->
+            <!-- Link Icon Konten 2 -->
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 2</label>
-                <div id="preview_content2_icon" 
-                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
-                     onclick="document.getElementById('content2_icon').click()">
-                    @if(isset($aboutData->content_2_icon))
-                        <img src="{{ asset('storage/' . $aboutData->content_2_icon) }}" class="mx-auto max-h-32 rounded-lg">
-                    @else
+                <label for="content2_icon" class="block text-sm font-medium text-gray-700 mb-2">Link Icon</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors cursor-pointer" onclick="document.getElementById('content2_icon').click()">
+                    
+                    <!-- Upload Area Content 2 (Default) -->
+                    <div id="upload-area-content2" @if(isset($aboutData->content2_icon) && $aboutData->content2_icon) style="display: none;" @endif>
                         <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                         </svg>
-                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
-                    @endif
+                        <p class="text-gray-500 mb-1">Drop Your File Here or Browse</p>
+                        <p class="text-xs text-gray-400">SVG, PNG up to 2MB</p>
+                    </div>
+                    
+                    <!-- Preview Area Content 2 -->
+                    <div id="preview-area-content2" @if(!isset($aboutData->content2_icon) || !$aboutData->content2_icon) class="hidden" @endif>
+                        <img id="preview-image-content2" 
+                             src="{{ isset($aboutData->content2_icon) && $aboutData->content2_icon ? asset('storage/' . $aboutData->content2_icon) : '' }}" 
+                             alt="Icon Preview" 
+                             class="max-w-full max-h-32 rounded-lg mx-auto object-contain mb-2">
+                        <p class="text-sm text-gray-600 mb-2">Click to change icon</p>
+                        <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event, 'content2')">Remove Icon</button>
+                    </div>
+                    
+                    <!-- Hidden File Input -->
+                    <input type="file" id="content2_icon" name="content2_icon" class="hidden" accept=".svg,.png" onchange="previewImage(this, 'content2')">
                 </div>
-                <input type="file" id="content2_icon" name="content2_icon" class="hidden" accept=".svg,.png"
-                    onchange="previewImage(event, 'preview_content2_icon')">
+                @error('content2_icon')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
@@ -198,24 +222,36 @@
                     placeholder="Masukkan sub judul konten 3">
             </div>
 
-            <!-- Icon Konten 3 -->
+            <!-- Link Icon Konten 3 -->
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 3</label>
-                <div id="preview_content3_icon" 
-                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
-                     onclick="document.getElementById('content3_icon').click()">
-                    @if(isset($aboutData->content_3_icon))
-                        <img src="{{ asset('storage/' . $aboutData->content_3_icon) }}" class="mx-auto max-h-32 rounded-lg">
-                    @else
+                <label for="content3_icon" class="block text-sm font-medium text-gray-700 mb-2">Link Icon</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors cursor-pointer" onclick="document.getElementById('content3_icon').click()">
+                    
+                    <!-- Upload Area Content 3 (Default) -->
+                    <div id="upload-area-content3" @if(isset($aboutData->content3_icon) && $aboutData->content3_icon) style="display: none;" @endif>
                         <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                         </svg>
-                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
-                    @endif
+                        <p class="text-gray-500 mb-1">Drop Your File Here or Browse</p>
+                        <p class="text-xs text-gray-400">SVG, PNG up to 2MB</p>
+                    </div>
+                    
+                    <!-- Preview Area Content 3 -->
+                    <div id="preview-area-content3" @if(!isset($aboutData->content2_icon) || !$aboutData->content2_icon) class="hidden" @endif>
+                        <img id="preview-image-content3" 
+                             src="{{ isset($aboutData->content2_icon) && $aboutData->content2_icon ? asset('storage/' . $aboutData->content2_icon) : '' }}" 
+                             alt="Icon Preview" 
+                             class="max-w-full max-h-32 rounded-lg mx-auto object-contain mb-2">
+                        <p class="text-sm text-gray-600 mb-2">Click to change icon</p>
+                        <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event, 'content3')">Remove Icon</button>
+                    </div>
+                    
+                    <!-- Hidden File Input -->
+                    <input type="file" id="content3_icon" name="content3_icon" class="hidden" accept=".svg,.png" onchange="previewImage(this, 'content3')">
                 </div>
-                <input type="file" id="content3_icon" name="content3_icon" class="hidden" accept=".svg,.png"
-                    onchange="previewImage(event, 'preview_content3_icon')">
+                @error('content3_icon')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
@@ -261,44 +297,125 @@
                     placeholder="Masukkan sub judul konten 4">
             </div>
 
-            <!-- Icon Konten 4 -->
+            <!-- Link Icon Konten 2 -->
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Icon Konten 4</label>
-                <div id="preview_content4_icon" 
-                     class="image-upload-area cursor-pointer border-dashed border-2 border-gray-300 rounded-lg p-4 text-center"
-                     onclick="document.getElementById('content4_icon').click()">
-                    @if(isset($aboutData->content_4_icon))
-                        <img src="{{ asset('storage/' . $aboutData->content_4_icon) }}" class="mx-auto max-h-32 rounded-lg">
-                    @else
+                <label for="content3_icon" class="block text-sm font-medium text-gray-700 mb-2">Link Icon</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors cursor-pointer" onclick="document.getElementById('content3_icon').click()">
+                    
+                    <!-- Upload Area Content 2 (Default) -->
+                    <div id="upload-area-content3" @if(isset($aboutData->content3_icon) && $aboutData->content3_icon) style="display: none;" @endif>
                         <svg class="w-12 h-12 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                         </svg>
-                        <p class="text-gray-500">Pastikan file berbentuk SVG atau PNG</p>
-                    @endif
+                        <p class="text-gray-500 mb-1">Drop Your File Here or Browse</p>
+                        <p class="text-xs text-gray-400">SVG, PNG up to 2MB</p>
+                    </div>
+                    
+                    <!-- Preview Area Content 2 -->
+                    <div id="preview-area-content3" @if(!isset($aboutData->content3_icon) || !$aboutData->content3_icon) class="hidden" @endif>
+                        <img id="preview-image-content3" 
+                             src="{{ isset($aboutData->content3_icon) && $aboutData->content3_icon ? asset('storage/' . $aboutData->content3_icon) : '' }}" 
+                             alt="Icon Preview" 
+                             class="max-w-full max-h-32 rounded-lg mx-auto object-contain mb-2">
+                        <p class="text-sm text-gray-600 mb-2">Click to change icon</p>
+                        <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event, 'content3')">Remove Icon</button>
+                    </div>
+                    
+                    <!-- Hidden File Input -->
+                    <input type="file" id="content3_icon" name="content3_icon" class="hidden" accept=".svg,.png" onchange="previewImage(this, 'content3')">
                 </div>
-                <input type="file" id="content4_icon" name="content4_icon" class="hidden" accept=".svg,.png"
-                    onchange="previewImage(event, 'preview_content4_icon')">
+                @error('content3_icon')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
-        <!-- Save Button -->
-        <div class="flex justify-start mt-6">
-            <button type="submit" class="btn-primary">
-                Save
-            </button>
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+            <button type="submit" class="btn-primary">Save</button>
         </div>
     </form>
 </div>
 @endsection
 
 <script>
-function previewImage(event, previewId) {
-    let reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById(previewId).innerHTML =
-            `<img src="${e.target.result}" class="mx-auto max-h-32 rounded-lg" alt="Preview">`;
-    };
-    reader.readAsDataURL(event.target.files[0]);
+function previewImage(input, contentType) {
+    const uploadArea = document.getElementById(`upload-area-${contentType}`);
+    const previewArea = document.getElementById(`preview-area-${contentType}`);
+    const previewImage = document.getElementById(`preview-image-${contentType}`);
+    
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        
+        // Validate file size (2MB)
+        if (file.size > 2 * 1024 * 1024) {
+            alert('File size must be less than 2MB');
+            input.value = '';
+            return;
+        }
+        
+        // Validate file type
+        if (!file.type.match('image/svg.*') && !file.type.match('image/png.*')) {
+            alert('Please select a valid SVG or PNG file');
+            input.value = '';
+            return;
+        }
+        
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            // Hide upload area
+            if (uploadArea) {
+                uploadArea.style.display = 'none';
+            }
+            
+            // Show and update preview area
+            if (previewArea) {
+                previewArea.classList.remove('hidden');
+            }
+            
+            if (previewImage) {
+                previewImage.src = e.target.result;
+            }
+        }
+        
+        reader.readAsDataURL(file);
+    }
 }
+
+function removeImage(event, contentType) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    const fileInput = document.getElementById(`${contentType}_icon`);
+    const uploadArea = document.getElementById(`upload-area-${contentType}`);
+    const previewArea = document.getElementById(`preview-area-${contentType}`);
+    
+    // Clear file input
+    fileInput.value = '';
+    
+    // Show upload area
+    if (uploadArea) {
+        uploadArea.style.display = 'block';
+    }
+    
+    // Hide preview area
+    if (previewArea) {
+        previewArea.classList.add('hidden');
+    }
+}
+
+// Auto hide success/error messages
+setTimeout(function() {
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    
+    if (successMessage) {
+        successMessage.style.display = 'none';
+    }
+    
+    if (errorMessage) {
+        errorMessage.style.display = 'none';
+    }
+}, 5000);
 </script>

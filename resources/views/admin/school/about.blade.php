@@ -62,39 +62,48 @@
                 </div>
             </div>
         </div>
-<!-- Cover Image -->
-<div class="mt-6">
-    <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
-    <div class="image-upload-area border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer hover:border-blue-500 transition-colors"
-         onclick="document.getElementById('about-image').click()">
         
-        <div id="upload-placeholder" class="text-center {{ isset($aboutData) && $aboutData->cover_image ? 'hidden' : '' }}">
-            <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-            </svg>
-            <p class="text-gray-500">
-                Drop Your File Here or Browse
-            </p>
-            <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
+        <!-- Cover Image -->
+        <div class="mt-6 mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+            
+            <!-- Image Upload Area -->
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('about-image').click()">
+                <!-- Preview Container -->
+                <div id="image-preview-container">
+                    @if(isset($about->image) && $about->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $about->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                        <div class="mt-3">
+                            <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                        </div>
+                    @else
+                        <!-- Default Upload UI -->
+                        <div id="upload-placeholder">
+                            <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="text-gray-500">Drop Your File Here or Browse</p>
+                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                        
+                        <!-- Hidden Preview Template (will be shown when image selected) -->
+                        <div id="preview-template" class="hidden">
+                            <img id="preview-image" src="" alt="Preview" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                            <div class="mt-3">
+                                <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            </div>
+            
+            <!-- Hidden File Input -->
+            <input type="file" id="about-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            
+            @error('image')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
         </div>
-
-        @if(isset($aboutData) && $aboutData->cover_image)
-            <img 
-                id="image-preview" 
-                class="max-w-full max-h-32 rounded-lg mx-auto mt-4" 
-                src="{{ asset('storage/' . $aboutData->cover_image) }}" 
-                alt="Image Preview"
-            />
-        @else
-            <img id="image-preview" class="max-w-full max-h-32 rounded-lg mx-auto mt-4 hidden" src="" alt="Image Preview"/>
-        @endif
-    </div>
-    
-    <input type="file" id="about-image" name="cover_image" accept="image/*" class="hidden" onchange="previewImage(this)">
-    @error('cover_image')
-        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-    @enderror
-</div>
 
         <!-- Submit Button -->
         <div class="mt-6 flex justify-end">
@@ -119,19 +128,83 @@
 @section('extra-js')
 <script>
     function previewImage(input) {
-        const preview = document.getElementById('image-preview');
-        const placeholder = document.getElementById('upload-placeholder');
-        const file = input.files[0];
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        const previewImage = document.getElementById('preview-image');
         
-        if (file) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            
+            // Validate file size (10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB');
+                input.value = '';
+                return;
+            }
+            
+            // Validate file type
+            if (!file.type.match('image.*')) {
+                alert('Please select a valid image file');
+                input.value = '';
+                return;
+            }
+            
             const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-                preview.classList.remove('hidden');
-                if (placeholder) placeholder.classList.add('hidden');
-            };
+            
+            reader.onload = function(e) {
+                // Hide upload placeholder
+                if (uploadPlaceholder) {
+                    uploadPlaceholder.style.display = 'none';
+                }
+                
+                // Show and update preview
+                if (previewTemplate) {
+                    previewTemplate.classList.remove('hidden');
+                }
+                
+                if (previewImage) {
+                    previewImage.src = e.target.result;
+                }
+            }
+            
             reader.readAsDataURL(file);
         }
     }
+    
+    function removeImage(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const fileInput = document.getElementById('about-image');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        
+        // Clear file input
+        fileInput.value = '';
+        
+        // Show upload placeholder
+        if (uploadPlaceholder) {
+            uploadPlaceholder.style.display = 'block';
+        }
+        
+        // Hide preview
+        if (previewTemplate) {
+            previewTemplate.classList.add('hidden');
+        }
+    }
+    
+    // Auto hide success/error messages
+    setTimeout(function() {
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+        
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 5000);
 </script>
 @endsection

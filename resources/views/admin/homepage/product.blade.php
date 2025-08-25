@@ -6,9 +6,12 @@
 @section('content')
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">Product Section</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">Produk Section</h2>
         <a href="{{ route('admin.homepage.product.create') }}" class="btn-add">
-            <span class="mr-2">+</span>Tambah Produk
+             <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+            Tambah Produk
         </a>
     </div>
 
@@ -38,10 +41,10 @@
                 @forelse($products ?? [] as $index => $product)
                 <tr>
                     <td class="text-center">{{ $index + 1 }}</td>
-                    <td>{{ $product->nama ?? 'Cards Edu' }}</td>
+                    <td>{{ $products->nama ?? 'Cards Edu' }}</td>
                     <td class="text-center">
-                        @if(isset($product->gambar) && $product->gambar)
-                            <img src="{{ asset('storage/' . $product->gambar) }}" 
+                        @if(isset($products->gambar) && $products->gambar)
+                            <img src="{{ asset('storage/' . $products->gambar) }}" 
                                  alt="Product Image" 
                                  class="w-16 h-16 object-cover rounded mx-auto">
                         @else
@@ -53,20 +56,20 @@
                         @endif
                     </td>
                     <td>
-                        @if(isset($product->link) && $product->link)
-                            <a href="{{ $product->link }}" target="_blank" class="text-blue-600 hover:underline">{{ $product->link }}</a>
+                        @if(isset($products->link) && $products->link)
+                            <a href="{{ $products->link }}" target="_blank" class="text-blue-600 hover:underline">{{ $products->link }}</a>
                         @else
                             <span class="text-gray-400">-</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('admin.homepage.product.edit', $product->id ?? 1) }}" 
+                        <a href="{{ route('admin.homepage.product.edit', $products->id ?? 1) }}" 
                            class="action-btn action-btn-edit">
                             <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>
                         </a>
-                        <form action="{{ route('admin.homepage.product.delete', $product->id ?? 1) }}" 
+                        <form action="{{ route('admin.homepage.product.delete', $products->id ?? 1) }}" 
                               method="POST" 
                               class="inline"
                               onsubmit="return confirmDelete('Are you sure you want to delete this product?')">

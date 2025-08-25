@@ -39,10 +39,10 @@
                 @forelse($features ?? [] as $index => $feature)
                 <tr>
                     <td class="text-center">{{ $index + 1 }}</td>
-                    <td>{{ $feature->nama ?? 'Canteen Feature' }}</td>
+                    <td>{{ $features->nama ?? 'Canteen Feature' }}</td>
                     <td class="text-center">
-                        @if(isset($feature->gambar) && $feature->gambar)
-                            <img src="{{ asset('storage/' . $feature->gambar) }}" 
+                        @if(isset($features->gambar) && $features->gambar)
+                            <img src="{{ asset('storage/' . $features->gambar) }}" 
                                  alt="Feature Image" 
                                  class="w-16 h-16 object-cover rounded mx-auto">
                         @else
@@ -53,20 +53,20 @@
                             </div>
                         @endif
                     </td>
-                    <td>{{ $feature->deskripsi ?? '-' }}</td>
+                    <td>{{ $features->deskripsi ?? '-' }}</td>
                     <td>
-                        <span class="px-2 py-1 rounded text-xs font-medium {{ $feature->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ ucfirst($feature->status ?? 'active') }}
+                        <span class="px-2 py-1 rounded text-xs font-medium {{ $features->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                            {{ ucfirst($features->status ?? 'active') }}
                         </span>
                     </td>
                     <td>
-                        <a href="{{ route('admin.parents.features.edit', $feature->id ?? 1) }}" 
+                        <a href="{{ route('admin.parents.features.edit', $features->id ?? 1) }}" 
                            class="action-btn action-btn-edit">
                             <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>
                         </a>
-                        <form action="{{ route('admin.parents.features.destroy', $feature->id ?? 1) }}" 
+                        <form action="{{ route('admin.parents.features.destroy', $features->id ?? 1) }}" 
                               method="POST" 
                               class="inline"
                               onsubmit="return confirmDelete('Are you sure you want to delete this feature?')">
@@ -107,13 +107,7 @@
 <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50" id="success-message">
     {{ session('success') }}
 </div>
-<script>
-    setTimeout(() => {
-        document.getElementById('success-message').remove();
-    }, 3000);
-</script>
 @endif
-
 <script>
     function confirmDelete(message) {
         return confirm(message);

@@ -6,7 +6,7 @@
 @section('content')
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-cards-teal">Features Section - Flexycazh</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">Features Section - Flexycazh</h2>
         <a href="{{ route('admin.flexycazh.features') }}" class="btn-back">
             <span class="mr-2">←</span>Kembali
         </a>
@@ -30,48 +30,47 @@
             @enderror
         </div>
 
-        <!-- Gambar Produk -->
-        <!-- Upload Area -->
-        <div class="mb-4">
-        <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">Gambar Fitur</label>
-        <div id="upload-area" 
-            class="cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-cards-teal transition"
-            onclick="document.getElementById('gambar').click()">
-
-            <!-- Preview (kosong dulu) -->
-            <img id="preview-img" src="" 
-                class="hidden max-h-48 rounded-lg mx-auto mb-2" 
-                alt="Preview">
-
-            <!-- Default placeholder -->
-            <div id="upload-placeholder">
-                <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                </svg>
-                <p class="text-gray-600 font-medium">Drop Your File Here or Browse</p>
+        <!-- Cover Image -->
+        <div class="mt-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+            
+            <!-- Image Upload Area -->
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('features-image').click()">
+                <!-- Preview Container -->
+                <div id="image-preview-container">
+                    @if(isset($features->image) && $features->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $features->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                        <div class="mt-3">
+                            <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                        </div>
+                    @else
+                        <!-- Default Upload UI -->
+                        <div id="upload-placeholder">
+                            <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="text-gray-500">Drop Your File Here or Browse</p>
+                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                        
+                        <!-- Hidden Preview Template (will be shown when image selected) -->
+                        <div id="preview-template" class="hidden">
+                            <img id="preview-image" src="" alt="Preview" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                            <div class="mt-3">
+                                <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
+            
+            <!-- Hidden File Input -->
+            <input type="file" id="features-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            
+            @error('image')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
         </div>
-
-        <!-- Hidden file input -->
-        <input type="file" id="gambar" name="gambar" accept="image/*" class="hidden">
-        </div>
-
-        <script>
-        document.getElementById('gambar').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('upload-placeholder').style.display = 'none';
-                const img = document.getElementById('preview-img');
-                img.src = e.target.result;
-                img.classList.remove('hidden');
-            }
-            reader.readAsDataURL(file);
-        });
-        </script>
 
         <!-- Deskripsi Produk -->
         <div>
@@ -101,27 +100,90 @@
 
         <!-- Submit Button -->
         <div class="flex justify-end space-x-4">
-            <a href="{{ route('admin.flexycazh.features') }}" class="btn-secondary">Cancel</a>
-            <button type="submit" class="btn-primary">Save Product</button>
+            <button type="submit" class="btn-primary">Save</button>
         </div>
     </form>
 </div>
 
 <script>
-function previewImage(input) {
-    const file = input.files[0];
-    const uploadArea = input.closest('.image-upload-area');
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            uploadArea.innerHTML = `
-                <img src="${e.target.result}" alt="Preview" class="max-w-full max-h-48 rounded-lg mx-auto">
-                <p class="text-sm text-gray-600 mt-2">Click to change image</p>
-            `;
-        };
-        reader.readAsDataURL(file);
+ function previewImage(input) {
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        const previewImage = document.getElementById('preview-image');
+        
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            
+            // Validate file size (10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB');
+                input.value = '';
+                return;
+            }
+            
+            // Validate file type
+            if (!file.type.match('image.*')) {
+                alert('Please select a valid image file');
+                input.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Hide upload placeholder
+                if (uploadPlaceholder) {
+                    uploadPlaceholder.style.display = 'none';
+                }
+                
+                // Show and update preview
+                if (previewTemplate) {
+                    previewTemplate.classList.remove('hidden');
+                }
+                
+                if (previewImage) {
+                    previewImage.src = e.target.result;
+                }
+            }
+            
+            reader.readAsDataURL(file);
+        }
     }
-}
+    
+    function removeImage(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const fileInput = document.getElementById('features-image');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        
+        // Clear file input
+        fileInput.value = '';
+        
+        // Show upload placeholder
+        if (uploadPlaceholder) {
+            uploadPlaceholder.style.display = 'block';
+        }
+        
+        // Hide preview
+        if (previewTemplate) {
+            previewTemplate.classList.add('hidden');
+        }
+    }
+    
+    // Auto hide success/error messages
+    setTimeout(function() {
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+        
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 5000);
 </script>
 @endsection

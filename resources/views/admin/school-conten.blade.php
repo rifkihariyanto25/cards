@@ -175,7 +175,7 @@
             background-color: #0F5F5F;
         }
         .btn-back {
-            background-color: #6B7280;
+            background-color: #00718f;
             color: white;
             padding: 8px 16px;
             border-radius: 6px;
@@ -185,7 +185,7 @@
             display: inline-block;
         }
         .btn-back:hover {
-            background-color: #4B5563;
+            background-color: #0F5F5F;
         }
 
         /* Sticky Sidebar Styles */

@@ -1,78 +1,45 @@
 @extends('admin.parent-conten')
 
-@section('title', 'About Section - Parents')
+@section('title', 'Parents Features - Cards Admin')
+@section('page-title', 'Parents Page - Content Management')
 
 @section('content')
-<div class="bg-white rounded-lg shadow-sm p-6">
+<div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">About Section - Parents</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">Features Section - Parents</h2>
+        <a href="{{ route('admin.parents.features') }}" class="btn-back">
+            <span class="mr-2">←</span>Kembali
+        </a>
     </div>
 
-    <form action="{{ route('admin.parents.about.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.parents.features.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Left Column -->
-            <div class="space-y-4">
-                <!-- Title -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Judul</label>
-                    <input type="text" name="title" value="{{ old('title', $aboutData->title ?? '') }}" class="input-field" placeholder="Enter about title">
-                    @error('title')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Description -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Sub judul</label>
-                    <textarea name="subtitle" class="textarea-field" rows="5" placeholder="Enter subtitle">{{ old('subtitle', $aboutData->subtitle ?? '') }}</textarea>
-                    @error('subtitle')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="space-y-4">
-                <!-- Title Font Size -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Ukuran Font</label>
-                    <select name="title_font_size" class="input-field">
-                        @foreach([24,28,32,36,40,48] as $size)
-                            <option value="{{ $size }}" {{ old('title_font_size', $aboutData->title_font_size ?? '') == $size ? 'selected' : '' }}>{{ $size }}</option>
-                        @endforeach
-                    </select>
-                    @error('title_font_size')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Subtitle Font Size -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Ukuran Font Sub Judul</label>
-                    <select name="subtitle_font_size" class="input-field">
-                        @foreach([14,16,18,20,24] as $size)
-                            <option value="{{ $size }}" {{ old('subtitle_font_size', $aboutData->subtitle_font_size ?? '') == $size ? 'selected' : '' }}>{{ $size }}</option>
-                        @endforeach
-                    </select>
-                    @error('subtitle_font_size')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+        <!-- Nama Produk -->
+        <div>
+            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Fitur</label>
+            <input type="text" 
+                   id="nama" 
+                   name="nama" 
+                   value="{{ old('nama') }}"
+                   class="input-field @error('nama') border-red-500 @enderror" 
+                   placeholder="Masukkan nama fitur"
+                   required>
+            @error('nama')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
-        
-        <!-- Cover Image -->
-        <div class="mt-6 mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+
+        <!-- Fitur Image -->
+        <div class="mt-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Fitur Image</label>
             
             <!-- Image Upload Area -->
-            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('about-image').click()">
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('feature-image').click()">
                 <!-- Preview Container -->
                 <div id="image-preview-container">
-                    @if(isset($about->image) && $about->image)
-                        <img id="preview-image" src="{{ asset('storage/' . $about->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                    @if(isset($feature->image) && $feature->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $feature->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
                         <div class="mt-3">
                             <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
                         </div>
@@ -98,36 +65,49 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="about-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="feature-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
             
             @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
+
+        <!-- Deskripsi Produk -->
+        <div>
+            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Produk (Optional)</label>
+            <textarea id="deskripsi" 
+                      name="deskripsi" 
+                      class="textarea-field @error('deskripsi') border-red-500 @enderror" 
+                      placeholder="Masukkan deskripsi produk">{{ old('deskripsi') }}</textarea>
+            @error('deskripsi')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Status -->
+        <div>
+            <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+            <select id="status" 
+                    name="status" 
+                    class="input-field @error('status') border-red-500 @enderror">
+                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+            </select>
+            @error('status')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div> -->
+
         <!-- Submit Button -->
-        <div class="mt-6 flex justify-end">
-            <button type="submit" class="btn-primary">Save Changes</button>
+        <div class="flex justify-end space-x-4">
+            <button type="submit" class="btn-primary">Save</button>
         </div>
     </form>
 </div>
 
-@if(session('success'))
-    <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50" id="success-message">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50" id="error-message">
-        {{ session('error') }}
-    </div>
-@endif
-@endsection
-
-@section('extra-js')
 <script>
-    function previewImage(input) {
+ function previewImage(input) {
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         const previewImage = document.getElementById('preview-image');
@@ -175,7 +155,7 @@
         event.preventDefault();
         event.stopPropagation();
         
-        const fileInput = document.getElementById('about-image');
+        const fileInput = document.getElementById('feature-image');
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         

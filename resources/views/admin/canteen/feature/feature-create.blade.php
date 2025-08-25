@@ -1,132 +1,190 @@
 @extends('admin.canteen-conten')
 
-@section('title', 'Cards Admin - Create Canteen Feature')
-@section('page-title', 'Canteen Page - Create Feature')
+@section('title', 'Canteen Features - Cards Admin')
+@section('page-title', 'Canteen Page - Content Management')
 
 @section('content')
-<div class="bg-white rounded-lg shadow-sm p-6">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">Create Feature</h2>
-        <a href="{{ route('admin.canteen.features') }}" 
-           class="bg-cyan-700 hover:bg-cyan-800 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Kembali
+<div class="section-card p-6">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold text-cards-teal">Features Section - Canteen</h2>
+        <a href="{{ route('admin.canteen.features') }}" class="btn-back">
+            <span class="mr-2">←</span>Kembali
         </a>
     </div>
 
     <form action="{{ route('admin.canteen.features.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         
-        <!-- Nama Field -->
+        <!-- Nama Produk -->
         <div>
-            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
+            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Fitur</label>
             <input type="text" 
                    id="nama" 
                    name="nama" 
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  outline-none transition-colors"
-                   placeholder="Masukkan nama feature"
+                   value="{{ old('nama') }}"
+                   class="input-field @error('nama') border-red-500 @enderror" 
+                   placeholder="Masukkan nama fitur"
                    required>
             @error('nama')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        <!-- Deskripsi Field -->
-        <div>
-            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
-            <textarea 
-                   id="deskripsi" 
-                   name="deskripsi" 
-                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  outline-none transition-colors"
-                   placeholder="Masukkan deskripsi feature"
-                   rows="4"></textarea>
-            @error('deskripsi')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <!-- Gambar Field -->
-        <div>
-            <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">Gambar</label>
-            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-cyan-600 transition-colors">
-                <input type="file" 
-                       id="gambar" 
-                       name="gambar" 
-                       accept="image/*"
-                       class="hidden"
-                       onchange="previewImage(this)">
-                <label for="gambar" class="cursor-pointer">
-                    <div id="upload-area">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                        </svg>
-                        <p class="mt-2 text-sm text-gray-600">
-                            <span class="font-medium text-black-600 hover:text-cyan-600">Drop Your File Here or Browse</span>
-                        </p>
-                        <p class="text-xs text-gray-500 mt-1">PNG, JPG, JPEG up to 2MB</p>
-                    </div>
-                    <div id="preview-area" class="hidden">
-                        <img id="preview-image" src="" alt="Preview" class="mx-auto max-h-48 rounded-lg">
-                        <p class="mt-2 text-sm text-gray-600">Click to change image</p>
-                    </div>
-                </label>
+        <!-- Fitur Image -->
+        <div class="mt-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Fitur Image</label>
+            
+            <!-- Image Upload Area -->
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('feature-image').click()">
+                <!-- Preview Container -->
+                <div id="image-preview-container">
+                    @if(isset($feature->image) && $feature->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $feature->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                        <div class="mt-3">
+                            <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                        </div>
+                    @else
+                        <!-- Default Upload UI -->
+                        <div id="upload-placeholder">
+                            <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="text-gray-500">Drop Your File Here or Browse</p>
+                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                        
+                        <!-- Hidden Preview Template (will be shown when image selected) -->
+                        <div id="preview-template" class="hidden">
+                            <img id="preview-image" src="" alt="Preview" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                            <div class="mt-3">
+                                <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
-            @error('gambar')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            
+            <!-- Hidden File Input -->
+            <input type="file" id="feature-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            
+            @error('image')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        <!-- Status Field -->
+
+        <!-- Deskripsi Produk -->
+        <div>
+            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Produk (Optional)</label>
+            <textarea id="deskripsi" 
+                      name="deskripsi" 
+                      class="textarea-field @error('deskripsi') border-red-500 @enderror" 
+                      placeholder="Masukkan deskripsi produk">{{ old('deskripsi') }}</textarea>
+            @error('deskripsi')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Status -->
         <div>
             <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
             <select id="status" 
                     name="status" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 outline-none transition-colors"
-                    required>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                    class="input-field @error('status') border-red-500 @enderror">
+                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
             @error('status')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
-        </div>
+        </div> -->
 
         <!-- Submit Button -->
-        <div class="flex justify-end">
-            <button type="submit" 
-                    class="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-2 rounded-lg transition-colors focus:ring-2 focus:ring-offset-2">
-                Save
-            </button>
+        <div class="flex justify-end space-x-4">
+            <button type="submit" class="btn-primary">Save</button>
         </div>
     </form>
 </div>
 
-@push('scripts')
 <script>
-function previewImage(input) {
-    const uploadArea = document.getElementById('upload-area');
-    const previewArea = document.getElementById('preview-area');
-    const previewImage = document.getElementById('preview-image');
-    
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
+ function previewImage(input) {
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        const previewImage = document.getElementById('preview-image');
         
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            uploadArea.classList.add('hidden');
-            previewArea.classList.remove('hidden');
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            
+            // Validate file size (10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB');
+                input.value = '';
+                return;
+            }
+            
+            // Validate file type
+            if (!file.type.match('image.*')) {
+                alert('Please select a valid image file');
+                input.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Hide upload placeholder
+                if (uploadPlaceholder) {
+                    uploadPlaceholder.style.display = 'none';
+                }
+                
+                // Show and update preview
+                if (previewTemplate) {
+                    previewTemplate.classList.remove('hidden');
+                }
+                
+                if (previewImage) {
+                    previewImage.src = e.target.result;
+                }
+            }
+            
+            reader.readAsDataURL(file);
+        }
+    }
+    
+    function removeImage(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const fileInput = document.getElementById('feature-image');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        
+        // Clear file input
+        fileInput.value = '';
+        
+        // Show upload placeholder
+        if (uploadPlaceholder) {
+            uploadPlaceholder.style.display = 'block';
         }
         
-        reader.readAsDataURL(input.files[0]);
+        // Hide preview
+        if (previewTemplate) {
+            previewTemplate.classList.add('hidden');
+        }
     }
-}
-
-// Reset preview when clicking on preview area
-document.getElementById('preview-area').addEventListener('click', function() {
-    document.getElementById('foto').click();
-});
+    
+    // Auto hide success/error messages
+    setTimeout(function() {
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+        
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 5000);
 </script>
-@endpush
 @endsection

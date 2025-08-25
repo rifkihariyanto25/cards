@@ -216,7 +216,7 @@
                 <!-- List Pengajuan FlexyCazh Section -->
                 <div class="px-6 py-4">
                     <!-- Section Header with Green Background -->
-                    <div class="bg-teal-700 text-white px-4 py-3 rounded-t-lg flex items-center">
+                    <div class="bg-cyan-700 text-white px-4 py-3 rounded-t-lg flex items-center">
                         <span class="mr-2">📋</span>
                         <span class="font-medium">List Pengajuan FlexyCazh</span>
                     </div>
@@ -241,11 +241,11 @@
                         <div class="divide-y divide-gray-200">
                             <!-- Row 1 -->
                             <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
-                                <div class="text-center font-medium">1.</div>
-                                <div class="text-gray-900">Toyota Xpander</div>
-                                <div class="text-center">1</div>
+                                <div class="text-center font-medium"></div>
+                                <div class="text-gray-900"></div>
+                                <div class="text-center"></div>
                                 <div class="text-gray-500">-</div>
-                                <div class="text-center text-gray-900">085291888881</div>
+                                <div class="text-center text-gray-900"></div>
                                 <div class="text-gray-500">-</div>
                                 <div class="text-gray-500">-</div>
                                 <div class="text-center text-gray-500">-</div>
@@ -253,9 +253,9 @@
 
                             <!-- Row 2 -->
                             <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
-                                <div class="text-center font-medium">2.</div>
-                                <div class="text-gray-900">Toyota Alphard</div>
-                                <div class="text-center">1</div>
+                                <div class="text-center font-medium"></div>
+                                <div class="text-gray-900"></div>
+                                <div class="text-center"></div>
                                 <div class="text-gray-500">-</div>
                                 <div class="text-center text-gray-500">-</div>
                                 <div class="text-gray-500">-</div>
@@ -265,9 +265,9 @@
 
                             <!-- Row 3 -->
                             <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
-                                <div class="text-center font-medium">3.</div>
-                                <div class="text-gray-900">Daihatsu Ayla</div>
-                                <div class="text-center">4</div>
+                                <div class="text-center font-medium"></div>
+                                <div class="text-gray-900"></div>
+                                <div class="text-center"></div>
                                 <div class="text-gray-500">-</div>
                                 <div class="text-center text-gray-500">-</div>
                                 <div class="text-gray-500">-</div>
@@ -277,9 +277,9 @@
 
                             <!-- Row 4 -->
                             <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
-                                <div class="text-center font-medium">4.</div>
-                                <div class="text-gray-900">Daihatsu Xenia</div>
-                                <div class="text-center">3</div>
+                                <div class="text-center font-medium"></div>
+                                <div class="text-gray-900"></div>
+                                <div class="text-center"></div>
                                 <div class="text-gray-500">-</div>
                                 <div class="text-center text-gray-500">-</div>
                                 <div class="text-gray-500">-</div>
@@ -289,9 +289,9 @@
 
                             <!-- Row 5 -->
                             <div class="grid grid-cols-7 gap-4 px-4 py-4 text-sm hover:bg-gray-50">
-                                <div class="text-center font-medium">5.</div>
-                                <div class="text-gray-900">Hyundai Palisade</div>
-                                <div class="text-center">1</div>
+                                <div class="text-center font-medium"></div>
+                                <div class="text-gray-900"></div>
+                                <div class="text-center"></div>
                                 <div class="text-gray-500">-</div>
                                 <div class="text-center text-gray-500">-</div>
                                 <div class="text-gray-500">-</div>
@@ -320,31 +320,16 @@
             }
         }
 
-          // Close dropdowns when clicking outside
+        // Close dropdowns when clicking outside
         document.addEventListener('click', function(event) {
             const dropdowns = document.querySelectorAll('[id$="-dropdown"]');
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.querySelector('.main-content');
-            
-
-            const isClickInsideSidebar = sidebar && sidebar.contains(event.target);
-            const isClickInsideMainContent = mainContent && mainContent.contains(event.target);
-        
-    
-        dropdowns.forEach(dropdown => {
-            const toggleButton = dropdown.previousElementSibling;
-            const isClickOnToggle = toggleButton && toggleButton.contains(event.target);
-            const isClickOnDropdownItem = dropdown.contains(event.target);
-            
-        
-            if (!isClickOnToggle && !isClickOnDropdownItem && !isClickInsideMainContent) {
-                if (!isClickInsideSidebar || (!toggleButton.contains(event.target) && !dropdown.contains(event.target))) {
+            dropdowns.forEach(dropdown => {
+                if (!dropdown.contains(event.target) && !dropdown.previousElementSibling.contains(event.target)) {
                     dropdown.classList.add('hidden');
                     dropdown.previousElementSibling.querySelector('.dropdown-arrow').classList.remove('rotate');
                 }
-            }
+            });
         });
-    });
     </script>
 </body>
 </html>
