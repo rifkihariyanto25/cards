@@ -77,7 +77,7 @@
                 <div class="flex items-center justify-between">
                     <!-- Logo -->
                     <div class="flex items-center space-x-2">
-                        <img src="{{ asset('logoCards.png') }}" alt="Logo" class="h-5 w-8">
+                        <img src="{{ asset('storage/assets/logo cards.png') }}" alt="Logo" class="h-8 w-auto">
                         <span class="text-xl font-semibold text-cyan-700"></span>
                     </div>
 
