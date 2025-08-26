@@ -47,6 +47,7 @@ use App\Http\Controllers\User\CanteenController;
 use App\Http\Controllers\User\SchoolController;
 use App\Http\Controllers\User\FlexycazhController;
 use App\Http\Controllers\User\ContactController;
+use App\Http\Controllers\User\AboutController;
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -225,6 +226,7 @@ Route::name('user.')->group(function () {
     Route::get('/school', [SchoolController::class, 'index'])->name('school');   // Otomatis menjadi 'user.school'
     Route::get('/flexy', [FlexycazhController::class, 'index'])->name('flexy');     // Otomatis menjadi 'user.flexy'
     Route::get('/contact', [ContactController::class, 'index'])->name('contact'); // Otomatis menjadi 'user.contact'
+    Route::get('/about', [AboutController::class, 'index'])->name('about'); // Otomatis menjadi 'user.contact'
 
     Route::post('/flexy/pengajuan', [FlexycazhController::class, 'storePengajuan'])->name('flexy.pengajuan'); // Otomatis menjadi 'user.flexy.pengajuan'
 });

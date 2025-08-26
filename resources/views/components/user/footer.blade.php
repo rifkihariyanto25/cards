@@ -10,22 +10,22 @@
                     <div class="w-12 h-12 bg-gradient-to-r from-white to-gray-100 rounded-xl flex items-center justify-center">
                         <i class="fas fa-money-bill-wave text-[#007696] text-xl"></i>
                     </div>
-                    <span class="text-2xl font-bold">FlexyCazh</span>
+                    <span class="text-2xl font-bold">Cards</span>
                 </div>
                 <p class="text-white/80 text-lg leading-relaxed max-w-md">
                     Solusi pembiayaan fleksibel untuk sekolah dan bisnis. Dapatkan modal kerja dan pembiayaan peralatan dengan proses yang cepat dan mudah.
                 </p>
                 <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <a href="https://facebook.com/cazhteknova" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <a href="https://www.instagram.com/cazhcards" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
                         <i class="fab fa-instagram"></i>
                     </a>
                     <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                    <a href="https://www.linkedin.com/company/cazh-inovasion" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
@@ -46,15 +46,15 @@
                 <div class="space-y-4">
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-envelope w-5"></i>
-                        <span class="text-white/80">info@flexycazh.com</span>
+                        <span class="text-white/80">info@cazh.com</span>
                     </div>
                     <div class="flex items-center space-x-3">
                         <i class="fas fa-phone w-5"></i>
-                        <span class="text-white/80">+62 21 1234 5678</span>
+                        <span class="text-white/80">+62 813</span>
                     </div>
                     <div class="flex items-start space-x-3">
                         <i class="fas fa-map-marker-alt w-5 mt-1"></i>
-                        <span class="text-white/80">Jakarta, Indonesia</span>
+                        <span class="text-white/80">Ruko Graha Timur, Jl. Martadireja 1 No.Blok B2, Kepetek, Mersi, Kec. Purwokerto Tim., Kabupaten Banyumas, Jawa Tengah 53111</span>
                     </div>
                 </div>
             </div>
