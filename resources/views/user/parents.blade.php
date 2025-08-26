@@ -1,392 +1,534 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parents</title>
+    <title>Cards Parents - Pantau Perkembangan Anak dengan Mudah</title>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #f7931e, 0 0 10px #f7931e, 0 0 15px #f7931e' },
+                            '100%': { boxShadow: '0 0 20px #f7931e, 0 0 30px #f7931e, 0 0 40px #f7931e' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .hover-lift { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .hover-lift:hover { transform: translateY(-8px); }
+        .gradient-text {
+            background: linear-gradient(135deg, #007696 0%, #f7931e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .feature-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(0, 118, 150, 0.1);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 118, 150, 0.15);
+            border-color: rgba(247, 147, 30, 0.3);
+        }
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #007696, #f7931e);
+            border-radius: 12px 12px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .feature-card:hover::after { opacity: 1; }
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .gradient-text-white {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
-<body>
-    <section class="relative isolate overflow-hidden">
-  <div class="relative z-10">
+<body class="font-inter antialiased bg-white">
+    <div class="scroll-indicator"></div>
+    
+    <nav id="navbar" class="fixed top-4 left-4 right-4 z-[200] glass shadow-xl px-8 py-4 rounded-2xl transition-all duration-500 hover:shadow-2xl">
+        <div class="flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-r from-[#007696] to-[#f7931e] rounded-xl flex items-center justify-center">
+                    <i class="fas fa-users text-white text-lg"></i>
+                </div>
+                <span class="text-xl font-bold gradient-text">Cards Parents</span>
+            </a>
 
-<!-- Navigation -->
-  <nav 
-        id="navbar"
-        class="fixed top-4 left-4 right-4 z-[200] bg-white/95 backdrop-blur-md shadow-lg px-6 py-3 rounded-full transition-all duration-300">
-  <!-- Isi navbar -->
-    <div class="flex items-center justify-between">
-        <!-- Logo -->
-        <div class="flex items-center space-x-2">
-        <img src="../img/logo cards.png" alt="Logo" class="h-5 w-8">
-        <span class="text-xl font-semibold text-cyan-700"></span>
-        </div>
-
-        <!-- Hamburger Button (Mobile) -->
-        <button class="md:hidden focus:outline-none" onclick="toggleMenu()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-            d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        </button>
-
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-8 items-center font-medium">
-        <a href="index.html" class="hover:text-cyan-700 transition-colors">Home</a>
-         <a href="flexy.html" class="hover:text-cyan-700 transition-colors">Flexy</a>
-       
-        <!-- Wrapper Produk -->
-        <div class="relative" id="product-dropdown-wrapper">
-        <!-- Tombol Produk -->
-        <button onclick="toggleDropdown()" class="flex items-center hover:text-cyan-700 focus:outline-none transition-colors">
-            Products
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-        </button>
-
-        <!-- Dropdown Menu -->
-        <div id="product-dropdown" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 w-44 z-[110]">
-            <a href="Edu.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Edu</a>
-            <a href="parents.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Parents</a>
-            <a href="school.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">School</a>
-            <a href="canteen.html" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Canteen</a>
-        </div>
-        </div>
-        <a href="about.html" class="hover:text-cyan-700 transition-colors">About</a>
-        <a href="contact.html" class="hover:text-cyan-700 transition-colors">Contact</a>
-        </div>
-    </div>
-    </nav>
-
- <!-- MOBILE MENU -->
-    <div id="mobile-menu" class="md:hidden hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg mx-4 rounded-lg z-[90] py-3">
-      <div class="flex flex-col space-y-4 px-6 font-medium">
-        <a href="index.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">Home</a>
-        <a href="flexy.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">Flexy</a>
-
-        <!-- Products dropdown -->
-        <div class="relative">
-            <button onclick="toggleMobileDropdown()" class="flex items-center text-cyan-700 hover:text-cyan-900 transition-colors">
-            Products
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
+            <button class="md:hidden focus:outline-none hover:scale-110 transition-transform" onclick="toggleMenu()">
+                <div class="w-6 h-6 flex flex-col justify-between">
+                    <span class="w-full h-0.5 bg-gray-800 rounded transition-all"></span>
+                    <span class="w-full h-0.5 bg-gray-800 rounded transition-all"></span>
+                    <span class="w-full h-0.5 bg-gray-800 rounded transition-all"></span>
+                </div>
             </button>
 
-            <!-- DROPDOWN yang menutupi elemen lain -->
-            <div id="mobile-product-dropdown" class="hidden mt-2 bg-white shadow rounded w-full text-left z-[100]">
-            <a href="Edu.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Edu</a>
-            <a href="parents.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Parents</a>
-            <a href="school.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">School</a>
-            <a href="canteen.html" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Canteen</a>
+            <div class="hidden md:flex space-x-8 items-center font-medium">
+                <a href="index.html" class="hover:text-[#007696] transition-all duration-300 relative group">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="flexy.html" class="hover:text-[#007696] transition-all duration-300 relative group">
+                    Flexy
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                
+                <div class="relative" id="product-dropdown-wrapper">
+                    <button onclick="toggleDropdown()" class="flex items-center hover:text-[#007696] focus:outline-none transition-all duration-300 group">
+                        Products
+                        <i class="fas fa-chevron-down ml-2 text-xs transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div id="product-dropdown" class="absolute hidden glass rounded-2xl mt-4 py-3 w-48 z-[110] shadow-xl">
+                        <a href="Edu.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">Edu</a>
+                        <a href="parents.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">Parents</a>
+                        <a href="school.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">School</a>
+                        <a href="canteen.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">Canteen</a>
+                    </div>
+                </div>
+                
+                <a href="about.html" class="hover:text-[#007696] transition-all duration-300 relative group">
+                    About
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="contact.html" class="hover:text-[#007696] transition-all duration-300 relative group">
+                    Contact
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
+                </a>
             </div>
         </div>
-        <a href="/about.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">About</a>
-        <a href="contact.html" class="text-cyan-700 hover:text-cyan-900 transition-colors">Contact</a>
-      </div>
-    </div>
+    </nav>
 
- <!-- SECTION HERO CARDS PARENTS (Mobile-first layout) -->
-<section class="bg-[#007696] py-52 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-    
-    <!-- Judul untuk mobile (muncul hanya di mobile) -->
-    <div class="w-full lg:hidden text-center text-white order-1">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-4">{{ $heroData->title ?? 'Cards Parents' }}</h2>
-    </div>
-
-    <!-- Gambar -->
-    <div class="w-full lg:w-1/2 order-3 lg:order-none">
-      <div class="bg-[#00627a] p-4 rounded-2xl w-full max-w-md mx-auto lg:mx-0">
-          <img 
-          src="{{ asset('storage/' . ($heroData->cover_image ?? 'parents/hero/parents_hero.png')) }}" 
-          alt="Cards Parents Mockup"
-          class="rounded-lg w-full h-auto 
-                  shadow-[15px_-15px_80px_(0,0,0,0.4)] 
-                  transform translate-x-4 -translate-y-4 scale-105 
-                  transition-all duration-500 ease-in-out"
-          >
-      </div>
-    </div>
-
-    <!-- Konten Teks + Tombol -->
-    <div class="w-full lg:w-1/2 text-center lg:text-left text-white order-4 lg:order-none">
-      <!-- Judul untuk desktop (tersembunyi di mobile) -->
-      <h2 class="hidden lg:block text-3xl sm:text-4xl font-bold mt-8 lg:mt-0 mb-4">{{ $heroData->title ?? 'Cards Parents' }}</h2>
-      <p class="text-base sm:text-lg mb-8">
-        {!! $heroData->subtitle ?? 'Transformasi sekolah jadi digital? Bisa! Dengan Cards Parents, kelola uang saku anak, tagihan sekolah, dan rapor jadi lebih cepat, rapi, dan terpantau!' !!}
-      </p>
-
-      <!-- Tombol CTA -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-        <a href="#" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-full text-sm sm:text-base transition">
-          Selengkapnya
-        </a>
-        <a href="#" class="bg-orange-500 justify-center hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-full text-sm sm:text-base transition inline-flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 4h10M5 11h14M5 15h14M5 19h14" />
-          </svg>
-          Jadwalkan Demo
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION: Apa Itu Cards Parents -->
-<section class="py-24 px-4 sm:px-6 lg:px-8 bg-white">
-  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-    
-    <!-- Gambar  -->
-        <div class="w-full lg:w-1/2 order-1 lg:order-none">
-    <div class="bg-[#00627a] p-4 rounded-2xl w-full max-w-md mx-auto lg:mx-0">
-        <img 
-        src="{{ asset('storage/' . ($aboutData->cover_image ?? 'parents/about/apaitu_parents.png')) }}" 
-        alt="Cards Parents Mockup"
-        class="rounded-lg w-full h-auto 
-                shadow-[15px_-15px_80px_(0,0,0,0.4)] 
-                transform translate-x-4 -translate-y-4 scale-105 
-                transition-all duration-500 ease-in-out"
-        >
-    </div>
-    </div>
-
-
-    <!-- Teks Kanan -->
-    <div class="w-full lg:w-1/2 text-center lg:text-left">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">{{ $aboutData->title ?? 'Apa Itu Cards Parents ?' }}</h2>
-      <p class="text-gray-700 text-base sm:text-lg leading-relaxed">
-        {!! $aboutData->subtitle ?? 'Sistem ini menyajikan solusi modern yang menyederhanakan peran orang tua. Dengan menggabungkan berbagai fungsi seperti manajemen keuangan, pemantauan pendidikan, dan juga yang lainnya dalam satu dasbor yang mudah diakses.' !!}
-      </p>
-    </div>
-
-  </div>
-</section>
-
-
- <!-- atas -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-  <path fill="#007696" fill-opacity="1" d="M0,96L80,90.7C160,85,320,75,480,96C640,117,800,171,960,192C1120,213,1280,203,1360,197.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-</svg>
-
-<!-- SECTION FITUR -->
-<section class="bg-[#007696] pt-4 md:pt-28 pb-36 md:pb-44 px-4 sm:px-6 lg:px-8 relative overflow-hidden" aria-label="Fitur Cards Edu">
-  <div class="max-w-7xl mx-auto text-center text-white mb-12">
-    <h2 class="text-3xl md:text-4xl font-bold">Fitur Fitur Cards Parents</h2>
-  </div>
-
-  <!-- Grid Fitur Responsive -->
-  <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8 justify-items-center">
-    
-    @forelse($features ?? [] as $feature)
-    <!-- Feature Card -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      @if(isset($feature->gambar) && $feature->gambar)
-        <img src="{{ asset('storage/' . $feature->gambar) }}" alt="{{ $feature->nama }}" class="mx-auto w-14 h-14 object-cover">
-      @else
-        <div class="w-14 h-14 bg-gray-200 rounded-full mx-auto flex items-center justify-center">
-          <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-          </svg>
-        </div>
-      @endif
-      <h3 class="font-semibold text-lg">{{ $feature->nama }}</h3>
-      <p class="text-sm">{{ $feature->deskripsi }}</p>
-    </article>
-    @empty
-    <!-- Fallback Cards if no features in database -->
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/calendar-emoji.png" alt="Ikon Jadwal Otomatis" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Jadwal Otomatis</h3>
-      <p class="text-sm">Siswa dan guru dapat melihat jadwal harian langsung dari aplikasi.</p>
-    </article>
-    
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/money-bag-emoji.png" alt="Ikon Pembayaran" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Pembayaran Digital</h3>
-      <p class="text-sm">Kelola pembayaran sekolah dan uang saku anak dengan mudah.</p>
-    </article>
-
-    <article class="bg-white text-gray-800 rounded-xl shadow-md p-6 w-full max-w-xs text-center space-y-3 transition duration-300 transform hover:scale-105">
-      <img src="https://img.icons8.com/emoji/96/notebook-with-decorative-cover.png" alt="Ikon Rapor" class="mx-auto w-14 h-14">
-      <h3 class="font-semibold text-lg">Rapor Online</h3>
-      <p class="text-sm">Pantau perkembangan akademik anak melalui rapor digital.</p>
-    </article>
-    @endforelse
-
-  </div>
-</section>
-
-
-<!-- bawah -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-  <path fill="#007696" fill-opacity="1" d="M0,96L80,90.7C160,85,320,75,480,96C640,117,800,171,960,192C1120,213,1280,203,1360,197.3L1440,192L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
-</svg>
-
-
-<!-- SECTION ACT -->
-    <section class="bg-white py-16 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
-
-        <!-- Judul untuk mobile (muncul hanya di mobile) -->
-        <div class="w-full md:hidden text-center text-cyan-800 mb-6">
-            <h2 class="text-2xl sm:text-3xl font-bold">
-                Download Aplikasi Cards Parents
-            </h2>
-        </div>
-
-        <!-- Gambar Aplikasi -->
-        <div class="w-full lg:w-3/5 flex lg:pl-10 justify-center order-2 md:order-none">
-            <div class="bg-orange-500 p-5 rounded-[3rem] w-full max-w-md">
-                <img src="../img/download.png" 
-                    alt="Gambar Siswa" 
-                    class="w-full aspect-[4/3] rounded-full object-cover" />
-            </div>
-        </div>
-
-        <!-- Konten Teks -->
-        <div class="md:w-1/2 w-full text-center md:text-left order-3 md:order-none">
-            <!-- Judul untuk desktop (tersembunyi di mobile) -->
-            <h2 class="hidden md:block text-2xl sm:text-3xl font-bold text-cyan-800 mb-4">
-                Download Aplikasi Cards Parents
-            </h2>
-            <p class="text-gray-700 text-base sm:text-lg mb-6">
-                Mulai perjalanan belajar digital Anda sekarang! Download aplikasi Cards Parents dan rasakan pengalaman belajar yang tak terlupakan. Tersedia untuk berbagai platform dengan fitur lengkap dan interface yang user-friendly.
-            </p>
+    <div id="mobile-menu" class="md:hidden hidden fixed top-24 left-4 right-4 glass shadow-xl rounded-2xl z-[90] py-6">
+        <div class="flex flex-col space-y-4 px-6 font-medium">
+            <a href="index.html" class="text-[#007696] hover:text-[#f7931e] transition-colors py-2">Home</a>
+            <a href="flexy.html" class="text-[#007696] hover:text-[#f7931e] transition-colors py-2">Flexy</a>
             
-            <!-- Tombol App Store -->
-            <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                <a href="#" target="_blank">
-                    <img src="../img/App Store.png" alt="Download di App Store" class="h-12 w-auto">
-                </a>
-                <a href="#" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Download di Google Play" class="h-12 w-auto">
-                </a>
+            <div class="relative">
+                <button onclick="toggleMobileDropdown()" class="flex items-center text-[#007696] hover:text-[#f7931e] transition-colors py-2 w-full">
+                    Products
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+                <div id="mobile-product-dropdown" class="hidden ml-4 mt-2 space-y-2">
+                    <a href="Edu.html" class="block py-2 text-gray-600 hover:text-[#007696] transition-colors">Edu</a>
+                    <a href="parents.html" class="block py-2 text-gray-600 hover:text-[#007696] transition-colors">Parents</a>
+                    <a href="school.html" class="block py-2 text-gray-600 hover:text-[#007696] transition-colors">School</a>
+                    <a href="canteen.html" class="block py-2 text-gray-600 hover:text-[#007696] transition-colors">Canteen</a>
+                </div>
+            </div>
+            
+            <a href="about.html" class="text-[#007696] hover:text-[#f7931e] transition-colors py-2">About</a>
+            <a href="contact.html" class="text-[#007696] hover:text-[#f7931e] transition-colors py-2">Contact</a>
+        </div>
+    </div>
+    
+    <section class="relative bg-gradient-to-br from-[#007696] via-[#0289a4] to-[#007696] pt-32 pb-20 px-6 sm:px-10 lg:px-20 overflow-hidden min-h-screen flex items-center">
+        <div class="floating-elements">
+            <div class="floating-circle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+            <div class="floating-circle" style="top: 60%; right: 15%; animation-delay: 2s;"></div>
+            <div class="floating-circle" style="top: 80%; left: 20%; animation-delay: 4s;"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
+            <div class="text-white animate-slide-up text-center lg:text-left">
+                <div class="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+                    <i class="fas fa-child mr-2 text-[#f7931e]"></i>
+                    Untuk Orang Tua Hebat
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    <span class="gradient-text-white">{{ $heroData->title ?? 'Cards Parents' }}</span>
+                </h1>
+                
+                <p class="text-xl text-white/80 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                    {!! $heroData->subtitle ?? 'Transformasi sekolah jadi digital? Bisa! Dengan Cards Parents, kelola uang saku anak, tagihan sekolah, dan rapor jadi lebih cepat, rapi, dan terpantau!' !!}
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#features" class="group inline-flex items-center justify-center px-8 py-4 bg-[#f7931e] hover:bg-[#db7a00] text-white rounded-2xl font-semibold transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <i class="far fa-star mr-3 group-hover:scale-110 transition-transform"></i>
+                        Selengkapnya
+                    </a>
+                    <a href="#demo" class="group inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-2xl font-semibold transition-all duration-300 backdrop-blur-sm border border-white/20">
+                        <i class="fas fa-calendar-alt mr-3 group-hover:scale-110 transition-transform"></i>
+                        Jadwalkan Demo
+                    </a>
+                </div>
+            </div>
+
+            <div class="order-1 lg:order-2 flex justify-center">
+                <div class="relative w-[400px] h-[350px] animate-fade-in">
+                    <div class="absolute inset-0 bg-[#f7931e] rounded-full blur-3xl opacity-20 animate-glow"></div>
+                    
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[240px] bg-gradient-to-r from-[#f7931e] to-[#ff6b35] rounded-[3rem] shadow-2xl z-0 transform rotate-[-12deg] hover:rotate-[-8deg] transition-transform duration-500"></div>
+                    
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hover-lift">
+                        <img src="{{ asset('storage/' . ($heroData->cover_image ?? 'parents/hero/parents_hero.png')) }}" alt="Cards Parents Mockup" class="w-[280px] h-auto object-contain rounded-3xl shadow-2xl animate-float">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 w-full">
+            <svg viewBox="0 0 1440 120" class="w-full h-auto">
+                <path fill="#ffffff" fill-opacity="1" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section class="py-24 px-4 bg-white">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+            <div class="flex justify-center">
+                <div class="relative w-[400px] h-[350px]">
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[240px] bg-gradient-to-r from-[#007696] to-[#0289a4] rounded-[3rem] shadow-2xl z-0 transform rotate-[12deg]"></div>
+                    
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                        <img src="{{ asset('storage/' . ($aboutData->cover_image ?? 'parents/about/apaitu_parents.png')) }}" alt="Tentang Cards Parents" class="w-[280px] h-auto object-contain rounded-3xl shadow-2xl hover-lift">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8 text-center lg:text-left">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm font-medium text-[#007696]">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Solusi Modern
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-bold gradient-text leading-tight">
+                        {{ $aboutData->title ?? 'Apa Itu Cards Parents?' }}
+                    </h2>
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        {!! $aboutData->subtitle ?? 'Sistem ini menyajikan solusi modern yang menyederhanakan peran orang tua. Dengan menggabungkan berbagai fungsi seperti manajemen keuangan, pemantauan pendidikan, dan juga yang lainnya dalam satu dasbor yang mudah diakses.' !!}
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-[#007696] mb-2">Real-time</div>
+                        <div class="text-gray-600">Monitoring Anak</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-[#f7931e] mb-2">Praktis</div>
+                        <div class="text-gray-600">Pembayaran Digital</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-24 px-4 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 space-y-6">
+                <div class="inline-flex items-center px-4 py-2 bg-white rounded-full text-sm font-medium text-[#007696] shadow-sm">
+                    <i class="fas fa-star mr-2"></i>
+                    Fitur Unggulan
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold gradient-text">
+                    Fitur-fitur Cards Parents
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Semua yang Anda butuhkan untuk mendukung pendidikan anak dalam satu genggaman.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                @forelse($features ?? [] as $feature)
+                <article class="feature-card rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-gradient-to-r from-[#007696] to-[#f7931e] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        @if(isset($feature->gambar) && $feature->gambar)
+                        <img src="{{ asset('storage/' . $feature->gambar) }}" alt="Ikon {{ $feature->nama }}" class="w-8 h-8">
+                        @else
+                        <i class="fas fa-star text-white text-xl"></i>
+                        @endif
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">{{ $feature->nama }}</h3>
+                    <p class="text-gray-600 leading-relaxed">{{ $feature->deskripsi }}</p>
+                </article>
+                @empty
+                <article class="feature-card rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-gradient-to-r from-[#007696] to-[#f7931e] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-calendar-check text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Jadwal Otomatis</h3>
+                    <p class="text-gray-600 leading-relaxed">Lihat jadwal pelajaran dan kegiatan anak secara real-time langsung dari aplikasi.</p>
+                </article>
+                <article class="feature-card rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-gradient-to-r from-[#007696] to-[#f7931e] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-wallet text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Pembayaran Digital</h3>
+                    <p class="text-gray-600 leading-relaxed">Kelola pembayaran sekolah dan top-up uang saku anak dengan mudah dan aman.</p>
+                </article>
+                <article class="feature-card rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
+                    <div class="w-16 h-16 bg-gradient-to-r from-[#007696] to-[#f7931e] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-book-open text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Rapor Online</h3>
+                    <p class="text-gray-600 leading-relaxed">Pantau perkembangan akademik anak kapan saja melalui rapor digital yang detail.</p>
+                </article>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="w-full lg:w-1/2 flex justify-center order-2 lg:order-1">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#007696] to-[#f7931e] rounded-[4rem] blur-3xl opacity-20"></div>
+                        <div class="relative bg-gradient-to-br from-[#f7931e] to-[#ff6b35] p-8 rounded-[4rem] shadow-2xl max-w-md">
+                            <div class="bg-white rounded-[3rem] p-6 shadow-xl">
+                                <div class="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-[2rem] flex items-center justify-center">
+                                    <i class="fas fa-download text-6xl text-[#007696]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 text-center lg:text-left order-1 lg:order-2 space-y-8">
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm font-medium text-[#007696]">
+                            <i class="fas fa-mobile-alt mr-2"></i>
+                            Tersedia di Semua Platform
+                        </div>
+                        <h2 class="text-4xl lg:text-5xl font-bold gradient-text leading-tight">
+                            Download Aplikasi<br class="hidden lg:block">Cards Parents
+                        </h2>
+                        <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                            Mulai perjalanan digital Anda sebagai orang tua! Download aplikasi Cards Parents untuk pengalaman memantau pendidikan anak yang tak terlupakan.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#" class="group inline-flex items-center justify-center px-6 py-4 bg-black text-white rounded-2xl hover:bg-gray-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div class="flex items-center space-x-3">
+                                <i class="fab fa-apple text-2xl group-hover:scale-110 transition-transform"></i>
+                                <div class="text-left">
+                                    <div class="text-xs opacity-80">Download on the</div>
+                                    <div class="font-bold">App Store</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" class="group inline-flex items-center justify-center px-6 py-4 bg-green-600 text-white rounded-2xl hover:bg-green-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                            <div class="flex items-center space-x-3">
+                                <i class="fab fa-google-play text-2xl group-hover:scale-110 transition-transform"></i>
+                                <div class="text-left">
+                                    <div class="text-xs opacity-80">Get it on</div>
+                                    <div class="font-bold">Google Play</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gradient-to-br from-[#007696] to-[#0289a4] text-white">
+        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,138.7C384,139,480,181,576,208C672,235,768,245,864,224C960,203,1056,149,1152,122.7C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+        </svg>
+
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-r from-white to-gray-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-users text-[#007696] text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold">Cards Parents</span>
+                    </div>
+                    <p class="text-white/80 text-lg leading-relaxed max-w-md">
+                        Mendukung peran orang tua dalam pendidikan anak melalui teknologi yang mudah diakses dan informatif.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h4 class="text-xl font-semibold">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Home</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">About Us</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Features</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Pricing</a></li>
+                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-6">
+                    <h4 class="text-xl font-semibold">Contact Us</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope w-5"></i>
+                            <span class="text-white/80">info@cardsparents.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone w-5"></i>
+                            <span class="text-white/80">+62 123 456 7890</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt w-5 mt-1"></i>
+                            <span class="text-white/80">Jl. Pendidikan No. 123<br>Jakarta, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-    </div>
-</section>
-
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#007696" fill-opacity="1" d="M0,96L80,90.7C160,85,320,75,480,96C640,117,800,171,960,192C1120,213,1280,203,1360,197.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
-
-<!-- FOOTER SECTION -->
-<footer class="bg-[#007696]  text-white">
-  <!-- Footer Main Content -->
-  <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6  lg:px-8">
-    <div class="flex flex-col md:flex-row md:justify-between gap-10">
-      
-      <!-- Logo -->
-      <div class="md:w-1/4 flex justify-center md:justify-start">
-        <img src="../img/footer logo.png" alt="Cards Edu Logo" class="h-12 w-auto">
-        <!-- Ganti src dengan logo asli -->
-      </div>
-
-      <!-- Navigation Links -->
-      <div class="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-8 text-sm md:w-3/4 text-center md:text-left">
-        <!-- Homepage Links -->
-        <div>
-          <h4 class="font-semibold mb-2">Homepage</h4>
-          <ul class="space-y-1">
-            <li><a href="#" class="hover:underline">Advertisement</a></li>
-            <li><a href="#" class="hover:underline">Car</a></li>
-            <li><a href="#" class="hover:underline">Helpdesk</a></li>
-          </ul>
+        <div class="border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-white/80 text-center md:text-left">
+                    © 2025 Cards Parents by CAZH. All rights reserved.
+                </p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">Support</a>
+                </div>
+            </div>
         </div>
-        <!-- Contact Links -->
-        <div>
-          <h4 class="font-semibold mb-2">Contact</h4>
-          <ul class="space-y-1">
-            <li><a href="#" class="hover:underline">Booking</a></li>
-            <li><a href="#" class="hover:underline">FAQ</a></li>
-            <li><a href="#" class="hover:underline">Contact Us</a></li>
-          </ul>
-        </div>
-        <!-- Footer Links -->
-        <div>
-          <h4 class="font-semibold mb-2">Footer</h4>
-          <ul class="space-y-1">
-            <li><a href="#" class="hover:underline">Terms of Service</a></li>
-            <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-            <li><a href="#" class="hover:underline">About Us</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95');
+                navbar.classList.remove('glass');
+            } else {
+                navbar.classList.remove('bg-white/95');
+                navbar.classList.add('glass');
+            }
+        });
 
-  <!-- Divider -->
-  <hr class="border-t border-white opacity-20 my-4">
-
-  <!-- Footer Bottom Bar -->
-  <div class="bg-[#0289a4] text-sm">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-      <p>© 2025 CAZH. All rights reserved.</p>
-      <div class="flex gap-4 text-white text-lg">
-        <a href="#" aria-label="Facebook" class="hover:text-gray-300"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="Email" class="hover:text-gray-300"><i class="fas fa-envelope"></i></a>
-        <a href="#" aria-label="LinkedIn" class="hover:text-gray-300"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" aria-label="YouTube" class="hover:text-gray-300"><i class="fab fa-youtube"></i></a>
-      </div>
-    </div>
-  </div>
-</footer>
-
-
-
-
-
-<script>
-
-// fungsi dropdown 
+        // Dropdown functions
         function toggleDropdown() {
-    const dropdown = document.getElementById('product-dropdown');
-    dropdown.classList.toggle('hidden');
-    }
+            const dropdown = document.getElementById('product-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
 
+        function toggleMobileDropdown() {
+            const dropdown = document.getElementById('mobile-product-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
 
-    function toggleMobileDropdown() {
-        const dropdown = document.getElementById('mobile-product-dropdown');
-        dropdown.classList.toggle('hidden');
-    }
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById("mobile-menu");
+            menu.classList.toggle("hidden");
+        }
 
-    // tombol Humburger (navbar)
-    function toggleMenu() {
-    const menu = document.getElementById("mobile-menu");
-    menu.classList.toggle("hidden"); 
-    }
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdownWrapper = document.getElementById('product-dropdown-wrapper');
+            const dropdown = document.getElementById('product-dropdown');
+            if (dropdown && !dropdownWrapper.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
 
-    const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1.2,          
-    spaceBetween: 20,          
-    centeredSlides: true,       
-    loop: true,                
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    breakpoints: {
-        768: {
-        slidesPerView: 2.5,   
-        },
-        1024: {
-        slidesPerView: 3.2,     
-        },
-    },
-
-     pagination: {
-        el: ".swiper-pagination",
-        clickable: true,        
-    },
-    });
-
-
-    
-</script>
-    
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
-
 </html>
