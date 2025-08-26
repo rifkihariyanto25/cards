@@ -5,7 +5,7 @@ namespace App\Models\Parents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ParentsFeatures extends Model
+class ParentsFeature extends Model
 {
     use HasFactory;
 
