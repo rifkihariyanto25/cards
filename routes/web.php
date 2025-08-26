@@ -46,6 +46,7 @@ use App\Http\Controllers\User\ParentsController;
 use App\Http\Controllers\User\CanteenController;
 use App\Http\Controllers\User\SchoolController;
 use App\Http\Controllers\User\FlexycazhController;
+use App\Http\Controllers\User\ContactController;
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -82,7 +83,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/mitra/{mitra}/edit', [MitraController::class, 'editHomepageMitra'])->name('mitra.edit');
             Route::put('/mitra/{mitra}', [MitraController::class, 'updateHomepageMitra'])->name('mitra.update');
             Route::delete('/mitra/{mitra}', [MitraController::class, 'deleteHomepageMitra'])->name('mitra.delete');
-            
+
             // Product Section
             Route::get('/product', [ProductController::class, 'homepageProduct'])->name('product');
             Route::get('/product/create', [ProductController::class, 'createHomepageProduct'])->name('product.create');
@@ -214,12 +215,19 @@ Route::get('/admin', function () {
     return redirect()->route('admin.dashboard');
 });
 
-// Public Routes (User-facing)
-Route::get('/', [HomepageController::class, 'index'])->name('homepage');
-Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage.alternate');
-Route::get('/edu', [EduController::class, 'index'])->name('edu');
-Route::get('/parents', [ParentsController::class, 'index'])->name('parents');
-Route::get('/canteen', [CanteenController::class, 'index'])->name('canteen');
-Route::get('/school', [SchoolController::class, 'index'])->name('school');
-Route::get('/flexy', [FlexycazhController::class, 'index'])->name('flexy');
-Route::post('/flexy/pengajuan', [FlexycazhController::class, 'storePengajuan'])->name('flexy.pengajuan');
+// routes/web.php (Sesudah - Direkomendasikan)
+
+Route::name('user.')->group(function () {
+    Route::get('/', [HomepageController::class, 'index'])->name('homepage'); // Otomatis menjadi 'user.homepage'
+    Route::get('/edu', [EduController::class, 'index'])->name('edu');       // Otomatis menjadi 'user.edu'
+    Route::get('/parents', [ParentsController::class, 'index'])->name('parents'); // Otomatis menjadi 'user.parents'
+    Route::get('/canteen', [CanteenController::class, 'index'])->name('canteen'); // Otomatis menjadi 'user.canteen'
+    Route::get('/school', [SchoolController::class, 'index'])->name('school');   // Otomatis menjadi 'user.school'
+    Route::get('/flexy', [FlexycazhController::class, 'index'])->name('flexy');     // Otomatis menjadi 'user.flexy'
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact'); // Otomatis menjadi 'user.contact'
+
+    Route::post('/flexy/pengajuan', [FlexycazhController::class, 'storePengajuan'])->name('flexy.pengajuan'); // Otomatis menjadi 'user.flexy.pengajuan'
+});
+
+// Anda bisa menghapus rute /homepage karena sudah di-handle oleh /
+// Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage.alternate');

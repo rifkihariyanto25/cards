@@ -129,64 +129,8 @@
 </head>
 <body class="bg-white overflow-x-hidden">
 
-    <!-- Navigation -->
-    <nav id="navbar" class="fixed top-4 left-4 right-4 z-50 glass rounded-2xl px-6 py-3 transition-all duration-300">
-        <div class="flex items-center justify-between max-w-7xl mx-auto">
-            <!-- Logo -->
-            <div class="flex items-center space-x-3">
-                <img src="{{ asset('storage/assets/logo cards.png') }}" alt="Logo" class="h-8 w-auto">
-                <span class="text-xl font-bold text-gray-800"></span>
-            </div>
-
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="{{ route('homepage') }}" class="text-gray-700 hover:text-cyan-600 transition-colors font-medium">Home</a>
-                <a href="{{ route('flexy') }}" class="text-gray-700 hover:text-cyan-600 transition-colors font-medium">Flexy</a>
-                
-                <!-- Products Dropdown -->
-                <div class="relative group">
-                    <button class="flex items-center text-gray-700 hover:text-cyan-600 transition-colors font-medium">
-                        Products
-                        <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
-                    </button>
-                    <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 glass rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                        <div class="p-2">
-                            <a href="{{ route('edu') }}" class="block px-4 py-3 text-gray-700 hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors">Edu</a>
-                            <a href="{{ route('parents') }}" class="block px-4 py-3 text-gray-700 hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors">Parents</a>
-                            <a href="{{ route('school') }}" class="block px-4 py-3 text-gray-700 hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors">School</a>
-                            <a href="{{ route('canteen') }}" class="block px-4 py-3 text-gray-700 hover:text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors">Canteen</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <a href="#about" class="text-gray-700 hover:text-cyan-600 transition-colors font-medium">About</a>
-                <a href="#contact" class="text-gray-700 hover:text-cyan-600 transition-colors font-medium">Contact</a>
-            </div>
-
-            <!-- Mobile menu button -->
-            <button class="md:hidden p-2" onclick="toggleMobileMenu()">
-                <div class="w-6 h-6 flex flex-col justify-center items-center space-y-1">
-                    <div class="h-0.5 w-6 bg-gray-700 transition-all duration-300" id="line1"></div>
-                    <div class="h-0.5 w-6 bg-gray-700 transition-all duration-300" id="line2"></div>
-                    <div class="h-0.5 w-6 bg-gray-700 transition-all duration-300" id="line3"></div>
-                </div>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden mt-4 p-4 glass rounded-xl hidden">
-            <div class="space-y-4">
-                <a href="{{ route('homepage') }}" class="block text-gray-700 hover:text-cyan-600 transition-colors">Home</a>
-                <a href="{{ route('flexy') }}" class="block text-gray-700 hover:text-cyan-600 transition-colors">Flexy</a>
-                <a href="{{ route('edu') }}" class="block text-gray-700 hover:text-cyan-600 transition-colors pl-4">- Edu</a>
-                <a href="{{ route('parents') }}" class="block text-gray-700 hover:text-cyan-600 transition-colors pl-4">- Parents</a>
-                <a href="{{ route('school') }}" class="block text-gray-700 hover:text-cyan-600 transition-colors pl-4">- School</a>
-                <a href="{{ route('canteen') }}" class="block text-gray-700 hover:text-cyan-600 transition-colors pl-4">- Canteen</a>
-                <a href="#about" class="block text-gray-700 hover:text-cyan-600 transition-colors">About</a>
-                <a href="#contact" class="block text-gray-700 hover:text-cyan-600 transition-colors">Contact</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Include Navbar Component -->
+    <x-user.navbar />
 
     <!-- Hero Section -->
     <section id="home" class="pt-32 pb-20 px-4 min-h-screen flex items-center relative overflow-hidden">
@@ -491,7 +435,7 @@
                     <div class="gradient-card rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
                         <button class="w-full p-6 text-left flex justify-between items-center" onclick="toggleAccordion('faq4')">
                             <h3 class="font-bold text-gray-900 text-lg pr-4">Sekolah saya udah pakai sistem lain, bisa pindah ke CARDS?</h3>
-                            <i id="faq2-icon" class="fas fa-plus text-cyan-600 transition-transform duration-300"></i>
+                            <i id="faq4-icon" class="fas fa-plus text-cyan-600 transition-transform duration-300"></i>
                         </button>
                         <div id="faq4" class="accordion-content">
                             <div class="px-6 pb-6 border-t border-gray-100 pt-4">
@@ -504,62 +448,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact" class="bg-gray-900 text-white">
-        <div class="container mx-auto max-w-7xl px-4 py-16">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-                <!-- Company Info -->
-                <div class="col-span-2 md:col-span-1">
-                    <div class="flex items-center space-x-3 mb-6">
-                        <img src="{{ asset('storage/assets/logo cards.png') }}" alt="Logo" class="h-8 w-auto filter brightness-0 invert">
-                        <span class="text-2xl font-bold">CARDS</span>
-                    </div>
-                    <p class="text-gray-400 mb-6 leading-relaxed">Transforming education through innovative digital solutions.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-cyan-600 transition-colors"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-cyan-600 transition-colors"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-cyan-600 transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-cyan-600 transition-colors"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-
-                <!-- Homepage Links -->
-                <div>
-                    <h4 class="font-bold text-lg mb-6 text-orange-400">Homepage</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Advertisement</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Car</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Helpdesk</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Links -->
-                <div>
-                    <h4 class="font-bold text-lg mb-6 text-orange-400">Contact</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Booking</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                    </ul>
-                </div>
-
-                <!-- Legal Links -->
-                <div>
-                    <h4 class="font-bold text-lg mb-6 text-orange-400">Legal</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Bottom Bar -->
-            <div class="border-t border-gray-800 pt-8 text-center md:text-left">
-                <p class="text-gray-400 text-sm">© {{ date('Y') }} CAZH. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Include Footer Component -->
+    <x-user.footer />
 
     <!-- Scripts -->
     <script>
@@ -622,26 +512,6 @@
                 observer.observe(section);
             });
         });
-
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const line1 = document.getElementById('line1');
-            const line2 = document.getElementById('line2');
-            const line3 = document.getElementById('line3');
-            
-            menu.classList.toggle('hidden');
-            
-            if (menu.classList.contains('hidden')) {
-                line1.style.transform = 'rotate(0) translate(0, 0)';
-                line2.style.opacity = '1';
-                line3.style.transform = 'rotate(0) translate(0, 0)';
-            } else {
-                line1.style.transform = 'rotate(45deg) translate(4px, 4px)';
-                line2.style.opacity = '0';
-                line3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
-            }
-        }
 
         // Enhanced accordion functionality
         function toggleAccordion(id) {

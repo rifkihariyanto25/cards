@@ -3,445 +3,828 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flexy</title>
+    <title>FlexyCazh - Solusi Pembiayaan Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-slideIn { animation: slideIn 0.6s ease-out forwards; }
+        
+        /* Glass morphism effect */
+        .glass {
+            backdrop-filter: blur(16px) saturate(180%);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+        
+        /* Gradient backgrounds */
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-cyan {
+            background: linear-gradient(135deg, #00718F 0%, #60CEC9 100%);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #00718F; border-radius: 4px; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50">
     <!-- Navigation -->
-  <nav 
-        id="navbar"
-        class="fixed top-4 left-4 right-4 z-[200] bg-white/95 backdrop-blur-md shadow-lg px-6 py-3 rounded-full transition-all duration-300">
-  <!-- Isi navbar -->
-    <div class="flex items-center justify-between">
-        <!-- Logo -->
-        <div class="flex items-center space-x-2">
-        <img src="{{ asset('logoCards.png') }}" alt="Logo" class="h-5 w-8">
-        <span class="text-xl font-semibold text-cyan-700"></span>
+    <!-- Include Navbar Component -->
+    <x-user.navbar />
+
+    <section id="home" class="relative min-h-screen flex items-center justify-center gradient-cyan overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
         </div>
 
-        <!-- Hamburger Button (Mobile) -->
-        <button class="md:hidden focus:outline-none" onclick="toggleMenu()">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-            d="M4 6h16M4 12h16M4 18h16" />
+        <div class="relative z-10 max-w-7xl mx-auto px-6 py-32">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="text-white space-y-8 animate-fadeInUp">
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium">
+                            <i class="fas fa-star text-yellow-300 mr-2"></i>
+                            Trusted Financial Solution
+                        </div>
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                            FlexyCazh
+                            <span class="block text-3xl lg:text-4xl font-normal text-white/90 mt-4">
+                                Solusi Pembiayaan Digital untuk Sekolah
+                            </span>
+                        </h1>
+                        <p class="text-xl text-white/90 leading-relaxed max-w-2xl">
+                            Dapatkan pendanaan cepat untuk kebutuhan operasional sekolah dengan bunga kompetitif dan proses yang mudah melalui platform terintegrasi CARDS.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="inline-flex items-center justify-center bg-white text-cyan-600 px-8 py-4 rounded-2xl font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                            <i class="fas fa-rocket mr-3"></i>
+                            Mulai Sekarang
+                        </a>
+                        <a href="#features" class="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-cyan-600 transition-all duration-300">
+                            <i class="fas fa-play mr-3"></i>
+                            Pelajari Lebih Lanjut
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-8 pt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">500+</div>
+                            <div class="text-white/80 text-sm">Partner Aktif</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">24 Jam</div>
+                            <div class="text-white/80 text-sm">Pencairan Dana</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold">99.9%</div>
+                            <div class="text-white/80 text-sm">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative animate-fadeInUp" style="animation-delay: 0.3s;">
+                    <div class="relative">
+                        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8 border border-white/30 shadow-2xl">
+                            <div class="bg-white rounded-2xl p-6 shadow-xl">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-coins text-white text-sm"></i>
+                                        </div>
+                                        <span class="font-bold text-gray-800">FlexyCazh</span>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                                        <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <div class="bg-gradient-to-r from-cyan-50 to-blue-50 p-4 rounded-xl">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-gray-600 text-sm">Available Credit</span>
+                                            <i class="fas fa-arrow-up text-green-500"></i>
+                                        </div>
+                                        <div class="text-2xl font-bold text-gray-800">Rp 500,000,000</div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div class="bg-gray-50 p-3 rounded-lg text-center">
+                                            <div class="text-lg font-semibold text-gray-800">3-12</div>
+                                            <div class="text-xs text-gray-600">Bulan Tenor</div>
+                                        </div>
+                                        <div class="bg-gray-50 p-3 rounded-lg text-center">
+                                            <div class="text-lg font-semibold text-gray-800">0.8%</div>
+                                            <div class="text-xs text-gray-600">Bunga/Bulan</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -top-6 -right-6 w-16 h-16 bg-yellow-400 rounded-2xl flex items-center justify-center shadow-xl animate-float">
+                            <i class="fas fa-bolt text-white text-xl"></i>
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 w-16 h-16 bg-green-400 rounded-2xl flex items-center justify-center shadow-xl animate-float" style="animation-delay: -2s;">
+                            <i class="fas fa-check text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center bg-cyan-50 text-cyan-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i class="fas fa-gem mr-2"></i>
+                    Premium Features
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                    Fitur Unggulan <span class="text-cyan-600">FlexyCazh</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Solusi pembiayaan yang dirancang khusus untuk memenuhi kebutuhan finansial sekolah dan institusi pendidikan
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Pendanaan Instan</h3>
+                    <p class="text-gray-600 leading-relaxed">Proses pengajuan yang simpel dengan pencairan dana dalam 24 jam setelah persetujuan.</p>
+                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-percentage text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Bunga Kompetitif</h3>
+                    <p class="text-gray-600 leading-relaxed">Suku bunga mulai dari 0.8% per bulan dengan perhitungan yang transparan dan kompetitif.</p>
+                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Tenor Fleksibel</h3>
+                    <p class="text-gray-600 leading-relaxed">Pilih tenor pembayaran dari 3-12 bulan sesuai dengan kemampuan cash flow sekolah.</p>
+                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-link text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Integrasi Seamless</h3>
+                    <p class="text-gray-600 leading-relaxed">Terintegrasi langsung dengan sistem CARDS untuk monitoring dan pelaporan yang real-time.</p>
+                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Keamanan Terjamin</h3>
+                    <p class="text-gray-600 leading-relaxed">Sistem keamanan berlapis dengan enkripsi end-to-end untuk melindungi data finansial.</p>
+                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+
+                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Analytics Dashboard</h3>
+                    <p class="text-gray-600 leading-relaxed">Dashboard komprehensif untuk tracking status pengajuan, pembayaran, dan laporan keuangan.</p>
+                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-32 gradient-cyan">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
+                    <i class="fas fa-route mr-2"></i>
+                    Simple Process
+                </div>
+                <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+                    Cara Mudah Mendapatkan <span class="text-yellow-300">FlexyCazh</span>
+                </h2>
+                <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                    Tiga langkah mudah untuk mendapatkan pembiayaan yang Anda butuhkan
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="relative group">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl font-bold text-cyan-600">1</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Menjadi Partner CARDS</h3>
+                            <p class="text-white/80 leading-relaxed">
+                                Daftarkan sekolah Anda sebagai partner resmi CARDS untuk mengakses berbagai layanan digital pendidikan.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-white/30"></div>
+                </div>
+
+                <div class="relative group">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl font-bold text-cyan-600">2</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Bangun Track Record</h3>
+                            <p class="text-white/80 leading-relaxed">
+                                Lakukan transaksi minimal 3 bulan untuk membangun reputasi dan riwayat keuangan yang baik.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-white/30"></div>
+                </div>
+
+                <div class="relative group">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <span class="text-3xl font-bold text-cyan-600">3</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">Ajukan FlexyCazh</h3>
+                            <p class="text-white/80 leading-relaxed">
+                                Ajukan permohonan pembiayaan melalui form online dan nikmati kemudahan akses dana.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="bg-white rounded-3xl shadow-2xl p-10 border border-gray-100">
+                        <div class="text-center mb-8">
+                            <div class="inline-flex items-center bg-cyan-50 text-cyan-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Quick Application
+                            </div>
+                            <h2 class="text-3xl font-bold text-gray-900 mb-3">
+                                Ajukan <span class="text-cyan-600">FlexyCazh</span>
+                            </h2>
+                            <p class="text-gray-600">Lengkapi formulir ini dan tim kami akan menghubungi Anda dalam 24 jam</p>
+                        </div>
+
+                        <form class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-semibold text-gray-700">
+                                        <i class="fas fa-school mr-2 text-cyan-500"></i>Nama Partner
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        name="nama_partner" 
+                                        required 
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
+                                        placeholder="Contoh: SD Negeri 1 Jakarta"
+                                    />
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-semibold text-gray-700">
+                                        <i class="fas fa-building mr-2 text-cyan-500"></i>Jenis Partner
+                                    </label>
+                                    <select 
+                                        name="jenis_partner" 
+                                        required
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
+                                    >
+                                        <option value="">Pilih Jenis Partner</option>
+                                        <option value="Sekolah">Sekolah</option>
+                                        <option value="Klinik">Klinik</option>
+                                        <option value="Perusahaan">Perusahaan</option>
+                                    </select>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-semibold text-gray-700">
+                                        <i class="fas fa-user mr-2 text-cyan-500"></i>Nama PIC
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        name="nama_pic" 
+                                        required
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
+                                        placeholder="Nama Penanggung Jawab"
+                                    />
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-semibold text-gray-700">
+                                        <i class="fas fa-phone mr-2 text-cyan-500"></i>Nomor HP PIC
+                                    </label>
+                                    <input 
+                                        type="tel" 
+                                        name="no_hp_pic" required
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
+                                        placeholder="08xxxxxxxxxx"
+                                        pattern="[0-9]{10,13}"
+                                    />
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-semibold text-gray-700">
+                                        <i class="fas fa-clipboard-list mr-2 text-cyan-500"></i>Kebutuhan
+                                    </label>
+                                    <select 
+                                        name="kebutuhan" 
+                                        required
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
+                                    >
+                                        <option value="">Pilih Kebutuhan</option>
+                                        <option value="Kebutuhan Pendanaan">Kebutuhan Pendanaan</option>
+                                        <option value="Modal Kerja">Modal Kerja</option>
+                                        <option value="Operasional Sekolah">Operasional Sekolah</option>
+                                        <option value="Renovasi Fasilitas">Renovasi Fasilitas</option>
+                                    </select>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-semibold text-gray-700">
+                                        <i class="fas fa-money-bill-wave mr-2 text-cyan-500"></i>Nominal (Rp)
+                                    </label>
+                                    <input 
+                                        type="text" name="kebutuhan_pendanaan" required
+                                        min="1000000"
+                                        max="1000000000"
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
+                                        placeholder="50000000"
+                                        onkeyup="formatCurrency(this); calculateInstallment()"
+                                    />
+                                    <p class="text-xs text-gray-500">Minimum Rp 1.000.000 - Maximum Rp 1.000.000.000</p>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-sm font-semibold text-gray-700">
+                                        <i class="fas fa-calendar-check mr-2 text-cyan-500"></i>Tenor
+                                    </label>
+                                    <select 
+                                        name="tenor" 
+                                        required
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
+                                        onchange="calculateInstallment()"
+                                    >
+                                        <option value="">Pilih Tenor</option>
+                                        <option value="3 Bulan">3 Bulan</option>
+                                        <option value="6 Bulan">6 Bulan</option>
+                                        <option value="12 Bulan">12 Bulan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="estimation-card" class="hidden bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-6 border border-cyan-100">
+                                <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-calculator mr-2 text-cyan-500"></i>
+                                    Estimasi Cicilan
+                                </h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-sm text-gray-600">Cicilan per Bulan</p>
+                                        <p id="monthly-payment" class="text-2xl font-bold text-cyan-600">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-600">Total Bunga</p>
+                                        <p id="total-interest" class="text-lg font-semibold text-gray-800">-</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-3">*Estimasi berdasarkan suku bunga 0.8% per bulan</p>
+                            </div>
+
+                            <div class="pt-4">
+                                <button 
+                                    type="submit"
+                                    class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 rounded-2xl font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center"
+                                    id="submit-btn"
+                                >
+                                    <i class="fas fa-paper-plane mr-3"></i>
+                                    <span>Kirim Pengajuan</span>
+                                </button>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="text-sm text-gray-500">
+                                    Dengan mengirim formulir ini, Anda menyetujui 
+                                    <a href="#" class="text-cyan-600 hover:underline">Syarat & Ketentuan</a> 
+                                    dan 
+                                    <a href="#" class="text-cyan-600 hover:underline">Kebijakan Privasi</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-cyan-100 to-blue-100 rounded-3xl p-8 text-center">
+                            <div class="w-64 h-64 mx-auto bg-white rounded-3xl shadow-2xl flex items-center justify-center mb-8">
+                                <div class="text-center">
+                                    <i class="fas fa-handshake text-6xl text-cyan-500 mb-4"></i>
+                                    <h3 class="text-xl font-bold text-gray-800">Partnership</h3>
+                                    <p class="text-gray-600">Trusted Financial Solution</p>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-center space-x-3 bg-white/50 rounded-full px-6 py-3">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span class="font-medium text-gray-700">Proses Cepat 24 Jam</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-3 bg-white/50 rounded-full px-6 py-3">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span class="font-medium text-gray-700">Bunga Kompetitif 0.8%</span>
+                                </div>
+                                <div class="flex items-center justify-center space-x-3 bg-white/50 rounded-full px-6 py-3">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span class="font-medium text-gray-700">Tanpa Jaminan Fisik</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -top-4 -left-4 w-16 h-16 bg-yellow-400 rounded-2xl flex items-center justify-center shadow-xl animate-float">
+                            <i class="fas fa-star text-white text-xl"></i>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-green-400 rounded-2xl flex items-center justify-center shadow-xl animate-float" style="animation-delay: -2s;">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="success-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full mx-4 text-center transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-check text-3xl text-green-500"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">Pengajuan Berhasil!</h3>
+            <p class="text-gray-600 mb-8">Terima kasih atas pengajuan Anda. Tim kami akan menghubungi Anda dalam 24 jam ke depan.</p>
+            <button onclick="closeModal()" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-2xl hover:shadow-lg transition-all duration-300">
+                Tutup
+            </button>
+        </div>
+    </div>
+
+    <footer class="bg-gradient-to-br from-[#007696] to-[#0289a4] text-white">
+        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#ffffff" fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,138.7C384,139,480,181,576,208C672,235,768,245,864,224C960,203,1056,149,1152,122.7C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
         </svg>
-        </button>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-8 items-center font-medium">
-        <a href="{{ route('homepage') }}" class="hover:text-cyan-700 transition-colors">Home</a>
-         <a href="{{ route('flexy') }}" class="hover:text-cyan-700 transition-colors">Flexy</a>
-       
-        <!-- Wrapper Produk -->
-        <div class="relative" id="product-dropdown-wrapper">
-        <!-- Tombol Produk -->
-        <button onclick="toggleDropdown()" class="flex items-center hover:text-cyan-700 focus:outline-none transition-colors">
-            Products
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-        </button>
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-r from-white to-gray-100 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-money-bill-wave text-[#007696] text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold">FlexyCazh</span>
+                    </div>
+                    <p class="text-white/80 text-lg leading-relaxed max-w-md">
+                        Solusi pembiayaan fleksibel untuk sekolah dan bisnis. Dapatkan modal kerja dan pembiayaan peralatan dengan proses yang cepat dan mudah.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
 
-        <!-- Dropdown Menu -->
-        <div id="product-dropdown" class="absolute hidden bg-white shadow-lg rounded mt-2 py-2 w-44 z-[110]">
-            <a href="{{ route('edu') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Edu</a>
-            <a href="{{ route('parents') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Parents</a>
-            <a href="{{ route('school') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">School</a>
-            <a href="{{ route('canteen') }}" class="block px-4 py-2 hover:bg-gray-100 transition-colors">Canteen</a>
-        </div>
-        </div>
-        <a href="{{ route('homepage') }}#about" class="hover:text-cyan-700 transition-colors">About</a>
-        <a href="{{ route('homepage') }}#contact" class="hover:text-cyan-700 transition-colors">Contact</a>
-        </div>
-    </div>
-    </nav>
+                <div class="space-y-6">
+                    <h4 class="text-xl font-semibold">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Home</a></li>
+                        <li><a href="#features" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Features</a></li>
+                        <li><a href="#process" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Process</a></li>
+                        <li><a href="#contact" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Apply Now</a></li>
+                    </ul>
+                </div>
 
- <!-- MOBILE MENU -->
-    <div id="mobile-menu" class="md:hidden hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg mx-4 rounded-lg z-[90] py-3">
-      <div class="flex flex-col space-y-4 px-6 font-medium">
-        <a href="{{ route('homepage') }}" class="text-cyan-700 hover:text-cyan-900 transition-colors">Home</a>
-        <a href="{{ route('flexy') }}" class="text-cyan-700 hover:text-cyan-900 transition-colors">Flexy</a>
-
-        <!-- Products dropdown -->
-        <div class="relative">
-            <button onclick="toggleMobileDropdown()" class="flex items-center text-cyan-700 hover:text-cyan-900 transition-colors">
-            Products
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-            </button>
-
-            <!-- DROPDOWN yang menutupi elemen lain -->
-            <div id="mobile-product-dropdown" class="hidden mt-2 bg-white shadow rounded w-full text-left z-[100]">
-            <a href="{{ route('edu') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Edu</a>
-            <a href="{{ route('parents') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Parents</a>
-            <a href="{{ route('school') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">School</a>
-            <a href="{{ route('canteen') }}" class="block px-4 py-2 hover:bg-gray-100 text-cyan-700 transition-colors">Canteen</a>
+                <div class="space-y-6">
+                    <h4 class="text-xl font-semibold">Contact Us</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope w-5"></i>
+                            <span class="text-white/80">info@flexycazh.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone w-5"></i>
+                            <span class="text-white/80">+62 21 1234 5678</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt w-5 mt-1"></i>
+                            <span class="text-white/80">Jakarta, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <a href="{{ route('homepage') }}#about" class="text-cyan-700 hover:text-cyan-900 transition-colors">About</a>
-        <a href="{{ route('homepage') }}#contact" class="text-cyan-700 hover:text-cyan-900 transition-colors">Contact</a>
-      </div>
-    </div>
 
-
-<!-- Hero Section -->
-<section class="relative bg-[#007696] pt-0 pb-32 px-6 sm:px-10 lg:px-20 overflow-hidden">
-  <!-- Konten -->
-  <div class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-10 mt-[180px]">
-    <!-- Konten Kiri -->
-    <div class="text-white">
-      <h2 class="text-2xl sm:text-3xl font-bold leading-snug">
-        FlexyCazh: Solusi Pembiayaan Digital untuk Arus Kas Sekolah
-      </h2>
-      <p class="text-base sm:text-lg text-white/90 mt-4 leading-relaxed">
-        Dapatkan pendanaan cepat untuk tagihan dan kebutuhan operasional sekolah, tanpa beban bunga tinggi, melalui platform fleksibel yang terintegrasi dengan sistem CARDS
-      </p>
-    </div>
-
-    <!-- Gambar Kanan -->
-    <div class="relative">
-      <div class="rounded-xl overflow-hidden border-4 border-[#f7931e] shadow-lg w-full max-w-md mx-auto">
-        <img
-          src="{{ asset('logoFlexy.png') }}" 
-          alt="FlexyCazh"
-          class="w-full h-auto object-cover"
-        />
-      </div>
-
-      <!-- Ornamen Kotak -->
-      <div class="absolute top-[-20px] right-[-20px] w-6 h-6 sm:w-8 sm:h-8 border-4 border-[#f7931e] rotate-45"></div>
-      <div class="absolute bottom-[-20px] left-[-20px] w-6 h-6 sm:w-8 sm:h-8 border-4 border-[#f7931e] rotate-45"></div>
-      <div class="absolute bottom-[10%] right-[-10px] w-5 h-5 border-2 border-[#00bcd4] rotate-45 hidden sm:block"></div>
-    </div>
-  </div>
-
-  <!-- SVG Gelombang -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" class="absolute bottom-0 left-0 w-full">
-    <path fill="#0082A5" fill-opacity="1" d="M0,96L80,90.7C160,85,320,75,480,96C640,117,800,171,960,192C1120,213,1280,203,1360,197.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-  </svg>
-</section>
-
-
- <!-- SECTION FITUR -->
-<section class="bg-white py-12 px-4 md:px-8 lg:px-16">
-  <div class="text-center mb-10">
-    <h2 class="text-2xl md:text-3xl font-semibold text-gray-900">
-      Fitur Unggulan <span class="text-[#00718F]">FlexyCazh</span>
-    </h2>
-    <p class="mt-2 text-gray-600">Pembiayaan Cerdas yang Dirancang untuk Kebutuhan Bisnis Anda</p>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-    <!-- Item -->
-    <div class="bg-cyan-50 rounded-xl p-6 text-center shadow-sm">
-      <div class="mb-4 flex items-center justify-center">
-        <div class="w-12 h-12 rounded-full bg-[#00718F] text-white flex items-center justify-center text-xl">
-          💸
-        </div>
-      </div>
-      <h3 class="text-lg font-semibold text-sky-800 mb-2">Pendanaan Instan</h3>
-      <p class="text-sm text-gray-700">Ajukan pendanaan faktur atau tagihan dengan mudah, proses cepat, dana langsung cair</p>
-    </div>
-
-    <!-- Item -->
-    <div class="bg-cyan-50 rounded-xl p-6 text-center shadow-sm">
-      <div class="mb-4 flex items-center justify-center">
-        <div class="w-12 h-12 rounded-full bg-[#00718F] text-white flex items-center justify-center text-xl">
-          📉
-        </div>
-      </div>
-      <h3 class="text-lg font-semibold text-sky-800 mb-2">Bunga Bersahabat</h3>
-      <p class="text-sm text-gray-700">Skema suku bunga kompetitif yang ringan untuk membantu arus kas tanpa tekanan keuangan</p>
-    </div>
-
-    <!-- Item -->
-    <div class="bg-cyan-50 rounded-xl p-6 text-center shadow-sm">
-      <div class="mb-4 flex items-center justify-center">
-        <div class="w-12 h-12 rounded-full bg-[#00718F] text-white flex items-center justify-center text-xl">
-          🗓️
-        </div>
-      </div>
-      <h3 class="text-lg font-semibold text-sky-800 mb-2">Tenor Fleksibel</h3>
-      <p class="text-sm text-gray-700">Pilih periode cicilan sesuai kebutuhan, dari jangka pendek hingga menengah</p>
-    </div>
-
-    <!-- Item -->
-    <div class="bg-cyan-50 rounded-xl p-6 text-center shadow-sm">
-      <div class="mb-4 flex items-center justify-center">
-        <div class="w-12 h-12 rounded-full bg-[#00718F] text-white flex items-center justify-center text-xl">
-          🔗
-        </div>
-      </div>
-      <h3 class="text-lg font-semibold text-sky-800 mb-2">Integrasi Mulus</h3>
-      <p class="text-sm text-gray-700">Terhubung langsung dengan dashboard keuangan CARDS, memudahkan monitoring dan laporan</p>
-    </div>
-
-    <!-- Item -->
-    <div class="bg-cyan-50 rounded-xl p-6 text-center shadow-sm">
-      <div class="mb-4 flex items-center justify-center">
-        <div class="w-12 h-12 rounded-full bg-[#00718F] text-white flex items-center justify-center text-xl">
-          🔍
-        </div>
-      </div>
-      <h3 class="text-lg font-semibold text-sky-800 mb-2">Transparansi Total</h3>
-      <p class="text-sm text-gray-700">Semua transaksi dan status pendanaan tercatat jelas dalam satu platform</p>
-    </div>
-   
-    
-</section>
-
-
-<!-- SECTION LANGKAH LANGKAH -->
-
-<section class="bg-[#025968] text-white py-16 px-4 md:px-10 lg:px-20">
-  <div class="text-center mb-12">
-    <h2 class="text-2xl md:text-3xl font-semibold relative inline-block">
-      <span class="before:absolute before:left-[-60px] before:top-1/2 before:w-10 before:h-[2px] before:bg-white before:translate-y-[-50%] after:absolute after:right-[-60px] after:top-1/2 after:w-10 after:h-[2px] after:bg-white after:translate-y-[-50%]">
-        Cara Mudah Mendapatkan <span class="text-[#73E2FF] font-bold">Flexycazh</span>
-      </span>
-    </h2>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-    <!-- Step 1 -->
-    <div class="text-center sm:text-left">
-      <div class="text-5xl font-extrabold text-white/80 mb-4">#1</div>
-      <h3 class="text-lg font-bold text-[#73E2FF] mb-2">Mulai dengan Menjadi Partner Resmi CARDS</h3>
-      <p class="text-white/80 text-sm leading-relaxed">
-        Menyediakan layanan paket pemeriksaan kesehatan berkala (Medical Check Up) yang komprehensif dan akurat dengan didukung oleh dokter dan tenaga medis yang kompeten serta layanan penunjang medis yang lengkap.
-      </p>
-    </div>
-
-    <!-- Step 2 -->
-    <div class="text-center sm:text-left">
-      <div class="text-5xl font-extrabold text-white/80 mb-4">#2</div>
-      <h3 class="text-lg font-bold text-[#73E2FF] mb-2">Bangun Reputasi Lewat Transaksi Selama 3 Bulan</h3>
-      <p class="text-white/80 text-sm leading-relaxed">
-        Untuk memastikan kredibilitas dan kelayakan pengajuan, Flexycazh hanya tersedia bagi partner yang telah aktif melakukan transaksi online minimal selama 3 bulan. Catatan transaksi ini akan menjadi acuan dalam menentukan limit pembiayaan Anda. Semakin konsisten Anda bertransaksi, semakin besar peluang mendapatkan limit Flexycazh yang optimal.
-      </p>
-    </div>
-
-    <!-- Step 3 -->
-    <div class="text-center sm:text-left">
-      <div class="text-5xl font-extrabold text-white/80 mb-4">#3</div>
-      <h3 class="text-lg font-bold text-[#73E2FF] mb-2">Ajukan Flexycazh, Nikmati Kemudahan Pembiayaan</h3>
-      <p class="text-white/80 text-sm leading-relaxed">
-        Setelah memenuhi kriteria, Anda dapat langsung mengajukan Flexycazh melalui menu pengajuan yang tersedia. Pastikan seluruh data Anda akurat dan riwayat transaksi tercatat baik agar proses verifikasi berjalan cepat dan tanpa hambatan. Rasakan kemudahan pengelolaan keuangan usaha dengan akses pembiayaan yang fleksibel dan terintegrasi.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION Formulir -->
-<section class="bg-[#60CEC9] px-6 md:px-10 rounded-2xl shadow-lg max-w-6xl mx-auto my-10">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-    
-    <!-- Formulir -->
-    <div class="order-1 lg:order-1">
-      <!-- Judul -->
-     <div class="flex flex-col items-center text-center pt-6 pb-4 md:pt-0 md:pb-0">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
-          Siap Ajukan <span class="text-[#FFFF]">FlexyCazh</span>?
-        </h2>
-        <p class="text-gray-700 mb-8">Lengkapi formulir ini, tim kami akan segera menghubungi Anda.</p>
-      </div>
-      
-      <!-- Form -->
-      <form action="{{ route('flexy.pengajuan') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        @csrf
-        
-        @if(session('success'))
-        <div class="col-span-2 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-          <span class="block sm:inline">{{ session('success') }}</span>
-        </div>
-        @endif
-        
-        @if(session('error'))
-        <div class="col-span-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-          <span class="block sm:inline">{{ session('error') }}</span>
-        </div>
-        @endif
-        
-        @if ($errors->any())
-        <div class="col-span-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-          <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
-        
-        <!-- Kolom Kiri -->
-        <div class="flex flex-col gap-4">
-          <div>
-            <label class="block text-sm text-gray-800 mb-1">Nama Partner</label>
-            <input type="text" name="nama_partner" value="{{ old('nama_partner') }}" class="w-full px-4 py-2 rounded-md border border-gray-300" required />
-          </div>
-          <div>
-            <label class="block text-sm text-gray-800 mb-1">Jenis Partner</label>
-            <select name="jenis_partner" class="w-full px-4 py-2 rounded-md border border-gray-300" required>
-              <option value="" selected disabled>Pilih Jenis Partner...</option>
-              <option value="Sekolah" {{ old('jenis_partner') == 'Sekolah' ? 'selected' : '' }}>Sekolah</option>
-              <option value="Klinik" {{ old('jenis_partner') == 'Klinik' ? 'selected' : '' }}>Klinik</option>
-              <option value="Perusahaan" {{ old('jenis_partner') == 'Perusahaan' ? 'selected' : '' }}>Perusahaan</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm text-gray-800 mb-1">Nama PIC</label>
-            <input type="text" name="nama_pic" value="{{ old('nama_pic') }}" class="w-full px-4 py-2 rounded-md border border-gray-300" required />
-          </div>
-          <div>
-            <label class="block text-sm text-gray-800 mb-1">Nomor HP PIC</label>
-            <input type="text" name="nomor_hp_pic" value="{{ old('nomor_hp_pic') }}" class="w-full px-4 py-2 rounded-md border border-gray-300" required />
-          </div>
-        </div>
-
-        <!-- Kolom Kanan -->
-        <div class="flex flex-col gap-4">
-          <div>
-            <label class="block text-sm text-gray-800 mb-1">Kebutuhan</label>
-            <select name="kebutuhan" class="w-full px-4 py-2 rounded-md border border-gray-300" required>
-              <option value="" selected disabled>Pilih Kebutuhan...</option>
-              <option value="Kebutuhan Pendanaan" {{ old('kebutuhan') == 'Kebutuhan Pendanaan' ? 'selected' : '' }}>Kebutuhan Pendanaan</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm text-gray-800 mb-1">Nominal</label>
-            <input type="number" name="nominal" value="{{ old('nominal') }}" placeholder="0" class="w-full px-4 py-2 rounded-md border border-gray-300" required />
-          </div>
-          <div>
-            <label class="block text-sm text-gray-800 mb-1">Tenor</label>
-            <select name="tenor" class="w-full px-4 py-2 rounded-md border border-gray-300" required>
-              <option value="" selected disabled>Pilih Tenor...</option>
-              <option value="3 Bulan" {{ old('tenor') == '3 Bulan' ? 'selected' : '' }}>3 Bulan</option>
-              <option value="6 Bulan" {{ old('tenor') == '6 Bulan' ? 'selected' : '' }}>6 Bulan</option>
-              <option value="12 Bulan" {{ old('tenor') == '12 Bulan' ? 'selected' : '' }}>12 Bulan</option>
-            </select>
-          </div>
-          <div class="flex items-end mt-4 h-full">
-            <button type="submit" class="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition-all">
-              Kirim
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <!-- Gambar -->
-    <div class="hidden lg:block order-10 lg:order-10">
-      <img src="/Users/fendhi/Downloads/image 42.png" alt="Marketing Woman" class="w-[240px] md:w-[300px] lg:w-[320px] mx-auto mt-10 lg:mt-0">
-    </div>
-  </div>
-</section>
-
-
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#007696" fill-opacity="1" d="M0,96L80,90.7C160,85,320,75,480,96C640,117,800,171,960,192C1120,213,1280,203,1360,197.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
-
-<!-- FOOTER SECTION -->
-    <footer class="bg-[#007696] text-white">
-    <!-- Footer Main Content -->
-    <div class="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:justify-between gap-10">
-        
-        <!-- Logo -->
-        <div class="md:w-1/4 flex justify-center md:justify-start">
-            <img src="../img/footer logo.png" alt="Cards Edu Logo" class="h-12 w-auto">
-            <!-- Ganti src dengan logo asli -->
-        </div>
-
-        <!-- Navigation Links -->
-        <div class="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-8 text-sm md:w-3/4 text-center md:text-left">
-            <!-- Homepage Links -->
-            <div>
-            <h4 class="font-semibold mb-2">Homepage</h4>
-            <ul class="space-y-1">
-                <li><a href="#" class="hover:underline">Advertisement</a></li>
-                <li><a href="#" class="hover:underline">Car</a></li>
-                <li><a href="#" class="hover:underline">Helpdesk</a></li>
-            </ul>
-            </div>
-            <!-- Contact Links -->
-            <div>
-            <h4 class="font-semibold mb-2">Contact</h4>
-            <ul class="space-y-1">
-                <li><a href="#" class="hover:underline">Booking</a></li>
-                <li><a href="#" class="hover:underline">FAQ</a></li>
-                <li><a href="#" class="hover:underline">Contact Us</a></li>
-            </ul>
-            </div>
-            <!-- Footer Links -->
-            <div>
-            <h4 class="font-semibold mb-2">Footer</h4>
-            <ul class="space-y-1">
-                <li><a href="#" class="hover:underline">Terms of Service</a></li>
-                <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-                <li><a href="#" class="hover:underline">About Us</a></li>
-            </ul>
+        <div class="border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-white/80 text-center md:text-left">
+                    © 2025 FlexyCazh by CAZH. All rights reserved.
+                </p>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">Terms of Service</a>
+                    <a href="#" class="text-white/80 hover:text-white transition-colors">Support</a>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
-
-    <!-- Footer Bottom Bar -->
-    <div class="bg-[#0289a4] text-sm">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-center sm:text-left">© 2025 CAZH. All rights reserved.</p>
-        <div class="flex gap-4 justify-center sm:justify-end text-white text-lg">
-            <a href="#" aria-label="Facebook" class="hover:text-gray-300"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="Email" class="hover:text-gray-300"><i class="fas fa-envelope"></i></a>
-            <a href="#" aria-label="LinkedIn" class="hover:text-gray-300"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="YouTube" class="hover:text-gray-300"><i class="fab fa-youtube"></i></a>
-        </div>
-        </div>
-    </div>
     </footer>
 
-
     <script>
-// fungsi dropdown 
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const line1 = document.getElementById('line1');
+            const line2 = document.getElementById('line2');
+            const line3 = document.getElementById('line3');
+            
+            menu.classList.toggle('hidden');
+            
+            // Animate hamburger to X
+            if (!menu.classList.contains('hidden')) {
+                line1.classList.add('rotate-45', 'translate-y-1.5');
+                line2.classList.add('opacity-0');
+                line3.classList.add('-rotate-45', '-translate-y-1.5');
+                
+                // Hide mobile product dropdown when closing menu
+                const mobileProductDropdown = document.getElementById('mobile-product-dropdown');
+                if (mobileProductDropdown) {
+                    mobileProductDropdown.classList.add('hidden');
+                }
+                
+                // Reset icon rotation
+                const mobileDropdownIcon = document.getElementById('mobile-dropdown-icon');
+                if (mobileDropdownIcon) {
+                    mobileDropdownIcon.classList.remove('rotate-180');
+                }
+            } else {
+                line1.classList.remove('rotate-45', 'translate-y-1.5');
+                line2.classList.remove('opacity-0');
+                line3.classList.remove('-rotate-45', '-translate-y-1.5');
+            }
+        }
+        
+        // Mobile Product Dropdown Toggle
+        function toggleMobileProductDropdown() {
+            const dropdown = document.getElementById('mobile-product-dropdown');
+            const icon = document.getElementById('mobile-dropdown-icon');
+            
+            dropdown.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Currency Formatting
+        function formatCurrency(input) {
+            let value = input.value.replace(/\D/g, '');
+            // Simpan nilai angka murni ke dalam data-attribute
+            input.dataset.value = value; 
+            if (value) {
+                input.value = new Intl.NumberFormat('id-ID').format(value);
+            }
+        }
+
+        // Calculate Installment
+        function calculateInstallment() {
+            // DIUBAH: Menggunakan selector yang sudah diperbaiki
+            const nominalInput = document.querySelector('input[name="kebutuhan_pendanaan"]');
+            const nominal = nominalInput.dataset.value || nominalInput.value.replace(/\D/g, ''); // Ambil nilai murni
+            const tenor = document.querySelector('select[name="tenor"]').value;
+            
+            if (nominal && tenor) {
+                const principal = parseInt(nominal);
+                const months = parseInt(tenor.split(' ')[0]);
+                const monthlyRate = 0.008; // 0.8% per month
+                
+                // Calculate monthly payment
+                const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+                const totalInterest = (monthlyPayment * months) - principal;
+                
+                document.getElementById('monthly-payment').textContent = 'Rp ' + Math.round(monthlyPayment).toLocaleString('id-ID');
+                document.getElementById('total-interest').textContent = 'Rp ' + Math.round(totalInterest).toLocaleString('id-ID');
+                document.getElementById('estimation-card').classList.remove('hidden');
+            }
+        }
+
+        // Form Submission Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const originalContent = submitBtn.innerHTML;
+            const form = event.target;
+            
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i>Mengirim...';
+            submitBtn.disabled = true;
+            
+            // Mengumpulkan data form
+            const formData = new FormData(form);
+            
+            // Mengambil nilai angka murni dari input nominal dan menimpanya di FormData
+            const nominalInput = form.querySelector('[name="kebutuhan_pendanaan"]');
+            const rawNominal = nominalInput.dataset.value || nominalInput.value.replace(/\D/g, '');
+            formData.set('kebutuhan_pendanaan', rawNominal);
+
+            // (Opsional) Tampilkan data yang akan dikirim di console
+            console.log('Data yang akan dikirim:');
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
+
+            // Simulate API call (Ganti bagian ini dengan fetch() untuk mengirim ke backend)
+            setTimeout(() => {
+                showSuccessModal();
+                submitBtn.innerHTML = originalContent;
+                submitBtn.disabled = false;
+                form.reset();
+                document.getElementById('estimation-card').classList.add('hidden');
+            }, 2000);
+        }
+
+        // Show Success Modal
+        function showSuccessModal() {
+            const modal = document.getElementById('success-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        // Close Modal
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('success-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95');
+                navbar.classList.remove('glass');
+            } else {
+                navbar.classList.remove('bg-white/95');
+                navbar.classList.add('glass');
+            }
+        });
+        
+        // Dropdown functions
         function toggleDropdown() {
-    const dropdown = document.getElementById('product-dropdown');
-    dropdown.classList.toggle('hidden');
-    }
+            const dropdown = document.getElementById('product-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdowns = ['product-dropdown', 'mobile-product-dropdown'];
+            const buttons = ['product-dropdown-wrapper', 'mobile-product-dropdown-button'];
+            
+            dropdowns.forEach(dropdownId => {
+                const dropdown = document.getElementById(dropdownId);
+                const isClickInsideDropdown = dropdown && dropdown.contains(event.target);
+                
+                let isClickOnButton = false;
+                buttons.forEach(buttonId => {
+                    const button = document.getElementById(buttonId);
+                    if (button && button.contains(event.target)) {
+                        isClickOnButton = true;
+                    }
+                });
+                
+                if (dropdown && !isClickInsideDropdown && !isClickOnButton) {
+                    dropdown.classList.add('hidden');
+                    
+                    // Reset icon rotation for mobile
+                    if (dropdownId === 'mobile-product-dropdown') {
+                        const icon = document.getElementById('mobile-dropdown-icon');
+                        if (icon) icon.classList.remove('rotate-180');
+                    }
+                }
+            });
+        });
 
+        // Add scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-    function toggleMobileDropdown() {
-        const dropdown = document.getElementById('mobile-product-dropdown');
-        dropdown.classList.toggle('hidden');
-    }
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                }
+            });
+        }, observerOptions);
 
-    // tombol Humburger (navbar)
-    function toggleMenu() {
-    const menu = document.getElementById("mobile-menu");
-    menu.classList.toggle("hidden"); 
-    }
-
-    const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1.2,          
-    spaceBetween: 20,          
-    centeredSlides: true,       
-    loop: true,                
-
-    breakpoints: {
-        768: {
-        slidesPerView: 2.5,   
-        },
-        1024: {
-        slidesPerView: 3.2,     
-        },
-    },
-
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,        
-    },
-    });
-</script>
-    
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>

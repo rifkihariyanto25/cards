@@ -106,57 +106,8 @@
 <body class="font-inter antialiased bg-white">
     <div class="scroll-indicator"></div>
     
-    <nav id="navbar" class="fixed top-4 left-4 right-4 z-[200] glass shadow-xl px-8 py-4 rounded-2xl transition-all duration-500 hover:shadow-2xl">
-        <div class="flex items-center justify-between">
-            <a href="index.html" class="flex items-center space-x-3">
-                <div class="w-10 h-10 bg-gradient-to-r from-[#007696] to-[#f7931e] rounded-xl flex items-center justify-center">
-                    <i class="fas fa-book-reader text-white text-lg"></i>
-                </div>
-                <span class="text-xl font-bold gradient-text">Cards Edu</span>
-            </a>
-
-            <button class="md:hidden focus:outline-none hover:scale-110 transition-transform" onclick="toggleMenu()">
-                <div class="w-6 h-6 flex flex-col justify-between">
-                    <span class="w-full h-0.5 bg-gray-800 rounded transition-all"></span>
-                    <span class="w-full h-0.5 bg-gray-800 rounded transition-all"></span>
-                    <span class="w-full h-0.5 bg-gray-800 rounded transition-all"></span>
-                </div>
-            </button>
-
-            <div class="hidden md:flex space-x-8 items-center font-medium">
-                <a href="index.html" class="hover:text-[#007696] transition-all duration-300 relative group">
-                    Home
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="flexy.html" class="hover:text-[#007696] transition-all duration-300 relative group">
-                    Flexy
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                
-                <div class="relative" id="product-dropdown-wrapper">
-                    <button onclick="toggleDropdown()" class="flex items-center hover:text-[#007696] focus:outline-none transition-all duration-300 group">
-                        Products
-                        <i class="fas fa-chevron-down ml-2 text-xs transition-transform group-hover:rotate-180"></i>
-                    </button>
-                    <div id="product-dropdown" class="absolute hidden glass rounded-2xl mt-4 py-3 w-48 z-[110] shadow-xl">
-                        <a href="Edu.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">Edu</a>
-                        <a href="parents.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">Parents</a>
-                        <a href="school.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">School</a>
-                        <a href="canteen.html" class="block px-6 py-3 hover:bg-white/20 transition-all duration-300 text-gray-700 hover:text-[#007696]">Canteen</a>
-                    </div>
-                </div>
-                
-                <a href="about.html" class="hover:text-[#007696] transition-all duration-300 relative group">
-                    About
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-                <a href="contact.html" class="hover:text-[#007696] transition-all duration-300 relative group">
-                    Contact
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#007696] transition-all duration-300 group-hover:w-full"></span>
-                </a>
-            </div>
-        </div>
-    </nav>
+    <!-- Include Navbar Component -->
+    <x-user.navbar />
 
     <div id="mobile-menu" class="md:hidden hidden fixed top-24 left-4 right-4 glass shadow-xl rounded-2xl z-[90] py-6">
         <div class="flex flex-col space-y-4 px-6 font-medium">
@@ -164,9 +115,9 @@
             <a href="flexy.html" class="text-[#007696] hover:text-[#f7931e] transition-colors py-2">Flexy</a>
             
             <div class="relative">
-                <button onclick="toggleMobileDropdown()" class="flex items-center text-[#007696] hover:text-[#f7931e] transition-colors py-2 w-full">
+                <button onclick="toggleMobileProductDropdown()" class="flex items-center justify-between text-[#007696] hover:text-[#f7931e] transition-colors py-2 w-full">
                     Products
-                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                    <i id="mobile-dropdown-icon" class="fas fa-chevron-down ml-2 text-xs transition-transform"></i>
                 </button>
                 <div id="mobile-product-dropdown" class="hidden ml-4 mt-2 space-y-2">
                     <a href="Edu.html" class="block py-2 text-gray-600 hover:text-[#007696] transition-colors">Edu</a>
@@ -370,83 +321,8 @@
         </div>
     </section>
 
-    <footer class="bg-gradient-to-br from-[#007696] to-[#0289a4] text-white">
-        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <path fill="#ffffff" fill-opacity="1" d="M0,224L48,202.7C96,181,192,139,288,138.7C384,139,480,181,576,208C672,235,768,245,864,224C960,203,1056,149,1152,122.7C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
-        </svg>
-
-        <div class="max-w-7xl mx-auto px-4 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 bg-gradient-to-r from-white to-gray-100 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-book-reader text-[#007696] text-xl"></i>
-                        </div>
-                        <span class="text-2xl font-bold">Cards Edu</span>
-                    </div>
-                    <p class="text-white/80 text-lg leading-relaxed max-w-md">
-                        Mendukung ekosistem pendidikan digital untuk siswa, guru, dan sekolah.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="space-y-6">
-                    <h4 class="text-xl font-semibold">Quick Links</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Home</a></li>
-                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">About Us</a></li>
-                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Features</a></li>
-                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Pricing</a></li>
-                        <li><a href="#" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="space-y-6">
-                    <h4 class="text-xl font-semibold">Contact Us</h4>
-                    <div class="space-y-4">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-envelope w-5"></i>
-                            <span class="text-white/80">info@cardsedu.com</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-phone w-5"></i>
-                            <span class="text-white/80">+62 123 456 7890</span>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <i class="fas fa-map-marker-alt w-5 mt-1"></i>
-                            <span class="text-white/80">Jl. Pendidikan No. 123<br>Jakarta, Indonesia</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="border-t border-white/10">
-            <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-white/80 text-center md:text-left">
-                    © 2025 Cards Edu by CAZH. All rights reserved.
-                </p>
-                <div class="flex space-x-6 text-sm">
-                    <a href="#" class="text-white/80 hover:text-white transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-white/80 hover:text-white transition-colors">Terms of Service</a>
-                    <a href="#" class="text-white/80 hover:text-white transition-colors">Support</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Include Footer Component -->
+    <x-user.footer />
     
     <script>
         // Navbar scroll effect
@@ -467,23 +343,41 @@
             dropdown.classList.toggle('hidden');
         }
 
-        function toggleMobileDropdown() {
+        function toggleMobileProductDropdown() {
             const dropdown = document.getElementById('mobile-product-dropdown');
+            const icon = document.getElementById('mobile-dropdown-icon');
             dropdown.classList.toggle('hidden');
+            if (dropdown.classList.contains('hidden')) {
+                icon.style.transform = '';
+            } else {
+                icon.style.transform = 'rotate(180deg)';
+            }
         }
 
         // Mobile menu toggle
         function toggleMenu() {
             const menu = document.getElementById("mobile-menu");
+            const mobileProductDropdown = document.getElementById("mobile-product-dropdown");
             menu.classList.toggle("hidden");
+            if (mobileProductDropdown) {
+                mobileProductDropdown.classList.add("hidden");
+            }
         }
 
         // Close dropdowns when clicking outside
         document.addEventListener('click', function(event) {
             const dropdownWrapper = document.getElementById('product-dropdown-wrapper');
             const dropdown = document.getElementById('product-dropdown');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileProductDropdown = document.getElementById('mobile-product-dropdown');
+            
             if (dropdown && !dropdownWrapper.contains(event.target)) {
                 dropdown.classList.add('hidden');
+            }
+            
+            if (mobileMenu && !event.target.closest('#mobile-menu') && !event.target.closest('button[onclick="toggleMenu()"]')) {
+                mobileMenu.classList.add('hidden');
+                mobileProductDropdown.classList.add('hidden');
             }
         });
 
@@ -517,5 +411,7 @@
             });
         });
     </script>
+    
+  
 </body>
 </html>
