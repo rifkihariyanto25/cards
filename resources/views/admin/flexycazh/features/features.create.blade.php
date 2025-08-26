@@ -1,49 +1,45 @@
-@extends('admin.home-conten')
+@extends('admin.flexycazh-conten')
 
-@section('title', 'Cards Admin - Edit Mitra')
-@section('page-title', 'Home Page - Content Management')
+@section('title', 'Cards Admin - Flexycazh Features Management')
+@section('page-title', 'Flexycazh Page - Features Management')
 
 @section('content')
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">Mitra Section - Edit</h2>
-        <a href="{{ route('admin.homepage.mitra') }}" class="btn-back">
+        <h2 class="text-xl font-semibold text-cards-teal">Features Section - Flexycazh</h2>
+        <a href="{{ route('admin.flexycazh.features') }}" class="btn-back">
             <span class="mr-2">←</span>Kembali
         </a>
     </div>
 
-    <form action="{{ route('admin.homepage.mitra.update', $mitra->id) }}" 
-          method="POST" 
-          enctype="multipart/form-data" 
-          class="space-y-6">
+    <form action="{{ route('admin.flexycazh.features.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
-        @method('PUT')
         
-        <!-- Nama Mitra -->
+        <!-- Nama Produk -->
         <div>
-            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Mitra</label>
+            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Fitur</label>
             <input type="text" 
                    id="nama" 
                    name="nama" 
-                   value="{{ old('nama', $mitra->nama ?? '') }}"
+                   value="{{ old('nama') }}"
                    class="input-field @error('nama') border-red-500 @enderror" 
-                   placeholder="Masukkan nama mitra"
+                   placeholder="Masukkan nama fitur"
                    required>
             @error('nama')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        <!-- Logo Mitra -->
-        <div class="mt-6 mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Logo Mitra</label>
+        <!-- Cover Image -->
+        <div class="mt-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
             
             <!-- Image Upload Area -->
-            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('logo-image').click()">
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('features-image').click()">
                 <!-- Preview Container -->
                 <div id="image-preview-container">
-                    @if(isset($logo->image) && $logo->image)
-                        <img id="preview-image" src="{{ asset('storage/' . $logo->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                    @if(isset($features->image) && $features->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $features->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
                         <div class="mt-3">
                             <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
                         </div>
@@ -69,22 +65,48 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="logo-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="features-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
             
             @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
+        <!-- Deskripsi Produk -->
+        <div>
+            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Produk (Optional)</label>
+            <textarea id="deskripsi" 
+                      name="deskripsi" 
+                      class="textarea-field @error('deskripsi') border-red-500 @enderror" 
+                      placeholder="Masukkan deskripsi produk">{{ old('deskripsi') }}</textarea>
+            @error('deskripsi')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Status -->
+        <div>
+            <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+            <select id="status" 
+                    name="status" 
+                    class="input-field @error('status') border-red-500 @enderror">
+                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+            </select>
+            @error('status')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div> -->
+
         <!-- Submit Button -->
         <div class="flex justify-end space-x-4">
-            <button type="submit" class="btn-primary">Update Mitra</button>
+            <button type="submit" class="btn-primary">Save</button>
         </div>
     </form>
 </div>
 
 <script>
-function previewImage(input) {
+ function previewImage(input) {
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         const previewImage = document.getElementById('preview-image');
@@ -132,7 +154,7 @@ function previewImage(input) {
         event.preventDefault();
         event.stopPropagation();
         
-        const fileInput = document.getElementById('logo-image');
+        const fileInput = document.getElementById('features-image');
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         
@@ -164,19 +186,43 @@ function previewImage(input) {
         }
     }, 5000);
 
-document.getElementById('logo').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        document.getElementById('upload-placeholder').style.display = 'none';
-        const img = document.getElementById('preview-img');
-        img.src = e.target.result;
-        img.classList.remove('hidden');
+    // Drag and drop functionality
+    const uploadArea = document.getElementById('upload-area');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
     }
-    reader.readAsDataURL(file);
-});
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight() {
+        uploadArea.classList.add('border-cards-teal', 'bg-gray-50');
+    }
+    
+    function unhighlight() {
+        uploadArea.classList.remove('border-cards-teal', 'bg-gray-50');
+    }
+    
+    uploadArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        const fileInput = document.getElementById('gambar');
+        
+        fileInput.files = files;
+        previewImage(fileInput);
+    }
 </script>
-
 @endsection

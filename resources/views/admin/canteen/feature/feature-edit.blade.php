@@ -49,45 +49,55 @@
             @enderror
         </div>
 
-        <!-- Gambar Field -->
-        <div>
-            <label for="gambar" class="block text-sm font-medium text-gray-700 mb-2">Gambar</label>
+         <!-- Fitur Image -->
+        <div class="mt-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Fitur Image</label>
             
-            <!-- Current Image Display -->
-            @if(isset($feature->gambar))
-            <div class="mb-4">
-                <p class="text-sm text-gray-600 mb-2">Gambar saat ini:</p>
+            <!-- Current Image -->
+            @if($feature->gambar)
+            <div class="mb-3">
+                <p class="text-sm text-gray-600 mb-2">Current Image:</p>
                 <img src="{{ asset('storage/' . $feature->gambar) }}" 
-                     alt="Current Image" 
-                     class="max-h-32 object-contain border-2 border-gray-300">
+                     alt="Current Feature Image" 
+                     class="max-h-48 rounded-lg">
             </div>
             @endif
-            
-            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-cyan-600 transition-colors">
-                <input type="file" 
-                       id="gambar" 
-                       name="gambar" 
-                       accept="image/*"
-                       class="hidden"
-                       onchange="previewImage(this)">
-                <label for="gambar" class="cursor-pointer">
-                    <div id="upload-area">
-                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                        </svg>
-                        <p class="mt-2 text-sm text-gray-600">
-                            <span class="font-medium text-black-600 hover:text-blue-500">Drop Your File Here or Browse</span>
-                        </p>
-                        <p class="text-xs text-gray-500 mt-1">PNG, JPG, JPEG up to 2MB (Kosongkan jika tidak ingin mengubah)</p>
-                    </div>
-                    <div id="preview-area" class="hidden">
-                        <img id="preview-image" src="" alt="Preview" class="mx-auto max-h-48 rounded-lg">
-                        <p class="mt-2 text-sm text-gray-600">Click to change image</p>
-                    </div>
-                </label>
+
+            <!-- Image Upload Area -->
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('feature-image').click()">
+                <!-- Preview Container -->
+                <div id="image-preview-container">
+                    @if(isset($feature->image) && $feature->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $feature->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                        <div class="mt-3">
+                            <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                        </div>
+                    @else
+                        <!-- Default Upload UI -->
+                        <div id="upload-placeholder">
+                            <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="text-gray-500">Drop Your File Here or Browse</p>
+                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                        
+                        <!-- Hidden Preview Template (will be shown when image selected) -->
+                        <div id="preview-template" class="hidden">
+                            <img id="preview-image" src="" alt="Preview" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                            <div class="mt-3">
+                                <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
-            @error('gambar')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            
+            <!-- Hidden File Input -->
+            <input type="file" id="feature-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            
+            @error('image')
+                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
@@ -108,10 +118,6 @@
 
         <!-- Submit Button -->
         <div class="flex justify-end gap-3">
-            <a href="{{ route('admin.canteen.features') }}" 
-               class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors">
-                Batal
-            </a>
             <button type="submit" 
                     class="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-2 rounded-lg transition-colors focus:ring-2  focus:ring-offset-2">
                 Update
@@ -122,28 +128,124 @@
 
 @push('scripts')
 <script>
-function previewImage(input) {
-    const uploadArea = document.getElementById('upload-area');
-    const previewArea = document.getElementById('preview-area');
-    const previewImage = document.getElementById('preview-image');
-    
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
+   function previewImage(input) {
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        const previewImage = document.getElementById('preview-image');
         
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            uploadArea.classList.add('hidden');
-            previewArea.classList.remove('hidden');
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            
+            // Validate file size (10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB');
+                input.value = '';
+                return;
+            }
+            
+            // Validate file type
+            if (!file.type.match('image.*')) {
+                alert('Please select a valid image file');
+                input.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                // Hide upload placeholder
+                if (uploadPlaceholder) {
+                    uploadPlaceholder.style.display = 'none';
+                }
+                
+                // Show and update preview
+                if (previewTemplate) {
+                    previewTemplate.classList.remove('hidden');
+                }
+                
+                if (previewImage) {
+                    previewImage.src = e.target.result;
+                }
+            }
+            
+            reader.readAsDataURL(file);
+        }
+    }
+    
+    function removeImage(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const fileInput = document.getElementById('feature-image');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const previewTemplate = document.getElementById('preview-template');
+        
+        // Clear file input
+        fileInput.value = '';
+        
+        // Show upload placeholder
+        if (uploadPlaceholder) {
+            uploadPlaceholder.style.display = 'block';
         }
         
-        reader.readAsDataURL(input.files[0]);
+        // Hide preview
+        if (previewTemplate) {
+            previewTemplate.classList.add('hidden');
+        }
     }
-}
+    
+    // Auto hide success/error messages
+    setTimeout(function() {
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+        
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 5000);
 
-// Reset preview when clicking on preview area
-document.getElementById('preview-area').addEventListener('click', function() {
-    document.getElementById('foto').click();
-});
+    // Drag and drop functionality
+    const uploadArea = document.getElementById('upload-area');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight() {
+        uploadArea.classList.add('border-cards-teal', 'bg-gray-50');
+    }
+    
+    function unhighlight() {
+        uploadArea.classList.remove('border-cards-teal', 'bg-gray-50');
+    }
+    
+    uploadArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        const fileInput = document.getElementById('gambar');
+        
+        fileInput.files = files;
+        previewImage(fileInput);
+    }
 </script>
 @endpush
 @endsection

@@ -34,11 +34,11 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">Logo Mitra</label>
             
             <!-- Image Upload Area -->
-            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('hero-image').click()">
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('logo-image').click()">
                 <!-- Preview Container -->
                 <div id="image-preview-container">
-                    @if(isset($hero->image) && $hero->image)
-                        <img id="preview-image" src="{{ asset('storage/' . $hero->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                    @if(isset($logo->image) && $logo->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $logo->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
                         <div class="mt-3">
                             <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
                         </div>
@@ -64,7 +64,7 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="hero-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="logo-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
             
             @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -127,7 +127,7 @@ function previewImage(input) {
         event.preventDefault();
         event.stopPropagation();
         
-        const fileInput = document.getElementById('hero-image');
+        const fileInput = document.getElementById('logo-image');
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         

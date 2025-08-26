@@ -107,7 +107,7 @@
 </div>
 
 <script>
- function previewImage(input) {
+    function previewImage(input) {
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         const previewImage = document.getElementById('preview-image');
@@ -186,5 +186,44 @@
             errorMessage.style.display = 'none';
         }
     }, 5000);
+
+    // Drag and drop functionality
+    const uploadArea = document.getElementById('upload-area');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight() {
+        uploadArea.classList.add('border-cards-teal', 'bg-gray-50');
+    }
+    
+    function unhighlight() {
+        uploadArea.classList.remove('border-cards-teal', 'bg-gray-50');
+    }
+    
+    uploadArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        const fileInput = document.getElementById('gambar');
+        
+        fileInput.files = files;
+        previewImage(fileInput);
+    }
 </script>
 @endsection

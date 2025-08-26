@@ -52,11 +52,11 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">Foto</label>
             
             <!-- Image Upload Area -->
-            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('hero-image').click()">
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('testimoni-image').click()">
                 <!-- Preview Container -->
                 <div id="image-preview-container">
-                    @if(isset($hero->image) && $hero->image)
-                        <img id="preview-image" src="{{ asset('storage/' . $hero->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                    @if(isset($testimoni->image) && $testimoni->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $testimoni->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
                         <div class="mt-3">
                             <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
                         </div>
@@ -82,7 +82,7 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="hero-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="testimoni-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
             
             @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -106,10 +106,6 @@
 
         <!-- Submit Button -->
         <div class="flex justify-end gap-3">
-            <a href="{{ route('admin.homepage.testimoni') }}" 
-               class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors">
-                Batal
-            </a>
             <button type="submit" 
                     class="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-2 rounded-lg transition-colors focus:ring-2  focus:ring-offset-2">
                 Update
@@ -168,7 +164,7 @@
         event.preventDefault();
         event.stopPropagation();
         
-        const fileInput = document.getElementById('hero-image');
+        const fileInput = document.getElementById('testimoni-image');
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         

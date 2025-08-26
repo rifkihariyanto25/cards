@@ -1,39 +1,68 @@
 @extends('admin.parent-conten')
 
-@section('title', 'Parents Features - Cards Admin')
-@section('page-title', 'Parents Page - Content Management')
+@section('title', 'Cards Admin - Edit Parents Feature')
+@section('page-title', 'Parents Page - Edit Feature')
 
 @section('content')
-<div class="section-card p-6">
-    <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">Features Section - Parents</h2>
-        <a href="{{ route('admin.parents.features') }}" class="btn-back">
-            <span class="mr-2">←</span>Kembali
+<div class="bg-white rounded-lg shadow-sm p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-cards-teal">Edit Feature</h2>
+        <a href="{{ route('admin.parents.features') }}" 
+           class="bg-cyan-700 hover:bg-cyan-800 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Kembali
         </a>
     </div>
 
-    <form action="{{ route('admin.parents.features.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.parents.features.update', $feature->id ?? 1) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
+        @method('PUT')
         
-        <!-- Nama Produk -->
+        <!-- Nama Field -->
         <div>
-            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Fitur</label>
+            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama</label>
             <input type="text" 
                    id="nama" 
                    name="nama" 
-                   value="{{ old('nama') }}"
-                   class="input-field @error('nama') border-red-500 @enderror" 
-                   placeholder="Masukkan nama fitur"
+                   value="{{ old('nama', $feature->nama ?? '') }}"
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  focus:border-blue-500 outline-none transition-colors"
+                   placeholder="Masukkan nama feature"
                    required>
             @error('nama')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
 
-        <!-- Fitur Image -->
+        <!-- Deskripsi Field -->
+        <div>
+            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
+            <textarea 
+                   id="deskripsi" 
+                   name="deskripsi" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  focus:border-blue-500 outline-none transition-colors"
+                   placeholder="Masukkan deskripsi feature"
+                   rows="4">{{ old('deskripsi', $feature->deskripsi ?? '') }}</textarea>
+            @error('deskripsi')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+         <!-- Fitur Image -->
         <div class="mt-6">
             <label class="block text-sm font-medium text-gray-700 mb-2">Fitur Image</label>
             
+            <!-- Current Image -->
+            @if($feature->gambar)
+            <div class="mb-3">
+                <p class="text-sm text-gray-600 mb-2">Current Image:</p>
+                <img src="{{ asset('storage/' . $feature->gambar) }}" 
+                     alt="Current Feature Image" 
+                     class="max-h-48 rounded-lg">
+            </div>
+            @endif
+
             <!-- Image Upload Area -->
             <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('feature-image').click()">
                 <!-- Preview Container -->
@@ -72,40 +101,32 @@
             @enderror
         </div>
 
-
-        <!-- Deskripsi Produk -->
-        <div>
-            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Produk (Optional)</label>
-            <textarea id="deskripsi" 
-                      name="deskripsi" 
-                      class="textarea-field @error('deskripsi') border-red-500 @enderror" 
-                      placeholder="Masukkan deskripsi produk">{{ old('deskripsi') }}</textarea>
-            @error('deskripsi')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <!-- Status -->
+        <!-- Status Field -->
         <div>
             <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
             <select id="status" 
                     name="status" 
-                    class="input-field @error('status') border-red-500 @enderror">
-                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2  focus:border-blue-500 outline-none transition-colors"
+                    required>
+                <option value="active" {{ (old('status', $feature->status ?? '') == 'active') ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ (old('status', $feature->status ?? '') == 'inactive') ? 'selected' : '' }}>Inactive</option>
             </select>
             @error('status')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
-        </div> -->
+        </div>
 
         <!-- Submit Button -->
-        <div class="flex justify-end space-x-4">
-            <button type="submit" class="btn-primary">Save</button>
+        <div class="flex justify-end gap-3">
+            <button type="submit" 
+                    class="bg-cyan-700 hover:bg-cyan-800 text-white px-6 py-2 rounded-lg transition-colors focus:ring-2  focus:ring-offset-2">
+                Update
+            </button>
         </div>
     </form>
 </div>
 
+@push('scripts')
 <script>
  function previewImage(input) {
         const uploadPlaceholder = document.getElementById('upload-placeholder');
@@ -186,5 +207,45 @@
             errorMessage.style.display = 'none';
         }
     }, 5000);
+
+    // Drag and drop functionality
+    const uploadArea = document.getElementById('upload-area');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight() {
+        uploadArea.classList.add('border-cards-teal', 'bg-gray-50');
+    }
+    
+    function unhighlight() {
+        uploadArea.classList.remove('border-cards-teal', 'bg-gray-50');
+    }
+    
+    uploadArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        const fileInput = document.getElementById('gambar');
+        
+        fileInput.files = files;
+        previewImage(fileInput);
+    }
 </script>
+@endpush
 @endsection

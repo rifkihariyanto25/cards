@@ -1,27 +1,28 @@
 @extends('admin.flexycazh-conten')
 
-@section('title', 'Cards Admin - Flexycazh Features Management')
-@section('page-title', 'Flexycazh Page - Features Management')
+@section('title', 'Edit Flexycazh Feature - Cards Admin')
+@section('page-title', 'Flexycazh Page - Edit Feature')
 
 @section('content')
 <div class="section-card p-6">
     <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-semibold text-cards-teal">Features Section - Flexycazh</h2>
+        <h2 class="text-xl font-semibold text-cards-teal">Edit Feature - Flexycazh</h2>
         <a href="{{ route('admin.flexycazh.features') }}" class="btn-back">
             <span class="mr-2">←</span>Kembali
         </a>
     </div>
 
-    <form action="{{ route('admin.flexycazh.features.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+    <form action="{{ route('admin.flexycazh.features.update', $feature->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
+        @method('PUT')
         
-        <!-- Nama Produk -->
+        <!-- Nama Feature -->
         <div>
             <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Fitur</label>
             <input type="text" 
                    id="nama" 
                    name="nama" 
-                   value="{{ old('nama') }}"
+                   value="{{ old('nama', $feature->nama) }}"
                    class="input-field @error('nama') border-red-500 @enderror" 
                    placeholder="Masukkan nama fitur"
                    required>
@@ -30,16 +31,40 @@
             @enderror
         </div>
 
-        <!-- Cover Image -->
+        <!-- Status -->
+        <div>
+            <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+            <select id="status" 
+                    name="status" 
+                    class="input-field @error('status') border-red-500 @enderror">
+                <option value="active" {{ old('status', $feature->status) == 'active' ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ old('status', $feature->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+            </select>
+            @error('status')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <!-- Fitur Image -->
         <div class="mt-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Fitur Image</label>
             
+            <!-- Current Image -->
+            @if($feature->gambar)
+            <div class="mb-3">
+                <p class="text-sm text-gray-600 mb-2">Current Image:</p>
+                <img src="{{ asset('storage/' . $feature->gambar) }}" 
+                     alt="Current Feature Image" 
+                     class="max-h-48 rounded-lg">
+            </div>
+            @endif
+
             <!-- Image Upload Area -->
-            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('features-image').click()">
+            <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('feature-image').click()">
                 <!-- Preview Container -->
                 <div id="image-preview-container">
-                    @if(isset($features->image) && $features->image)
-                        <img id="preview-image" src="{{ asset('storage/' . $features->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                    @if(isset($feature->image) && $feature->image)
+                        <img id="preview-image" src="{{ asset('storage/' . $feature->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
                         <div class="mt-3">
                             <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
                         </div>
@@ -65,48 +90,37 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="features-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="feature-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
             
             @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        <!-- Deskripsi Produk -->
+        <!-- Deskripsi -->
         <div>
-            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Produk (Optional)</label>
+            <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
             <textarea id="deskripsi" 
                       name="deskripsi" 
-                      class="textarea-field @error('deskripsi') border-red-500 @enderror" 
-                      placeholder="Masukkan deskripsi produk">{{ old('deskripsi') }}</textarea>
+                      rows="4" 
+                      class="input-field @error('deskripsi') border-red-500 @enderror" 
+                      placeholder="Masukkan deskripsi fitur">{{ old('deskripsi', $feature->deskripsi) }}</textarea>
             @error('deskripsi')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        <!-- Status -->
-        <div>
-            <label for="status" class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-            <select id="status" 
-                    name="status" 
-                    class="input-field @error('status') border-red-500 @enderror">
-                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
-                <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
-            </select>
-            @error('status')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div> -->
-
         <!-- Submit Button -->
-        <div class="flex justify-end space-x-4">
-            <button type="submit" class="btn-primary">Save</button>
+        <div class="flex justify-end">
+            <button type="submit" class="btn-primary">
+                Update Feature
+            </button>
         </div>
     </form>
 </div>
 
 <script>
- function previewImage(input) {
+     function previewImage(input) {
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         const previewImage = document.getElementById('preview-image');
@@ -154,7 +168,7 @@
         event.preventDefault();
         event.stopPropagation();
         
-        const fileInput = document.getElementById('features-image');
+        const fileInput = document.getElementById('feature-image');
         const uploadPlaceholder = document.getElementById('upload-placeholder');
         const previewTemplate = document.getElementById('preview-template');
         
@@ -185,5 +199,44 @@
             errorMessage.style.display = 'none';
         }
     }, 5000);
+
+    // Drag and drop functionality
+    const uploadArea = document.getElementById('upload-area');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, highlight, false);
+    });
+    
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, unhighlight, false);
+    });
+    
+    function highlight() {
+        uploadArea.classList.add('border-cards-teal', 'bg-gray-50');
+    }
+    
+    function unhighlight() {
+        uploadArea.classList.remove('border-cards-teal', 'bg-gray-50');
+    }
+    
+    uploadArea.addEventListener('drop', handleDrop, false);
+    
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        const fileInput = document.getElementById('gambar');
+        
+        fileInput.files = files;
+        previewImage(fileInput);
+    }
 </script>
 @endsection

@@ -17,7 +17,7 @@ class FeaturesController extends Controller
 
     public function create()
     {
-        return view('admin.parents.features.features-create');
+        return view('admin.parents.features.features.create');
     }
 
     public function store(Request $request)
@@ -55,13 +55,13 @@ class FeaturesController extends Controller
 
     public function edit($id)
     {
-        $feature = ParentsFeatures::findOrFail($id);
-        return view('admin.parents.features.features-edit', compact('features'));
+        $features = ParentsFeatures::findOrFail($id);
+        return view('admin.parents.features.features.edit', compact('features'));
     }
 
     public function update(Request $request, $id)
     {
-        $feature = ParentsFeatures::findOrFail($id);
+        $features = ParentsFeatures::findOrFail($id);
 
         $request->validate([
             'nama' => 'required|string|max:255',
@@ -74,8 +74,8 @@ class FeaturesController extends Controller
 
         if ($request->hasFile('gambar')) {
             // Delete old image if exists
-            if ($feature->gambar && Storage::disk('public')->exists($feature->gambar)) {
-                Storage::disk('public')->delete($feature->gambar);
+            if ($features->gambar && Storage::disk('public')->exists($features->gambar)) {
+                Storage::disk('public')->delete($features->gambar);
             }
 
             $gambar = $request->file('gambar');
@@ -89,21 +89,21 @@ class FeaturesController extends Controller
             unset($data['gambar']);
         }
 
-        $feature->update($data);
+        $features->update($data);
 
         return redirect()->route('admin.parents.features')->with('success', 'Feature updated successfully!');
     }
 
     public function destroy($id)
     {
-        $feature = ParentsFeatures::findOrFail($id);
+        $features = ParentsFeatures::findOrFail($id);
 
         // Delete image if exists
-        if ($feature->gambar && Storage::disk('public')->exists($feature->gambar)) {
-            Storage::disk('public')->delete($feature->gambar);
+        if ($features->gambar && Storage::disk('public')->exists($features->gambar)) {
+            Storage::disk('public')->delete($features->gambar);
         }
 
-        $feature->delete();
+        $features->delete();
 
         return redirect()->route('admin.parents.features')->with('success', 'Feature deleted successfully!');
     }
