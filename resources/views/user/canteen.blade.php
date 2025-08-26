@@ -120,7 +120,7 @@
         <img
           src="{{ isset($hero->cover_image) && $hero->cover_image ? asset('storage/' . $hero->cover_image) : '../img/hero_canteen.png' }}" 
           alt="Foto siswa di kantin"
-          class="w-full h-auto object-cover"
+          class="h-5 w-8"
         />
       </div>
 
