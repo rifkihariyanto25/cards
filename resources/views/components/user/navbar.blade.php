@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav id="navbar" class="fixed top-4 left-4 right-4 z-50 glass rounded-2xl px-6 py-3 transition-all duration-300">
+<nav id="navbar" class="fixed top-4 left-4 right-4 z-50 bg-white shadow-md rounded-2xl px-6 py-3 transition-all duration-300">
     <div class="flex items-center justify-between max-w-7xl mx-auto">
         <!-- Logo -->
         <div class="flex items-center space-x-3">
@@ -24,7 +24,7 @@
                     Products
                     <i class="fas fa-chevron-down ml-1 text-xs group-hover:rotate-180 transition-transform duration-300"></i>
                 </button>
-                <div id="product-dropdown" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 glass rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <div id="product-dropdown" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <div class="p-2">
                         <a href="{{ route('user.edu') }}" 
                            class="@if($currentRoute === 'user.edu') text-cyan-600 bg-cyan-50 @else text-gray-700 hover:text-cyan-600 @endif block px-4 py-3 hover:bg-cyan-50 rounded-lg transition-colors">
@@ -42,15 +42,14 @@
                            class="@if($currentRoute === 'user.canteen') text-cyan-600 bg-cyan-50 @else text-gray-700 hover:text-cyan-600 @endif block px-4 py-3 hover:bg-cyan-50 rounded-lg transition-colors">
                            Canteen
                         </a>
-                        
                     </div>
                 </div>
             </div>
             
             <a href="#about" class="text-gray-700 hover:text-cyan-600 transition-colors font-medium">About</a>
-              <a href="{{ route('user.contact') }}" 
-                           class="@if($currentRoute === 'user.contact') text-cyan-600 bg-cyan-50 @else text-gray-700 hover:text-cyan-600 @endif block px-4 py-3 hover:bg-cyan-50 rounded-lg transition-colors">
-                           Contact
+            <a href="{{ route('user.contact') }}" 
+               class="@if($currentRoute === 'user.contact') text-cyan-600 bg-cyan-50 @else text-gray-700 hover:text-cyan-600 @endif block px-4 py-3 hover:bg-cyan-50 rounded-lg transition-colors">
+               Contact
             </a>
         </div>
 
@@ -65,7 +64,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden mt-4 p-4 glass rounded-xl hidden">
+    <div id="mobile-menu" class="md:hidden mt-4 p-4 bg-white shadow-md rounded-xl hidden">
         <div class="space-y-4">
             <a href="{{ route('user.homepage') }}" 
                class="@if($currentRoute === 'user.homepage') text-cyan-600 @else text-gray-700 hover:text-cyan-600 @endif block transition-colors">

@@ -5,13 +5,13 @@
 
     <div class="max-w-7xl mx-auto px-4 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!-- Logo Section -->
             <div class="lg:col-span-2 space-y-6">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-white to-gray-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-money-bill-wave text-[#007696] text-xl"></i>
-                    </div>
-                    <span class="text-2xl font-bold">Cards</span>
-                </div>
+                <!-- Logo seperti di navbar -->
+               <div class="flex items-center space-x-3 mb-6">
+    <img src="{{ asset('storage/assets/logo putih.png') }}" alt="Logo" class="h-16 w-auto">
+    <span class="text-2xl font-bold"></span>
+</div>
                 <p class="text-white/80 text-lg leading-relaxed max-w-md">
                     Solusi pembiayaan fleksibel untuk sekolah dan bisnis. Dapatkan modal kerja dan pembiayaan peralatan dengan proses yang cepat dan mudah.
                 </p>
@@ -31,36 +31,48 @@
                 </div>
             </div>
 
+            <!-- Quick Links Section - Sesuai dengan navbar -->
             <div class="space-y-6">
                 <h4 class="text-xl font-semibold">Quick Links</h4>
                 <ul class="space-y-3">
-                    <li><a href="#home" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Home</a></li>
-                    <li><a href="#features" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Features</a></li>
-                    <li><a href="#process" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Process</a></li>
-                    <li><a href="#contact" class="text-white/80 hover:text-white transition-colors hover:translate-x-1 inline-block">Apply Now</a></li>
+                    <li><a href="{{ route('user.homepage') }}" class="text-white/80 hover:text-white transition-all duration-300 hover:translate-x-1 inline-block">Home</a></li>
+                    <li><a href="{{ route('user.flexy') }}" class="text-white/80 hover:text-white transition-all duration-300 hover:translate-x-1 inline-block">Flexy</a></li>
+                    <li><a href="#about" class="text-white/80 hover:text-white transition-all duration-300 hover:translate-x-1 inline-block">About</a></li>
+                    <li><a href="{{ route('user.contact') }}" class="text-white/80 hover:text-white transition-all duration-300 hover:translate-x-1 inline-block">Contact</a></li>
                 </ul>
+                
             </div>
 
+            <!-- Contact Section -->
             <div class="space-y-6">
                 <h4 class="text-xl font-semibold">Contact Us</h4>
                 <div class="space-y-4">
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-envelope w-5"></i>
-                        <span class="text-white/80">info@cazh.com</span>
+                    <div class="flex items-center space-x-3 group">
+                        <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                            <i class="fas fa-envelope text-sm"></i>
+                        </div>
+                        <span class="text-white/80 hover:text-white transition-colors">info@cazh.com</span>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <i class="fas fa-phone w-5"></i>
-                        <span class="text-white/80">+62 813</span>
+                    <div class="flex items-center space-x-3 group">
+                        <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                            <i class="fas fa-phone text-sm"></i>
+                        </div>
+                        <span class="text-white/80 hover:text-white transition-colors">+62 813</span>
                     </div>
-                    <div class="flex items-start space-x-3">
-                        <i class="fas fa-map-marker-alt w-5 mt-1"></i>
-                        <span class="text-white/80">Ruko Graha Timur, Jl. Martadireja 1 No.Blok B2, Kepetek, Mersi, Kec. Purwokerto Tim., Kabupaten Banyumas, Jawa Tengah 53111</span>
+                    <div class="flex items-start space-x-3 group">
+                        <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition-colors mt-1">
+                            <i class="fas fa-map-marker-alt text-sm"></i>
+                        </div>
+                        <span class="text-white/80 hover:text-white transition-colors text-sm leading-relaxed">
+                            Ruko Graha Timur, Jl. Martadireja 1 No.Blok B2, Kepetek, Mersi, Kec. Purwokerto Tim., Kabupaten Banyumas, Jawa Tengah 53111
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Bottom Section -->
     <div class="border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <p class="text-white/80 text-center md:text-left">
