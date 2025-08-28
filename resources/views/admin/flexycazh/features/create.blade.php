@@ -45,13 +45,16 @@
                         </div>
                     @else
                         <!-- Default Upload UI -->
-                        <div id="upload-placeholder">
-                            <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                            </svg>
-                            <p class="text-gray-500">Drop Your File Here or Browse</p>
-                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
-                        </div>
+                       <div id="image-preview-container">
+    <div id="upload-placeholder">
+        <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+        </svg>
+        <p class="text-gray-500">Drop Your File Here or Browse</p>
+        <p class="text-xs text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
+    </div>
+</div>
+
                         
                         <!-- Hidden Preview Template (will be shown when image selected) -->
                         <div id="preview-template" class="hidden">
@@ -65,9 +68,9 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="features-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="features-image" name="gambar" accept="image/*" class="hidden" onchange="previewImage(this)">
             
-            @error('image')
+            @error('gambar')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>

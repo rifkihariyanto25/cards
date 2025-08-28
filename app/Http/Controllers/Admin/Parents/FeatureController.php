@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Admin\Parents;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Parents\ParentsFeatures;
+use App\Models\Parents\ParentsFeature;
 use Illuminate\Support\Facades\Storage;
 
-class FeaturesController extends Controller
+class FeatureController extends Controller
 {
     public function index()
     {
-        $features = ParentsFeatures::all();
+        $features = ParentsFeature::all();
         return view('admin.parents.features', compact('features'));
     }
 
     public function create()
     {
-        return view('admin.parents.features.features.create');
+        return view('admin.parents.features.create');
     }
 
     public function store(Request $request)
@@ -48,20 +48,20 @@ class FeaturesController extends Controller
             // $data['gambar'] = 'parents/features/' . $gambarName;
         }
 
-        ParentsFeatures::create($data);
+        ParentsFeature::create($data);
 
         return redirect()->route('admin.parents.features')->with('success', 'Feature created successfully!');
     }
 
     public function edit($id)
     {
-        $features = ParentsFeatures::findOrFail($id);
-        return view('admin.parents.features.features.edit', compact('features'));
+        $features = ParentsFeature::findOrFail($id);
+        return view('admin.parents.features.edit', compact('features'));
     }
 
     public function update(Request $request, $id)
     {
-        $features = ParentsFeatures::findOrFail($id);
+        $features = ParentsFeature::findOrFail($id);
 
         $request->validate([
             'nama' => 'required|string|max:255',
@@ -96,7 +96,7 @@ class FeaturesController extends Controller
 
     public function destroy($id)
     {
-        $features = ParentsFeatures::findOrFail($id);
+        $features = ParentsFeature::findOrFail($id);
 
         // Delete image if exists
         if ($features->gambar && Storage::disk('public')->exists($features->gambar)) {

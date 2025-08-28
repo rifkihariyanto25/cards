@@ -194,51 +194,40 @@
     </section>
 
     <!-- Products Section -->
-    <section id="products" class="py-24 px-4 bg-gradient-to-b from-gray-50 to-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 space-y-6">
-                <div class="inline-flex items-center px-4 py-2 bg-white rounded-full text-sm font-medium text-[#007696] shadow-sm">
-                    <i class="fas fa-star mr-2"></i>
-                    Produk Unggulan
-                </div>
-                <h2 class="text-4xl lg:text-5xl font-bold gradient-text">
-                    Solusi <span class="text-[#007F9E] font-bold">Kantin</span> Masa Kini: Tanpa Tunai, Penuh <span class="text-[#007F9E] font-bold">Kendali</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Satu sentuhan di kantin, transaksi langsung tercatat. Uang saku tersimpan aman dalam kartu atau gelang, dan bisa dipantau orang tua kapan saja.
-                </p>
+   <!-- Products Section -->
+<section id="products" class="py-24 px-4 bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16 space-y-6">
+            <div class="inline-flex items-center px-4 py-2 bg-white rounded-full text-sm font-medium text-[#007696] shadow-sm">
+                <i class="fas fa-star mr-2"></i>
+                Produk Unggulan
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Produk 1 -->
-                <article class="product-card relative rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
-                    <div class="bg-[#9DE1E4] rounded-xl p-6 shadow-md mb-6">
-                        <img src="../img/produk1.png" alt="Kartu QR Code" class="w-full max-w-[280px] mx-auto">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Kartu Siswa Berbasis QR Code</h3>
-                    <p class="text-gray-600 leading-relaxed">Teknologi QR Code modern untuk transaksi cepat dan akurat di kantin sekolah.</p>
-                </article>
-
-                <!-- Produk 2 -->
-                <article class="product-card relative rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
-                    <div class="bg-[#9DE1E4] rounded-xl p-6 shadow-md mb-6">
-                        <img src="../img/produk2.png" alt="Kartu RFID" class="w-full max-w-[280px] mx-auto">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Kartu Siswa Berbasis RFID</h3>
-                    <p class="text-gray-600 leading-relaxed">Kartu RFID yang praktis dan tahan lama untuk kemudahan transaksi harian.</p>
-                </article>
-
-                <!-- Produk 3 -->
-                <article class="product-card relative rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
-                    <div class="bg-[#9DE1E4] rounded-xl p-6 shadow-md mb-6">
-                        <img src="../img/produk3.png" alt="Gelang RFID" class="w-full max-w-[280px] mx-auto">
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Gelang Siswa Berbasis RFID</h3>
-                    <p class="text-gray-600 leading-relaxed">Gelang RFID yang stylish dan aman, tidak mudah hilang atau rusak.</p>
-                </article>
-            </div>
+            <h2 class="text-4xl lg:text-5xl font-bold gradient-text">
+                Solusi <span class="text-[#007F9E] font-bold">Kantin</span> Masa Kini: Tanpa Tunai, Penuh <span class="text-[#007F9E] font-bold">Kendali</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Satu sentuhan di kantin, transaksi langsung tercatat. Uang saku tersimpan aman dalam kartu atau gelang, dan bisa dipantau orang tua kapan saja.
+            </p>
         </div>
-    </section>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse($features as $feature)
+                <article class="product-card relative rounded-2xl p-8 text-center hover-lift shadow-lg hover:shadow-xl transition-all duration-300 reveal">
+                    <div class="bg-[#9DE1E4] rounded-xl p-6 shadow-md mb-6">
+                        <img src="{{ $feature->gambar ? asset('storage/' . $feature->gambar) : asset('img/default.png') }}" 
+                             alt="{{ $feature->nama }}" 
+                             class="w-full max-w-[280px] mx-auto">
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">{{ $feature->nama }}</h3>
+                    <p class="text-gray-600 leading-relaxed">{{ $feature->deskripsi }}</p>
+                </article>
+            @empty
+                <p class="text-center col-span-3 text-gray-500">Belum ada produk yang ditambahkan</p>
+            @endforelse
+        </div>
+    </div>
+</section>
+
 
     <!-- CTA Section -->
     <section class="py-24 px-4 bg-gradient-to-br from-[#007696] to-[#0289a4] text-white">

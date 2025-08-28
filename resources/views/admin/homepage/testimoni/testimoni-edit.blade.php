@@ -81,10 +81,11 @@
                 </div>
             </div>
             
-            <!-- Hidden File Input -->
-            <input type="file" id="testimoni-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
             
-            @error('image')
+            <!-- Hidden File Input -->
+            <input type="file" id="testimoni-image" name="foto" accept="image/*" class="hidden" onchange="previewImage(this)">
+            
+            @error('foto')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>

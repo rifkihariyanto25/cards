@@ -64,7 +64,7 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="logo-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="logo-image" name="logo" accept="image/*" class="hidden" onchange="previewImage(this)">
             
             @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

@@ -37,54 +37,41 @@
             </thead>
             <tbody>
                 @forelse($features ?? [] as $index => $feature)
-                <tr>
-                    <td class="text-center">{{ $index + 1 }}</td>
-                    <td>{{ $features->nama ?? 'Flexycazh Feature' }}</td>
-                    <td class="text-center">
-                        @if(isset($features->gambar) && $features->gambar)
-                            <img src="{{ asset('storage/' . $features->gambar) }}" 
-                                 alt="Feature Image" 
-                                 class="w-16 h-16 object-cover rounded mx-auto">
-                        @else
-                            <div class="w-16 h-16 bg-gray-200 rounded mx-auto flex items-center justify-center">
-                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                        @endif
-                    </td>
-                    <td>{{ $features->deskripsi ?? '-' }}</td>
-                    <td>
-                        <span class="px-2 py-1 rounded text-xs font-medium {{ $features->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ ucfirst($features->status ?? 'active') }}
-                        </span>
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.flexycazh.features.edit', $features->id ?? 1) }}" 
-                           class="action-btn action-btn-edit">
-                            <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                            </svg>
-                        </a>
-                        <form action="{{ route('admin.flexycazh.features.destroy', $features->id ?? 1) }}" 
-                              method="POST" 
-                              class="inline"
-                              onsubmit="return confirmDelete('Are you sure you want to delete this feature?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="action-btn action-btn-delete">
-                                <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="6" class="text-center py-8 text-gray-500">No features found</td>
-                </tr>
-                @endforelse
+<tr>
+    <td class="text-center">{{ $index + 1 }}</td>
+    <td>{{ $feature->nama ?? 'Flexycazh Feature' }}</td>
+    <td class="text-center">
+        @if(isset($feature->gambar) && $feature->gambar)
+            <img src="{{ asset('storage/' . $feature->gambar) }}" 
+                 alt="Feature Image" 
+                 class="w-16 h-16 object-cover rounded mx-auto">
+        @else
+            <div class="w-16 h-16 bg-gray-200 rounded mx-auto flex items-center justify-center">
+                <svg class="w-8 h-8 text-gray-400" ...></svg>
+            </div>
+        @endif
+    </td>
+    <td>{{ $feature->deskripsi ?? '-' }}</td>
+    <td>
+        <span class="px-2 py-1 rounded text-xs font-medium {{ $feature->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+            {{ ucfirst($feature->status ?? 'active') }}
+        </span>
+    </td>
+    <td>
+        <a href="{{ route('admin.flexycazh.features.edit', $feature->id) }}" class="action-btn action-btn-edit">Edit</a>
+        <form action="{{ route('admin.flexycazh.features.destroy', $feature->id) }}" method="POST" class="inline" onsubmit="return confirmDelete('Are you sure you want to delete this feature?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="action-btn action-btn-delete">Delete</button>
+        </form>
+    </td>
+</tr>
+@empty
+<tr>
+    <td colspan="6" class="text-center py-8 text-gray-500">No features found</td>
+</tr>
+@endforelse
+
             </tbody>
         </table>
     </div>

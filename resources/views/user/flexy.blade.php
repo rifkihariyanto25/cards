@@ -57,61 +57,86 @@
     <!-- Include Navbar Component -->
     <x-user.navbar />
 
-    <section id="home" class="relative min-h-screen flex items-center justify-center gradient-cyan overflow-hidden">
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
-        </div>
+    <!-- Hero Section - Updated to use database data -->
+<section id="home" class="relative min-h-screen flex items-center justify-center gradient-cyan overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-float" style="animation-delay: -3s;"></div>
+    </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-32">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="text-white space-y-8 animate-fadeInUp">
-                    <div class="space-y-6">
-                        <div class="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium">
-                            <i class="fas fa-star text-yellow-300 mr-2"></i>
-                            Trusted Financial Solution
-                        </div>
-                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="text-white space-y-8 animate-fadeInUp">
+                <div class="space-y-6">
+                    <div class="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium">
+                        <i class="fas fa-star text-yellow-300 mr-2"></i>
+                        Trusted Financial Solution
+                    </div>
+                    
+                    <h1 class="font-bold leading-tight" 
+                        style="font-size: {{ $heroData->title_font_size ?? '5rem' }}; line-height: 1.2;">
+                        @if($heroData && $heroData->title)
+                            {!! nl2br(e($heroData->title)) !!}
+                        @else
                             FlexyCazh
                             <span class="block text-3xl lg:text-4xl font-normal text-white/90 mt-4">
                                 Solusi Pembiayaan Digital untuk Sekolah
                             </span>
-                        </h1>
+                        @endif
+                    </h1>
+
+                    @if($heroData && $heroData->subtitle)
+                        <p class="text-white/90 leading-relaxed max-w-2xl" 
+                           style="font-size: {{ $heroData->subtitle_font_size ?? '1.25rem' }};">
+                            {{ $heroData->subtitle }}
+                        </p>
+                    @else
                         <p class="text-xl text-white/90 leading-relaxed max-w-2xl">
                             Dapatkan pendanaan cepat untuk kebutuhan operasional sekolah dengan bunga kompetitif dan proses yang mudah melalui platform terintegrasi CARDS.
                         </p>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="inline-flex items-center justify-center bg-white text-cyan-600 px-8 py-4 rounded-2xl font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                            <i class="fas fa-rocket mr-3"></i>
-                            Mulai Sekarang
-                        </a>
-                        <a href="#features" class="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-cyan-600 transition-all duration-300">
-                            <i class="fas fa-play mr-3"></i>
-                            Pelajari Lebih Lanjut
-                        </a>
-                    </div>
-
-                    <div class="grid grid-cols-3 gap-8 pt-8">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold">500+</div>
-                            <div class="text-white/80 text-sm">Partner Aktif</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold">24 Jam</div>
-                            <div class="text-white/80 text-sm">Pencairan Dana</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold">99.9%</div>
-                            <div class="text-white/80 text-sm">Uptime</div>
-                        </div>
-                    </div>
+                    @endif
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="inline-flex items-center justify-center bg-white text-cyan-600 px-8 py-4 rounded-2xl font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        <i class="fas fa-rocket mr-3"></i>
+                        Mulai Sekarang
+                    </a>
+                    <a href="#features" class="inline-flex items-center justify-center border-2 border-white text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:text-cyan-600 transition-all duration-300">
+                        <i class="fas fa-play mr-3"></i>
+                        Pelajari Lebih Lanjut
+                    </a>
                 </div>
 
-                <div class="relative animate-fadeInUp" style="animation-delay: 0.3s;">
-                    <div class="relative">
+                <div class="grid grid-cols-3 gap-8 pt-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">500+</div>
+                        <div class="text-white/80 text-sm">Partner Aktif</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">24 Jam</div>
+                        <div class="text-white/80 text-sm">Pencairan Dana</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">99.9%</div>
+                        <div class="text-white/80 text-sm">Uptime</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative animate-fadeInUp" style="animation-delay: 0.3s;">
+                <div class="relative">
+                    <!-- Background Image from Database (if available) -->
+                    @if($heroData && $heroData->cover_image)
+                        <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8 border border-white/30 shadow-2xl"
+                             style="background-image: url('{{ asset('storage/' . $heroData->cover_image) }}'); 
+                                    background-size: cover; 
+                                    background-position: center;
+                                    background-blend-mode: overlay;">
+                    @else
                         <div class="bg-white/20 backdrop-blur-sm rounded-3xl p-8 border border-white/30 shadow-2xl">
+                    @endif
+                    
                             <div class="bg-white rounded-2xl p-6 shadow-xl">
                                 <div class="flex items-center justify-between mb-6">
                                     <div class="flex items-center space-x-3">
@@ -160,24 +185,50 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="features" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center bg-cyan-50 text-cyan-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                    <i class="fas fa-gem mr-2"></i>
-                    Premium Features
-                </div>
-                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-                    Fitur Unggulan <span class="text-cyan-600">FlexyCazh</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Solusi pembiayaan yang dirancang khusus untuk memenuhi kebutuhan finansial sekolah dan institusi pendidikan
-                </p>
+    <!-- Features Section - Updated to use database data -->
+<section id="features" class="py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+            <div class="inline-flex items-center bg-cyan-50 text-cyan-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <i class="fas fa-gem mr-2"></i>
+                Premium Features
             </div>
+            <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                Fitur Unggulan <span class="text-cyan-600">FlexyCazh</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Solusi pembiayaan yang dirancang khusus untuk memenuhi kebutuhan finansial sekolah dan institusi pendidikan
+            </p>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @if($features && $features->count() > 0)
+                @foreach($features as $index => $feature)
+                    <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-gradient-to-r {{ $gradients[$index % count($gradients)] }} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                         @if($feature->gambar)
+    <img src="{{ asset('storage/' . $feature->gambar) }}" 
+         alt="{{ $feature->nama }}" 
+         class="w-8 h-8 object-contain text-white">
+@else
+    <i class="fas {{ $defaultIcons[$index % count($defaultIcons)] }} text-white text-2xl"></i>
+@endif
+
+                        </div>
+                        
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">{{ $feature->nama }}</h3>
+                        <p class="text-gray-600 leading-relaxed">{{ $feature->deskripsi }}</p>
+                        
+                        <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
+                            Learn more <i class="fas fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <!-- Fallback static features if no database data -->
                 <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
                     <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-bolt text-white text-2xl"></i>
@@ -210,105 +261,122 @@
                         Learn more <i class="fas fa-arrow-right ml-2"></i>
                     </div>
                 </div>
-
-                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-link text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Integrasi Seamless</h3>
-                    <p class="text-gray-600 leading-relaxed">Terintegrasi langsung dengan sistem CARDS untuk monitoring dan pelaporan yang real-time.</p>
-                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
-                        Learn more <i class="fas fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-
-                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-shield-alt text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Keamanan Terjamin</h3>
-                    <p class="text-gray-600 leading-relaxed">Sistem keamanan berlapis dengan enkripsi end-to-end untuk melindungi data finansial.</p>
-                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
-                        Learn more <i class="fas fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-
-                <div class="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-cyan-200 hover:-translate-y-2">
-                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-chart-line text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Analytics Dashboard</h3>
-                    <p class="text-gray-600 leading-relaxed">Dashboard komprehensif untuk tracking status pengajuan, pembayaran, dan laporan keuangan.</p>
-                    <div class="mt-6 text-cyan-600 font-medium flex items-center group-hover:translate-x-2 transition-transform duration-300">
-                        Learn more <i class="fas fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="process" class="py-32 gradient-cyan">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
-                    <i class="fas fa-route mr-2"></i>
-                    Simple Process
-                </div>
+  <section id="process" class="py-32 gradient-cyan">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-20">
+            <div class="inline-flex items-center bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <i class="fas fa-route mr-2"></i>
+                Simple Process
+            </div>
+            @if($tutorials && $tutorials->title)
+                <h2 class="font-bold text-white mb-6" 
+                   style="font-size: {{ $tutorials->title_font_size ?? '3rem' }}; line-height: 1.2;">
+                    {!! nl2br(e($tutorials->title)) !!}
+                </h2>
+            @else
                 <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
                     Cara Mudah Mendapatkan <span class="text-yellow-300">FlexyCazh</span>
                 </h2>
-                <p class="text-xl text-white/90 max-w-3xl mx-auto">
-                    Tiga langkah mudah untuk mendapatkan pembiayaan yang Anda butuhkan
-                </p>
-            </div>
+            @endif
+            <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                Tiga langkah mudah untuk mendapatkan pembiayaan yang Anda butuhkan
+            </p>
+        </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="relative group">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
-                        <div class="text-center">
-                            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <span class="text-3xl font-bold text-cyan-600">1</span>
-                            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="relative group">
+                <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-3xl font-bold text-cyan-600">1</span>
+                        </div>
+                        @if($tutorials && $tutorials->content_1_title)
+                            <h3 class="font-bold text-white mb-4" 
+                               style="font-size: {{ $tutorials->content_1_title_font_size ?? '1.5rem' }};">
+                                {{ $tutorials->content_1_title }}
+                            </h3>
+                            @if($tutorials->content_1_subtitle)
+                                <p class="text-white/80 leading-relaxed" 
+                                   style="font-size: {{ $tutorials->content_1_subtitle_font_size ?? '1rem' }};">
+                                    {{ $tutorials->content_1_subtitle }}
+                                </p>
+                            @endif
+                        @else
                             <h3 class="text-2xl font-bold text-white mb-4">Menjadi Partner CARDS</h3>
                             <p class="text-white/80 leading-relaxed">
                                 Daftarkan sekolah Anda sebagai partner resmi CARDS untuk mengakses berbagai layanan digital pendidikan.
                             </p>
-                        </div>
+                        @endif
                     </div>
-                    <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-white/30"></div>
                 </div>
+                <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-white/30"></div>
+            </div>
 
-                <div class="relative group">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
-                        <div class="text-center">
-                            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <span class="text-3xl font-bold text-cyan-600">2</span>
-                            </div>
+            <!-- Step 2 -->
+            <div class="relative group">
+                <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-3xl font-bold text-cyan-600">2</span>
+                        </div>
+                        @if($tutorials && $tutorials->content_2_title)
+                            <h3 class="font-bold text-white mb-4" 
+                               style="font-size: {{ $tutorials->content_2_title_font_size ?? '1.5rem' }};">
+                                {{ $tutorials->content_2_title }}
+                            </h3>
+                            @if($tutorials->content_2_subtitle)
+                                <p class="text-white/80 leading-relaxed" 
+                                   style="font-size: {{ $tutorials->content_2_subtitle_font_size ?? '1rem' }};">
+                                    {{ $tutorials->content_2_subtitle }}
+                                </p>
+                            @endif
+                        @else
                             <h3 class="text-2xl font-bold text-white mb-4">Bangun Track Record</h3>
                             <p class="text-white/80 leading-relaxed">
                                 Lakukan transaksi minimal 3 bulan untuk membangun reputasi dan riwayat keuangan yang baik.
                             </p>
-                        </div>
+                        @endif
                     </div>
-                    <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-white/30"></div>
                 </div>
+                <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-white/30"></div>
+            </div>
 
-                <div class="relative group">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
-                        <div class="text-center">
-                            <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                                <span class="text-3xl font-bold text-cyan-600">3</span>
-                            </div>
+            <!-- Step 3 -->
+            <div class="relative group">
+                <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-500">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <span class="text-3xl font-bold text-cyan-600">3</span>
+                        </div>
+                        @if($tutorials && $tutorials->content_3_title)
+                            <h3 class="font-bold text-white mb-4" 
+                               style="font-size: {{ $tutorials->content_3_title_font_size ?? '1.5rem' }};">
+                                {{ $tutorials->content_3_title }}
+                            </h3>
+                            @if($tutorials->content_3_subtitle)
+                                <p class="text-white/80 leading-relaxed" 
+                                   style="font-size: {{ $tutorials->content_3_subtitle_font_size ?? '1rem' }};">
+                                    {{ $tutorials->content_3_subtitle }}
+                                </p>
+                            @endif
+                        @else
                             <h3 class="text-2xl font-bold text-white mb-4">Ajukan FlexyCazh</h3>
                             <p class="text-white/80 leading-relaxed">
                                 Ajukan permohonan pembiayaan melalui form online dan nikmati kemudahan akses dana.
                             </p>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section id="contact" class="py-32 bg-gradient-to-br from-gray-50 to-white">
         <div class="max-w-6xl mx-auto px-6">

@@ -98,9 +98,9 @@
             </div>
             
             <!-- Hidden File Input -->
-            <input type="file" id="about-image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
+            <input type="file" id="about-image" name="cover_image" accept="image/*" class="hidden" onchange="previewImage(this)">
             
-            @error('image')
+            @error('cover_image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
