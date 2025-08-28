@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class FlexycazhPengajuan extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'flexycazh_pengajuan';
-    
+
     protected $fillable = [
         'nama_partner',
         'jenis_partner',
@@ -21,13 +21,8 @@ class FlexycazhPengajuan extends Model
         'tenor',
         'status'
     ];
-    
-    /**
-     * Menyimpan data pengajuan baru
-     *
-     * @param array $data
-     * @return FlexycazhPengajuan
-     */
+
+
     public static function simpanPengajuan(array $data)
     {
         return self::create([
@@ -36,9 +31,9 @@ class FlexycazhPengajuan extends Model
             'nama_pic' => $data['nama_pic'],
             'nomor_hp_pic' => $data['nomor_hp_pic'],
             'kebutuhan' => $data['kebutuhan'],
-            'nominal' => $data['nominal'],
+            'nominal' => preg_replace('/[^\d]/', '', $data['nominal']), // Sanitasi nominal
             'tenor' => $data['tenor'],
-            'status' => 'pending'
+            'status' => 'pending',
         ]);
     }
 }

@@ -394,151 +394,105 @@
                             <p class="text-gray-600">Lengkapi formulir ini dan tim kami akan menghubungi Anda dalam 24 jam</p>
                         </div>
 
-                        <form class="space-y-6" onsubmit="handleFormSubmit(event)">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700">
-                                        <i class="fas fa-school mr-2 text-cyan-500"></i>Nama Partner
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        name="nama_partner" 
-                                        required 
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
-                                        placeholder="Contoh: SD Negeri 1 Jakarta"
-                                    />
-                                </div>
+                        <form class="space-y-6" action="{{ route('user.flexycazh.store') }}" method="POST">
+    @csrf
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Nama Partner -->
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-school mr-2 text-cyan-500"></i>Nama Partner
+            </label>
+            <input type="text" name="nama_partner" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 bg-gray-50 focus:bg-white"
+                placeholder="Contoh: SD Negeri 1 Jakarta"/>
+        </div>
 
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700">
-                                        <i class="fas fa-building mr-2 text-cyan-500"></i>Jenis Partner
-                                    </label>
-                                    <select 
-                                        name="jenis_partner" 
-                                        required
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
-                                    >
-                                        <option value="">Pilih Jenis Partner</option>
-                                        <option value="Sekolah">Sekolah</option>
-                                        <option value="Klinik">Klinik</option>
-                                        <option value="Perusahaan">Perusahaan</option>
-                                    </select>
-                                </div>
+        <!-- Jenis Partner -->
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-building mr-2 text-cyan-500"></i>Jenis Partner
+            </label>
+            <select name="jenis_partner" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 bg-gray-50 focus:bg-white">
+                <option value="">Pilih Jenis Partner</option>
+                <option value="Sekolah">Sekolah</option>
+                <option value="Klinik">Klinik</option>
+                <option value="Perusahaan">Perusahaan</option>
+            </select>
+        </div>
 
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700">
-                                        <i class="fas fa-user mr-2 text-cyan-500"></i>Nama PIC
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        name="nama_pic" 
-                                        required
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
-                                        placeholder="Nama Penanggung Jawab"
-                                    />
-                                </div>
+        <!-- Nama PIC -->
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-user mr-2 text-cyan-500"></i>Nama PIC
+            </label>
+            <input type="text" name="nama_pic" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 bg-gray-50 focus:bg-white"
+                placeholder="Nama Penanggung Jawab"/>
+        </div>
 
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700">
-                                        <i class="fas fa-phone mr-2 text-cyan-500"></i>Nomor HP PIC
-                                    </label>
-                                    <input 
-                                        type="tel" 
-                                        name="no_hp_pic" required
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
-                                        placeholder="08xxxxxxxxxx"
-                                        pattern="[0-9]{10,13}"
-                                    />
-                                </div>
+        <!-- Nomor HP PIC -->
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-phone mr-2 text-cyan-500"></i>Nomor HP PIC
+            </label>
+            <input type="tel" name="nomor_hp_pic" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 bg-gray-50 focus:bg-white"
+                placeholder="08xxxxxxxxxx" pattern="[0-9]{10,13}"/>
+        </div>
 
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700">
-                                        <i class="fas fa-clipboard-list mr-2 text-cyan-500"></i>Kebutuhan
-                                    </label>
-                                    <select 
-                                        name="kebutuhan" 
-                                        required
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
-                                    >
-                                        <option value="">Pilih Kebutuhan</option>
-                                        <option value="Kebutuhan Pendanaan">Kebutuhan Pendanaan</option>
-                                        <option value="Modal Kerja">Modal Kerja</option>
-                                        <option value="Operasional Sekolah">Operasional Sekolah</option>
-                                        <option value="Renovasi Fasilitas">Renovasi Fasilitas</option>
-                                    </select>
-                                </div>
+        <!-- Kebutuhan -->
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-clipboard-list mr-2 text-cyan-500"></i>Kebutuhan
+            </label>
+            <select name="kebutuhan" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 bg-gray-50 focus:bg-white">
+                <option value="">Pilih Kebutuhan</option>
+                <option value="Kebutuhan Pendanaan">Kebutuhan Pendanaan</option>
+                <option value="Modal Kerja">Modal Kerja</option>
+                <option value="Operasional Sekolah">Operasional Sekolah</option>
+                <option value="Renovasi Fasilitas">Renovasi Fasilitas</option>
+            </select>
+        </div>
 
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700">
-                                        <i class="fas fa-money-bill-wave mr-2 text-cyan-500"></i>Nominal (Rp)
-                                    </label>
-                                    <input 
-                                        type="text" name="kebutuhan_pendanaan" required
-                                        min="1000000"
-                                        max="1000000000"
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
-                                        placeholder="50000000"
-                                        onkeyup="formatCurrency(this); calculateInstallment()"
-                                    />
-                                    <p class="text-xs text-gray-500">Minimum Rp 1.000.000 - Maximum Rp 1.000.000.000</p>
-                                </div>
+        <!-- Nominal -->
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-money-bill-wave mr-2 text-cyan-500"></i>Nominal (Rp)
+            </label>
+            <input type="text" name="nominal" required
+                min="1000000" max="1000000000"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 bg-gray-50 focus:bg-white"
+                placeholder="50000000" onkeyup="formatCurrency(this); calculateInstallment()"/>
+            <p class="text-xs text-gray-500">Minimum Rp 1.000.000 - Maximum Rp 1.000.000.000</p>
+        </div>
 
-                                <div class="space-y-2">
-                                    <label class="block text-sm font-semibold text-gray-700">
-                                        <i class="fas fa-calendar-check mr-2 text-cyan-500"></i>Tenor
-                                    </label>
-                                    <select 
-                                        name="tenor" 
-                                        required
-                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 transition-all duration-300 bg-gray-50 focus:bg-white"
-                                        onchange="calculateInstallment()"
-                                    >
-                                        <option value="">Pilih Tenor</option>
-                                        <option value="3 Bulan">3 Bulan</option>
-                                        <option value="6 Bulan">6 Bulan</option>
-                                        <option value="12 Bulan">12 Bulan</option>
-                                    </select>
-                                </div>
-                            </div>
+        <!-- Tenor -->
+        <div class="space-y-2">
+            <label class="block text-sm font-semibold text-gray-700">
+                <i class="fas fa-calendar-check mr-2 text-cyan-500"></i>Tenor
+            </label>
+            <select name="tenor" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-50 bg-gray-50 focus:bg-white"
+                onchange="calculateInstallment()">
+                <option value="">Pilih Tenor</option>
+                <option value="3 Bulan">3 Bulan</option>
+                <option value="6 Bulan">6 Bulan</option>
+                <option value="12 Bulan">12 Bulan</option>
+            </select>
+        </div>
+    </div>
 
-                            <div id="estimation-card" class="hidden bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-6 border border-cyan-100">
-                                <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
-                                    <i class="fas fa-calculator mr-2 text-cyan-500"></i>
-                                    Estimasi Cicilan
-                                </h4>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <p class="text-sm text-gray-600">Cicilan per Bulan</p>
-                                        <p id="monthly-payment" class="text-2xl font-bold text-cyan-600">-</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Total Bunga</p>
-                                        <p id="total-interest" class="text-lg font-semibold text-gray-800">-</p>
-                                    </div>
-                                </div>
-                                <p class="text-xs text-gray-500 mt-3">*Estimasi berdasarkan suku bunga 0.8% per bulan</p>
-                            </div>
+    <div class="pt-4">
+        <button type="submit"
+            class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 rounded-2xl font-semibold hover:shadow-2xl transition-all duration-300 flex items-center justify-center">
+            <i class="fas fa-paper-plane mr-3"></i>
+            <span>Kirim Pengajuan</span>
+        </button>
+    </div>
+</form>
 
-                            <div class="pt-4">
-                                <button 
-                                    type="submit"
-                                    class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 rounded-2xl font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center"
-                                    id="submit-btn"
-                                >
-                                    <i class="fas fa-paper-plane mr-3"></i>
-                                    <span>Kirim Pengajuan</span>
-                                </button>
-                            </div>
-
-                            <div class="text-center">
-                                <p class="text-sm text-gray-500">
-                                    Dengan mengirim formulir ini, Anda menyetujui 
-                                    <a href="#" class="text-cyan-600 hover:underline">Syarat & Ketentuan</a> 
-                                    dan 
-                                    <a href="#" class="text-cyan-600 hover:underline">Kebijakan Privasi</a>
-                                </p>
-                            </div>
-                        </form>
                     </div>
                 </div>
 

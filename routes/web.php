@@ -49,6 +49,8 @@ use App\Http\Controllers\User\FlexycazhController;
 use App\Http\Controllers\User\ContactController;
 use App\Http\Controllers\User\AboutController;
 
+
+
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -226,8 +228,9 @@ Route::name('user.')->group(function () {
     Route::get('/flexy', [FlexycazhController::class, 'index'])->name('flexy');     // Otomatis menjadi 'user.flexy'
     Route::get('/contact', [ContactController::class, 'index'])->name('contact'); // Otomatis menjadi 'user.contact'
     Route::get('/about', [AboutController::class, 'index'])->name('about'); // Otomatis menjadi 'user.contact'
-
-    Route::post('/flexy/pengajuan', [FlexycazhController::class, 'storePengajuan'])->name('flexy.pengajuan'); // Otomatis menjadi 'user.flexy.pengajuan'
+    // FlexyCazh routes
+    Route::get('/flexycazh', [FlexycazhController::class, 'index'])->name('flexycazh');
+    Route::post('/flexycazh', [FlexycazhController::class, 'store'])->name('flexycazh.store');
 });
 
 // Anda bisa menghapus rute /homepage karena sudah di-handle oleh /
