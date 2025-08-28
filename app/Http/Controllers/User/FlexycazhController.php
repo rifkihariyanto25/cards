@@ -20,6 +20,8 @@ class FlexycazhController extends Controller
         $features = FlexycazhFeature::all();
         $tutorials = FlexycazhTutorial::first();
 
+        $pengajuans = FlexycazhPengajuan::all();
+
         $gradients = [
             'from-cyan-500 to-blue-600',
             'from-green-500 to-emerald-600',
@@ -38,7 +40,7 @@ class FlexycazhController extends Controller
             'fa-users'
         ];
 
-        return view('user.flexy', compact('heroData', 'features', 'tutorials', 'gradients', 'defaultIcons'));
+        return view('user.flexy', compact('heroData', 'features', 'tutorials', 'gradients', 'defaultIcons', 'pengajuans'));
     }
 
     // Simpan pengajuan
@@ -98,5 +100,14 @@ class FlexycazhController extends Controller
                 ->with('error', 'Terjadi kesalahan sistem. Silakan coba lagi.')
                 ->withInput();
         }
+    }
+
+    public function adminDashboard()
+    {
+        // Ambil semua data pengajuan dari database
+        $pengajuans = FlexycazhPengajuan::all();
+
+        // Kirimkan data ke view admin/dashboard.blade.php
+        return view('admin.dashboard', compact('pengajuans'));
     }
 }
