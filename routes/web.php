@@ -14,7 +14,6 @@ use App\Http\Controllers\Admin\Homepage\TestimoniController;
 // Edu controllers
 use App\Http\Controllers\Admin\Edu\HeroController as EduHeroController;
 use App\Http\Controllers\Admin\Edu\AboutController as EduAboutController;
-use App\Http\Controllers\Admin\Edu\DownloadController;
 use App\Http\Controllers\Admin\Edu\FeaturesController as EduFeaturesController;
 
 // Canteen controllers
@@ -26,13 +25,13 @@ use App\Http\Controllers\Admin\Canteen\FeaturesController as CanteenFeaturesCont
 use App\Http\Controllers\Admin\School\HeroController as SchoolHeroController;
 use App\Http\Controllers\Admin\School\AboutController as SchoolAboutController;
 use App\Http\Controllers\Admin\School\FeaturesController as SchoolFeaturesController;
-use App\Http\Controllers\Admin\School\DownloadController as SchoolDownloadController;
+
 
 // Parents controllers
 use App\Http\Controllers\Admin\Parents\HeroController as ParentsHeroController;
 use App\Http\Controllers\Admin\Parents\AboutController as ParentsAboutController;
 use App\Http\Controllers\Admin\Parents\FeatureController as ParentsFeatureController;
-use App\Http\Controllers\Admin\Parents\DownloadController as ParentsDownloadController;
+
 
 // Flexycazh controllers
 use App\Http\Controllers\Admin\Flexycazh\HeroController as FlexycazhHeroController;
@@ -124,9 +123,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/features/{feature}', [EduFeaturesController::class, 'updateEduFeature'])->name('features.update');
             Route::delete('/features/{feature}', [EduFeaturesController::class, 'deleteEduFeature'])->name('features.delete');
 
-            // Download Section
-            Route::get('/download', [DownloadController::class, 'index'])->name('download');
-            Route::post('/download', [DownloadController::class, 'update'])->name('download.update');
         });
 
         // Canteen Section
@@ -166,9 +162,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/features/{feature}', [SchoolFeaturesController::class, 'update'])->name('features.update');
             Route::delete('/features/{feature}', [SchoolFeaturesController::class, 'delete'])->name('features.delete');
 
-            // Download Section
-            Route::get('/download', [SchoolDownloadController::class, 'index'])->name('download');
-            Route::post('/download', [SchoolDownloadController::class, 'update'])->name('download.update');
         });
 
         // Parents Section
@@ -189,9 +182,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/features/{feature}', [ParentsFeatureController::class, 'update'])->name('features.update');
             Route::delete('/features/{feature}', [ParentsFeatureController::class, 'destroy'])->name('features.destroy');
 
-            // Download Section
-            Route::get('/download', [ParentsDownloadController::class, 'index'])->name('download');
-            Route::post('/download', [ParentsDownloadController::class, 'update'])->name('download.update');
         });
 
         // Flexycazh Section

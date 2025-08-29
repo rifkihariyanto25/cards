@@ -158,11 +158,9 @@
             </div>
         </div>
 
-        <!-- Save Button -->
-        <div class="flex justify-start mt-6">
-            <button type="submit" class="btn-primary">
-                Save
-            </button>
+        <!-- Submit Button -->
+        <div class="flex justify-end space-x-4">
+            <button type="submit" class="btn-primary">Save</button>
         </div>
     </form>
 </div>
