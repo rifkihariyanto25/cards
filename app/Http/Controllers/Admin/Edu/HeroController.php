@@ -39,6 +39,13 @@ class HeroController extends Controller
             $hero->cover_image = $request->file('image')->store('edu/hero', 'public');
         }
 
+        if ($request->remove_image == '1' && $hero->cover_image) {
+            if (Storage::disk('public')->exists($hero->cover_image)) {
+                Storage::disk('public')->delete($hero->cover_image);
+            }
+            $hero->cover_image = null;
+        }
+
         $hero->save();
 
         return redirect()->route('admin.edu.hero')->with('success', 'Hero section updated successfully');

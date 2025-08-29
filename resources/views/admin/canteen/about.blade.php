@@ -72,8 +72,8 @@
             <div class="image-upload-area cursor-pointer border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors" onclick="document.getElementById('about-image').click()">
                 <!-- Preview Container -->
                 <div id="image-preview-container">
-                    @if(isset($about->image) && $about->image)
-                        <img id="preview-image" src="{{ asset('storage/' . $about->image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
+                    @if(isset($aboutData->cover_image) && $aboutData->cover_image)
+                        <img id="preview-image" src="{{ asset('storage/' . $aboutData->cover_image) }}" alt="Current Image" class="max-w-full max-h-48 rounded-lg mx-auto object-contain">
                         <div class="mt-3">
                             <button type="button" class="text-sm text-red-600 hover:text-red-800" onclick="removeImage(event)">Remove Image</button>
                         </div>
