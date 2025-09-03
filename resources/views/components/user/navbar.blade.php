@@ -104,7 +104,48 @@
             </div>
             
             <a href="#about" class="block text-gray-700 hover:text-cyan-600 transition-colors">About</a>
-            <a href="#contact" class="block text-gray-700 hover:text-cyan-600 transition-colors">Contact</a>
+           <a href="{{ route('user.contact') }}" 
+               class="@if($currentRoute === 'user.contact') text-cyan-600 bg-cyan-50 @else text-gray-700 hover:text-cyan-600 @endif block px-4 py-3 hover:bg-cyan-50 rounded-lg transition-colors">
+               Contact
+            </a>
         </div>
     </div>
 </nav>
+
+<script>
+function toggleMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+    const line3 = document.getElementById('line3');
+    
+    // Toggle mobile menu visibility
+    mobileMenu.classList.toggle('hidden');
+    
+    // Animate hamburger lines to X
+    if (mobileMenu.classList.contains('hidden')) {
+        // Return to hamburger
+        line1.style.transform = 'rotate(0deg) translateY(0px)';
+        line2.style.opacity = '1';
+        line3.style.transform = 'rotate(0deg) translateY(0px)';
+    } else {
+        // Transform to X
+        line1.style.transform = 'rotate(45deg) translateY(6px)';
+        line2.style.opacity = '0';
+        line3.style.transform = 'rotate(-45deg) translateY(-6px)';
+    }
+}
+
+function toggleMobileProductDropdown() {
+    const dropdown = document.getElementById('mobile-product-dropdown');
+    const icon = document.getElementById('mobile-dropdown-icon');
+    
+    dropdown.classList.toggle('hidden');
+    
+    if (dropdown.classList.contains('hidden')) {
+        icon.style.transform = 'rotate(0deg)';
+    } else {
+        icon.style.transform = 'rotate(180deg)';
+    }
+}
+</script>
