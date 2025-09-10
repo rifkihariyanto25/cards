@@ -1,15 +1,16 @@
 {
     "version": 2,
-    "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.7.4" }
+        "api/index.php": {
+            "runtime": "vercel-php@0.7.4"
+        }
     },
     "routes": [
-        { "src": "/build/(.*)", "dest": "/public/build/" },
-        { "src": "/(.*)", "dest": "/api/index.php" }
+        { "src": "/build/(.*)", "dest": "/public/build/$1" },
+        { "src": "/(.*)", "dest": "/public/index.php" }
     ],
     "public": true,
-    "buildCommand": "vite build",
+    "buildCommand": "composer install && php artisan config:cache && php artisan route:cache && php artisan view:cache",
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
