@@ -9,7 +9,8 @@
             <div class="lg:col-span-2 space-y-6">
                 <!-- Logo seperti di navbar -->
                <div class="flex items-center space-x-3 mb-6">
-    <img src="{{ asset('storage/assets/logo putih.png') }}" alt="Logo" class="h-16 w-auto">
+    <img src="{{ asset('assets/logoCards.png') }}" alt="Logo" class="h-8 w-auto">
+
     <span class="text-2xl font-bold"></span>
 </div>
                 <p class="text-white/80 text-lg leading-relaxed max-w-md">
