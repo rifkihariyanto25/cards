@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\HomePage;
 use App\Http\Controllers\Controller;
-use App\Models\HomePage\HomepageProduct;
+use App\Models\Homepage\HomepageProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
