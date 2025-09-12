@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between max-w-7xl mx-auto">
         <!-- Logo -->
         <div class="flex items-center space-x-3">
-            <img src="{{ asset('storage/assets/logo cards.png') }}" alt="Logo" class="h-8 w-auto">
+            <img src="{{ asset('storage/assets/logoCards.png') }}" alt="Logo" class="h-8 w-auto">
             <span class="text-xl font-bold text-gray-800"></span>
         </div>
 
