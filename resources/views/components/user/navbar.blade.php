@@ -48,7 +48,7 @@
                 </div>
             </div>
             
-            <a href="#about" class="text-gray-700 hover:text-cyan-600 transition-colors font-medium">About</a>
+            <!-- <a href="#about" class="text-gray-700 hover:text-cyan-600 transition-colors font-medium">About</a> -->
             <a href="{{ route('user.contact') }}" 
                class="@if($currentRoute === 'user.contact') text-cyan-600 bg-cyan-50 @else text-gray-700 hover:text-cyan-600 @endif block px-4 py-3 hover:bg-cyan-50 rounded-lg transition-colors">
                Contact
@@ -105,7 +105,7 @@
                 </div>
             </div>
             
-            <a href="#about" class="block text-gray-700 hover:text-cyan-600 transition-colors">About</a>
+            <!-- <a href="#about" class="block text-gray-700 hover:text-cyan-600 transition-colors">About</a> -->
            <a href="{{ route('user.contact') }}" 
                class="@if($currentRoute === 'user.contact') text-cyan-600 bg-cyan-50 @else text-gray-700 hover:text-cyan-600 @endif block px-4 py-3 hover:bg-cyan-50 rounded-lg transition-colors">
                Contact
